@@ -1,17 +1,17 @@
 # Makefile for COMP2521 Assignment
 
 CC=gcc
-CFLAGS=-I -g -Wall -Werror 
+CFLAGS=-I -g -Wall -Werror
 TESTS=testGraph
 
 all: pagerank tests
 
 # Make will execute pagerank if any of the files after : change
 pagerank: pagerank.o graph.o
-	# $(variable)
+# $(variable)
 	$(CC) pagerank.o graph.o -o pagerank
 
-pagerank.o: pagerank.c pagerank.h 
+pagerank.o: pagerank.c pagerank.h
 	$(CC) -c pagerank.c
 
 tests: $(TESTS)
@@ -26,5 +26,5 @@ graph.o: graph.c graph.h
 	$(CC) -c graph.c
 
 clean:
-	# Remove all object files
+# Remove all object files
 	rm *o
