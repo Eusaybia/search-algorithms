@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
 	addEdge(g, "me", "you");
 	addEdge(g, "me", "she");
 	addEdge(g, "she", "he");
-	showGraph(g, DENSE);
+	showGraph(g, TERSE);
 	disposeGraph(g);
 	return EXIT_SUCCESS;
 }

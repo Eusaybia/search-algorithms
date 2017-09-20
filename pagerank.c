@@ -7,9 +7,9 @@
 #define MAX_CHAR 256
 
 int main(int argc, char *argv[]) {
-	// Build graph
 	// TODO: Read web pages from the collection file and build graph
-	// TODO: Commit to VCS system
+	// Build graph
+
 	// TODO: Sum of all pages' PR = 1
 
 	double damp = atof(argv[1]);

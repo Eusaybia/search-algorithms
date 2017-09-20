@@ -9,7 +9,7 @@
 
 typedef struct GraphRep *Graph;
 
-Graph newGraph(int maxV);
+Graph   newGraph(int maxV);
 void 	disposeGraph(Graph g);
 int 	addEdge(Graph g, char *from, char *to);
 int 	nVertices(Graph g);
@@ -19,7 +19,7 @@ int 	isConnected(Graph g, char *from, char *to);
 //	TERSE: View adjacency matrix
 void 	showGraph(Graph g, int print_mode);
 void	setVertexInfo(char *url, double w_in, double w_out, double pagerank);
-char *getVertexUrl(Graph g, int vertexId);
+char    *getVertexUrl(Graph g, int vertexId);
 void	setVertexUrl(Graph g, char *string, int vertexId);
 
 #endif
