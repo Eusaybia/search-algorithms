@@ -21,14 +21,14 @@ typedef struct Vertex {
 typedef struct GraphRep {
 	int nV;				// Current number of vertices
 	int maxV;			// Max number of vertices
-	Vertex **vertices;// Array of Vertex objects
+	Vertex **vertices;	// Array of Vertex objects
 	Bit **edges;		// 2D array of Bits
 } GraphRep;
 
 static int findVertexIdFromString(Graph g, char *string);
 static int addVertex(Graph g, char *string);
 
-Graph	newGraph(int maxV) {
+Graph newGraph(int maxV) {
 	GraphRep *g = (GraphRep *)malloc(maxV * sizeof(GraphRep));
 	assert(g != NULL);
 
@@ -54,7 +54,7 @@ Graph	newGraph(int maxV) {
 	return g;
 }
 
-void 	disposeGraph(Graph g) {
+void disposeGraph(Graph g) {
 	for (int i = 0; i < g->maxV; i++) {
 		free(g->vertices[i]);
 		free(g->edges[i]);
@@ -65,7 +65,7 @@ void 	disposeGraph(Graph g) {
 }
 
 // Return: 1 if edge successfully added, 0 if unsuccessful
-int 	addEdge(Graph g, char *from, char *to) {
+int addEdge(Graph g, char *from, char *to) {
 	// Check if both vertices exist
 	int from_index = 0, to_index = 0;
 	from_index = findVertexIdFromString(g, from);
@@ -87,12 +87,12 @@ int 	addEdge(Graph g, char *from, char *to) {
 	return 1;
 }
 
-int 	nVertices(Graph g) {
+int nVertices(Graph g) {
 	assert(g != NULL);
 	return g->nV;
 }
 
-int 	isConnected(Graph g, char *from, char *to) {
+int isConnected(Graph g, char *from, char *to) {
 	int from_index = findVertexIdFromString(g, from);
 	int to_index = findVertexIdFromString(g, to);
 	if (from_index == -1 || to_index == -1) return 0;
@@ -140,7 +140,7 @@ char *getVertexUrl(Graph g, int vertexId) {
 	return g->vertices[vertexId]->url;
 }
 
-void	setVertexUrl(Graph g, char *string, int vertexId) {
+void setVertexUrl(Graph g, char *string, int vertexId) {
 	strcpy(g->vertices[vertexId]->url, string);
 }
 
