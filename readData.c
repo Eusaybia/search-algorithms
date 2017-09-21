@@ -44,7 +44,7 @@ Graph createUrlGraph(Queue collectionUrls) {
             if (strcmp(url_to, "#start") == 0) continue;
             else if (strcmp(url_to, "Section-1") == 0) continue;
             else if (strcmp(url_to, "#end") == 0) break;
-        
+
             addEdge(urlGraph, url_from, url_to);
         }
     }

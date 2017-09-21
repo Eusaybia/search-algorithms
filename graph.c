@@ -15,7 +15,8 @@ typedef struct Vertex {
 	char url[MAX_CHAR];
 	double w_in;
 	double w_out;
-	double pagerank;
+	double pagerank_before;
+	double pagerank_after;
 } Vertex;
 
 typedef struct GraphRep {
@@ -133,6 +134,10 @@ void showGraph(Graph g, int print_mode) {
 				printf("\n");
 			}
 		}
+		printf("\n\n");
+		printf("Initilising all Pageranks to 1......\n");
+		for(int i = 0; i < g->nV; i++) printf("Pagerank for %s = %lf\n", g->vertices[i]->url, g->vertices[i]->pagerank_before);
+		printf("\n\n");
 	}
 }
 
@@ -142,6 +147,7 @@ char *getVertexUrl(Graph g, int vertexId) {
 
 void setVertexUrl(Graph g, char *string, int vertexId) {
 	strcpy(g->vertices[vertexId]->url, string);
+	g->vertices[vertexId]->pagerank_before = 1.0;
 }
 
 // Return: The vertex id with the string, or -1 if it couldn't be found
@@ -158,7 +164,7 @@ static int findVertexIdFromString(Graph g, char *string) {
 // not be added
 static int addVertex(Graph g, char *string) {
 	// TODO: Implement insertion sort
-	// If we're at the maximum number of nodes 
+	// If we're at the maximum number of nodes
 	if (g->nV == g->maxV) {
 		printf(RED "Could not add vertex, graph is full\n" RESET);
 		return -1;

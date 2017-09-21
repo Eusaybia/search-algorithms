@@ -9,19 +9,19 @@ all: yaggle tests
 # Make will execute pagerank if any of the files after : change
 
 yaggle: yaggle.o searchPagerank.o pagerank.o readData.o graph.o queue.o
-	$(CC) yaggle.o searchPagerank.o pagerank.o readData.o graph.o queue.o -o yaggle 
+	$(CC) yaggle.o searchPagerank.o pagerank.o readData.o graph.o queue.o -o yaggle
 
 yaggle.o: yaggle.c
-	$(CC) -c yaggle.c 
+	$(CC) -c yaggle.c
 
 searchPagerank.o: searchPagerank.c searchPagerank.h
-	$(CC) -c searchPagerank.c 
+	$(CC) -c searchPagerank.c
 
 pagerank.o: pagerank.c pagerank.h
 	$(CC) -c pagerank.c
 
 readData.o: readData.c
-	$(CC) -c readData.c 
+	$(CC) -c readData.c
 
 # ADTs are below
 tests: $(TESTS)
@@ -43,4 +43,4 @@ queue.o: queue.c queue.h
 
 clean:
 # Remove all object files
-	rm *o
+	rm *o yaggle testGraph
