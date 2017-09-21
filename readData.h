@@ -15,5 +15,3 @@ Graph createUrlGraph(Queue collectionUrls);
 
 // Generate empty inverted index BST
 // TODO: Create BST list structure
-
-
