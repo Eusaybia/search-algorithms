@@ -15,8 +15,8 @@ typedef unsigned char Bit;
 // Each instance of this struct is a Page
 typedef struct Vertex {
 	char url[MAX_CHAR]; // Link/URL of the page
-	int w_in; // Number of incoming links to the page
-	int w_out; // Number of outgoing links from the page
+	int nInLinks; // Number of incoming links to the page
+	int nOutLinks; // Number of outgoing links from the page
 	float pagerank_before; // pagerank of page at time t
 	float pagerank_after; // pagerank of page at time t+1
 } Vertex;
@@ -87,8 +87,8 @@ int addEdge(Graph g, char *from, char *to) {
 	}
 	// Add an edge
 	g->edges[from_index][to_index] += 1;
-	g->vertices[to_index]->w_in++;
-	g->vertices[from_index]->w_out++;
+	g->vertices[to_index]->nInLinks++;
+	g->vertices[from_index]->nOutLinks++;
 	return 1;
 }
 
@@ -183,11 +183,11 @@ int isEdge(Graph g, int from, int to){
 }
 // Return the number of outgoing links from a page given its VertexId
 int numOutlinks(Graph g, int i){
-	return g->vertices[i]->w_out;
+	return g->vertices[i]->nOutLinks;
 }
 // Return the number of incoming links to a page given its VertexId
 int numInlinks(Graph g, int i){
-	return g->vertices[i]->w_in;
+	return g->vertices[i]->nInLinks;
 }
 // Return the pagerank of a page at time t given its vertexId
 float get_pagerank_before(Graph g, int i){
@@ -215,8 +215,8 @@ void showPageRanks(Graph g){
 	printf("Pagerank Sum = %lf\n", sum);
 }
 // Set the values Page Info
-void setVertexInfo(Graph g, int vertexId, int w_in, int w_out, float pagerank){
+void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, float pagerank){
 	g->vertices[vertexId]->pagerank_before = pagerank;
-	g->vertices[vertexId]->w_in = w_in;
-	g->vertices[vertexId]->w_out = w_out;
+	g->vertices[vertexId]->nInLinks = nInLinks;
+	g->vertices[vertexId]->nOutLinks = nOutLinks;
 }

@@ -26,7 +26,7 @@ void 	showPageRanks(Graph g);
 //	DENSE: View node information
 //	TERSE: View adjacency matrix
 void 	showGraph(Graph g, int print_mode);
-void	setVertexInfo(Graph g, int vertexId, int w_in, int w_out, float pagerank);
+void	setVertexInfo(Graph g, int vertexId, int numInlinks, int numOutlinks, float pagerank);
 char    *getVertexUrl(Graph g, int vertexId);
 void	setVertexUrl(Graph g, char *string, int vertexId);
 
