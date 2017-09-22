@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "pagerank.h"
 #include "readData.h"
+#include "graph.h"
 #include "searchPagerank.h"
 
 int main(int argc, char* argv[]) {
@@ -10,5 +11,6 @@ int main(int argc, char* argv[]) {
     Graph urlGraph = createUrlGraph(collectionUrls);
 
     printf("Welcome to Yaggle. Enter your query\n");
+    pageRankWeights(0.85, 0.00001, 1000, urlGraph);
     return EXIT_SUCCESS;
 }

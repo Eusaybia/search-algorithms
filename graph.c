@@ -13,8 +13,8 @@ typedef unsigned char Bit;
 
 typedef struct Vertex {
 	char url[MAX_CHAR];
-	double w_in;
-	double w_out;
+	int w_in;
+	int w_out;
 	double pagerank_before;
 	double pagerank_after;
 } Vertex;
@@ -148,6 +148,13 @@ char *getVertexUrl(Graph g, int vertexId) {
 void setVertexUrl(Graph g, char *string, int vertexId) {
 	strcpy(g->vertices[vertexId]->url, string);
 	g->vertices[vertexId]->pagerank_before = 1.0;
+	int w_in = 0, w_out = 0;
+	for (int k = 0; k< g->nV; k++){
+		if(g->edges[k][vertexId]) w_in++;
+		if(g->edges[vertexId][k]) w_out++;
+	}
+	g->vertices[vertexId]->w_in = w_in;
+	g->vertices[vertexId]->w_out = w_out;
 }
 
 // Return: The vertex id with the string, or -1 if it couldn't be found

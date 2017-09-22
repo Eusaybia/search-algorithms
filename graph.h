@@ -18,7 +18,7 @@ int 	isConnected(Graph g, char *from, char *to);
 //	DENSE: View node information
 //	TERSE: View adjacency matrix
 void 	showGraph(Graph g, int print_mode);
-void	setVertexInfo(char *url, double w_in, double w_out, double pagerank);
+void	setVertexInfo(char *url, int w_in, int w_out, double pagerank);
 char    *getVertexUrl(Graph g, int vertexId);
 void	setVertexUrl(Graph g, char *string, int vertexId);
 
