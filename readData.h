@@ -1,6 +1,7 @@
 // readData.h - initialises the web graph and inverted index BST
 // Written by Kongwei Ying, September 2017
 // Modified by Rahil Agrawal, September 2017
+
 #ifndef READDATA_H
 #define READDATA_H
 

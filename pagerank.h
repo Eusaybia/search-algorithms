@@ -1,3 +1,6 @@
+// pagerank.h - Functions to calculate pagerank
+// Written by Rahil Agrawal, September 2017
+
 #ifndef PAGERANK_H
 #define PAGERANK_H
 

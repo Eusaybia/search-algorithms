@@ -1,13 +1,15 @@
 // pagerank.c - Calculate pageranks
 // Written by Rahil Agrawal, September 2017
 
-
 #include "pagerank.h"
 #include <math.h>
 
 #define MAX_V 100
 #define MAX_CHAR 256
 
+// Base function to calculate pageranks using formula provided in
+// http://www.cse.unsw.edu.au/~cs2521/17s2/ass/ass02/Ass2.html and
+// http://www.cse.unsw.edu.au/~cs2521/17s2/ass/ass02/page1725348.pdf
 void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g) {
 	//TODO: Write pageRankWeights function
 	// N = number of Urls in Graph
@@ -32,7 +34,7 @@ void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g) {
 	}
 	showPageRanks(g);
 }
-
+// Function to calculate the product of PageRank, In-weight and Out-weight
 float pageRankIncoming(Graph g, int i){
 	float product = 1.0;
 	float sum = 0.0;
@@ -46,6 +48,7 @@ float pageRankIncoming(Graph g, int i){
 	return sum;
 }
 
+// Function to calculate the In-Weight
 float Win(Graph g, int j, int i){
 	int Inlinks_I = numInlinks(g, i);
 	int Inlinks_Sum = 0;
@@ -57,6 +60,7 @@ float Win(Graph g, int j, int i){
 	return Inlinks_I*1.0/(double) Inlinks_Sum;
 }
 
+// Function to calculate the Out-Weight
 float Wout(Graph g, int j, int i){
 	int Outlinks_I = numOutlinks(g, i);
 	float Outlinks_Sum = 0;

@@ -1,5 +1,6 @@
 // graph.c - Graph of vertices using adjacency matrix
 // Written by Kongwei Ying, September 2017
+// Modified by Rahil Agrawal, September 2017
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,12 +12,13 @@
 
 typedef unsigned char Bit;
 
+// Each instance of this struct is a Page
 typedef struct Vertex {
-	char url[MAX_CHAR];
-	int w_in;
-	int w_out;
-	float pagerank_before;
-	float pagerank_after;
+	char url[MAX_CHAR]; // Link/URL of the page
+	int w_in; // Number of incoming links to the page
+	int w_out; // Number of outgoing links from the page
+	float pagerank_before; // pagerank of page at time t
+	float pagerank_after; // pagerank of page at time t+1
 } Vertex;
 
 typedef struct GraphRep {
@@ -28,7 +30,7 @@ typedef struct GraphRep {
 
 static int findVertexIdFromString(Graph g, char *string);
 static int addVertex(Graph g, char *string);
-
+// Create a new Graph and initialise data as required
 Graph newGraph(int maxV) {
 	GraphRep *g = (GraphRep *)malloc(maxV * sizeof(GraphRep));
 	assert(g != NULL);
@@ -54,7 +56,7 @@ Graph newGraph(int maxV) {
 
 	return g;
 }
-
+// Free all malloced memory associated with the Graph
 void disposeGraph(Graph g) {
 	for (int i = 0; i < g->maxV; i++) {
 		free(g->vertices[i]);
@@ -101,7 +103,9 @@ int isConnected(Graph g, char *from, char *to) {
 	if (from_index == -1 || to_index == -1) return 0;
 	return (g->edges[from_index][to_index] != 0) ? 1 : 0;
 }
-
+// Display the graph in one of two modes:
+// DENSE : Prints page name and explcitly states links
+// TERSE : Shows the links between pages in a 2D array of 1s and 0s
 void showGraph(Graph g, int print_mode) {
 	assert(g != NULL);
 	if (g->nV == 0) {
@@ -138,11 +142,11 @@ void showGraph(Graph g, int print_mode) {
 		}
 	}
 }
-
+// Returns the url of a page given the vertexId
 char *getVertexUrl(Graph g, int vertexId) {
 	return g->vertices[vertexId]->url;
 }
-
+// Sets the url of a page given its vertexId
 void setVertexUrl(Graph g, char *string, int vertexId) {
 	strcpy(g->vertices[vertexId]->url, string);
 }
@@ -168,39 +172,40 @@ static int addVertex(Graph g, char *string) {
 	}
 	// Copy string into the next available vertex
 	setVertexUrl(g, string, g->nV);
+	//Initialise page info
 	setVertexInfo(g, g->nV, 0, 0, 1.0);
 	return g->nV++;
 }
 
-
+// Check if there is an edge between two pages given the VertexIds
 int isEdge(Graph g, int from, int to){
 	return g->edges[from][to];
 }
-
+// Return the number of outgoing links from a page given its VertexId
 int numOutlinks(Graph g, int i){
 	return g->vertices[i]->w_out;
 }
-
+// Return the number of incoming links to a page given its VertexId
 int numInlinks(Graph g, int i){
 	return g->vertices[i]->w_in;
 }
-
+// Return the pagerank of a page at time t given its vertexId
 float get_pagerank_before(Graph g, int i){
 	return g->vertices[i]->pagerank_before;
 }
-
+// Return the pagerank of a page at time t+1 given its vertexId
 float get_pagerank_after(Graph g, int i){
 	return g->vertices[i]->pagerank_after;
 }
-
+// Set the pagerank of a page at time t given the pagerank and page's VertexId
 void set_pagerank_before(Graph g, int i, float value){
 	g->vertices[i]->pagerank_before = value;
 }
-
+// Set the pagerank of a page at time t+1 given the pagerank and page's VertexId
 void set_pagerank_after(Graph g, int i, float value){
 	g->vertices[i]->pagerank_after = value;
 }
-
+// Display the pageranks of all pages and the sum of the pagerank
 void showPageRanks(Graph g){
 	float sum = 0.0;
 	for(int i = 0; i < g->nV; i++){
@@ -209,7 +214,7 @@ void showPageRanks(Graph g){
 	}
 	printf("Pagerank Sum = %lf\n", sum);
 }
-
+// Set the values Page Info
 void setVertexInfo(Graph g, int vertexId, int w_in, int w_out, float pagerank){
 	g->vertices[vertexId]->pagerank_before = pagerank;
 	g->vertices[vertexId]->w_in = w_in;
