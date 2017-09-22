@@ -49,4 +49,5 @@ Graph createUrlGraph(Queue collectionUrls) {
         }
     }
     showGraph(urlGraph, DENSE);
+    return urlGraph;
 }

@@ -15,8 +15,8 @@ typedef struct Vertex {
 	char url[MAX_CHAR];
 	int w_in;
 	int w_out;
-	double pagerank_before;
-	double pagerank_after;
+	float pagerank_before;
+	float pagerank_after;
 } Vertex;
 
 typedef struct GraphRep {
@@ -85,6 +85,8 @@ int addEdge(Graph g, char *from, char *to) {
 	}
 	// Add an edge
 	g->edges[from_index][to_index] += 1;
+	g->vertices[to_index]->w_in++;
+	g->vertices[from_index]->w_out++;
 	return 1;
 }
 
@@ -134,10 +136,6 @@ void showGraph(Graph g, int print_mode) {
 				printf("\n");
 			}
 		}
-		printf("\n\n");
-		printf("Initilising all Pageranks to 1......\n");
-		for(int i = 0; i < g->nV; i++) printf("Pagerank for %s = %lf\n", g->vertices[i]->url, g->vertices[i]->pagerank_before);
-		printf("\n\n");
 	}
 }
 
@@ -147,14 +145,6 @@ char *getVertexUrl(Graph g, int vertexId) {
 
 void setVertexUrl(Graph g, char *string, int vertexId) {
 	strcpy(g->vertices[vertexId]->url, string);
-	g->vertices[vertexId]->pagerank_before = 1.0;
-	int w_in = 0, w_out = 0;
-	for (int k = 0; k< g->nV; k++){
-		if(g->edges[k][vertexId]) w_in++;
-		if(g->edges[vertexId][k]) w_out++;
-	}
-	g->vertices[vertexId]->w_in = w_in;
-	g->vertices[vertexId]->w_out = w_out;
 }
 
 // Return: The vertex id with the string, or -1 if it couldn't be found
@@ -178,5 +168,50 @@ static int addVertex(Graph g, char *string) {
 	}
 	// Copy string into the next available vertex
 	setVertexUrl(g, string, g->nV);
+	setVertexInfo(g, g->nV, 0, 0, 1.0);
 	return g->nV++;
+}
+
+
+int isEdge(Graph g, int from, int to){
+	return g->edges[from][to];
+}
+
+int numOutlinks(Graph g, int i){
+	return g->vertices[i]->w_out;
+}
+
+int numInlinks(Graph g, int i){
+	return g->vertices[i]->w_in;
+}
+
+float get_pagerank_before(Graph g, int i){
+	return g->vertices[i]->pagerank_before;
+}
+
+float get_pagerank_after(Graph g, int i){
+	return g->vertices[i]->pagerank_after;
+}
+
+void set_pagerank_before(Graph g, int i, float value){
+	g->vertices[i]->pagerank_before = value;
+}
+
+void set_pagerank_after(Graph g, int i, float value){
+	g->vertices[i]->pagerank_after = value;
+}
+
+void showPageRanks(Graph g){
+	float sum = 0.0;
+	for(int i = 0; i < g->nV; i++){
+		sum += g->vertices[i]->pagerank_before;
+		printf("Pagerank for %s = %lf\n", g->vertices[i]->url, g->vertices[i]->pagerank_before);
+	}
+	printf("Pagerank Sum = %lf\n", sum);
+}
+
+void setVertexInfo(Graph g, int vertexId, int w_in, int w_out, float pagerank){
+	g->vertices[vertexId]->pagerank_before = pagerank;
+	g->vertices[vertexId]->w_in = w_in;
+	g->vertices[vertexId]->w_out = w_out;
 }

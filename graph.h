@@ -14,11 +14,19 @@ void 	disposeGraph(Graph g);
 int 	addEdge(Graph g, char *from, char *to);
 int 	nVertices(Graph g);
 int 	isConnected(Graph g, char *from, char *to);
+int 	isEdge(Graph g, int from, int to);
+int		numOutlinks(Graph g, int i);
+int		numInlinks(Graph g, int i);
+float	get_pagerank_before(Graph g, int i);
+float	get_pagerank_after(Graph g, int i);
+void 	set_pagerank_after(Graph g, int i, float value);
+void 	set_pagerank_before(Graph g, int i, float value);
+void 	showPageRanks(Graph g);
 // Avaliable modes
 //	DENSE: View node information
 //	TERSE: View adjacency matrix
 void 	showGraph(Graph g, int print_mode);
-void	setVertexInfo(char *url, int w_in, int w_out, double pagerank);
+void	setVertexInfo(Graph g, int vertexId, int w_in, int w_out, float pagerank);
 char    *getVertexUrl(Graph g, int vertexId);
 void	setVertexUrl(Graph g, char *string, int vertexId);
 
