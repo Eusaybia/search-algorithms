@@ -4,7 +4,7 @@
 #ifndef PAGERANK_H
 #define PAGERANK_H
 
-#include "readData.h"
+#include "graph.h"
 
 void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g);
 float pageRankIncoming(Graph g, int i);

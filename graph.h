@@ -22,9 +22,6 @@ float	get_pagerank_after(Graph g, int i);
 void 	set_pagerank_after(Graph g, int i, float value);
 void 	set_pagerank_before(Graph g, int i, float value);
 void 	showPageRanks(Graph g);
-// Avaliable modes
-//	DENSE: View node information
-//	TERSE: View adjacency matrix
 void 	showGraph(Graph g, int print_mode);
 void	setVertexInfo(Graph g, int vertexId, int numInlinks, int numOutlinks, float pagerank);
 char    *getVertexUrl(Graph g, int vertexId);
