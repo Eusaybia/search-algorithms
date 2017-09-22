@@ -1,4 +1,4 @@
-// tree.h - Interface to binary search tree 
+// tree.c - Interface to binary search tree 
 // Written by Kongwei Ying, September 2017
 
 #include "tree.h"
