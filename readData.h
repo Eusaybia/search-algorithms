@@ -6,6 +6,7 @@
 #include <string.h>
 #include "queue.h"
 #include "graph.h"
+#include "tree.h"
 
 // Get URLs from collection.txt and put it into set
 Queue getCollectionUrls();
