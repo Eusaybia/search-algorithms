@@ -1,6 +1,7 @@
 // Main file for Yaggle search engine
 #include <stdio.h>
 #include <stdlib.h>
+#include "colours.h"
 #include "pagerank.h"
 #include "readData.h"
 #include "graph.h"
@@ -14,7 +15,7 @@ int main(int argc, char* argv[]) {
     Queue collectionUrls = getCollectionUrls();
     Graph urlGraph = createUrlGraph(collectionUrls);
     printImage("yaggleImage.txt");
-    printf("Welcome to Yaggle. Enter your query\n");
+    printf(RED "               Welcome to Yaggle. Enter your query.\n" RESET);
     pageRankWeights(0.85, 0.00001, 1000, urlGraph);
     return EXIT_SUCCESS;
 }
@@ -34,7 +35,7 @@ void printImage(char *directory) {
     char read_string[MAX_CHAR];
  
     while(fgets(read_string,sizeof(read_string),fptr) != NULL)
-        printf("%s",read_string);
+        printf(CYN "%s" RESET,read_string);
 
     printf("\n");
 }

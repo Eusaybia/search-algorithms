@@ -13,10 +13,10 @@ Queue getCollectionUrls() {
     char str[MAX_CHAR] = {0};
     while (fscanf(collectionFp, "%s", str) != EOF) {
         enterQueue(collectionUrls, str);
-        printf("Scanning...");
+        //printf("Scanning...");
     }
     printf("\n");
-    showQueue(collectionUrls);
+    //showQueue(collectionUrls);
     fclose(collectionFp);
     return collectionUrls;
 }
@@ -50,6 +50,6 @@ Graph createUrlGraph(Queue collectionUrls) {
             addEdge(urlGraph, url_from, url_to);
         }
     }
-    showGraph(urlGraph, DENSE);
+    //showGraph(urlGraph, DENSE);
     return urlGraph;
 }
