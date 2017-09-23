@@ -14,6 +14,8 @@ typedef struct TreeRep {
 
 static int findDepth(Vertex *root);
 static int vertexKeyCompare(Vertex *v1, Vertex *v2);
+static void print_t(Vertex *tree);
+int _print_t(Vertex *tree, int is_left, int offset, int depth, char s[20][255]);
 static Vertex *newVertex(char *str);
 
 // TODO: Implement functions below
@@ -63,61 +65,80 @@ void insertIntoTree(Tree t, char *word) {
 int deleteFromTree(Tree t, char *word); // Deletes vertex with key, "word"
 void setVertexList(Tree t, char *word, List urls); // Sets the urls list of a vertex
 
+// This function has a print depth limitation of 20 lines
+// Try changing the magic number 20 in the print_t and _print_t functions
+// if you need to increase the depth it prints up to
 void showTree(Tree t) {
-    /*
-    width = number of spaces
-    d = findDepth(t)
-    q = newQueue()
-    enQueue(q, t->root)
-    curr_d = current depth
-    print width d - curr_d times
-    print q
-    print new line
+    print_t(t->root);
+}
 
-    while (q is not empty)
-        sub_trees_printed = 0
-        print width d - curr_d times
-        while (sub_trees_printed != curr_d)
-            pred = deQueue(q)
-            print left
-            print width * 2
-            print right
-            sub_trees_printed++
-            enQueue left and right
-        print new line
-        curr_d++
-    */
+// Taken from here
+// https://stackoverflow.com/questions/801740/c-how-to-draw-a-binary-tree-to-the-console
+static void print_t(Vertex *tree) {
+    char s[20][255];
+    for (int i = 0; i < 20; i++)
+        sprintf(s[i], "%80s", " ");
 
-    char space[MAX_CHAR] = "               ";
-    int depth = getDepth(t);
-    int curr_depth = 0;
-    VertexQueue q = newVertexQueue();
+    _print_t(tree, 0, 0, 0, s);
 
-    enterVertexQueue(q, t->root);
-    for (int i = 0; i < depth - curr_depth; i++) printf("%s", space);
-    printf("%s", t->root->word);
+    for (int i = 0; i < 20; i++)
+        printf("%s\n", s[i]);
+}
 
-    while (!emptyVertexQueue(q) && curr_depth <= depth) {
-        int subTreesPrinted = 0;
-        for (int i = 0; i < depth - curr_depth; i++) printf("%s", space);
-        while (subTreesPrinted != curr_depth) {
-            Vertex *pred = leaveVertexQueue(q);
-            if (pred->left != NULL) {
-                printf("%s", pred->left->word);
-                enterVertexQueue(q, pred->left);
-            }
-            for (int i = 0; i < 2; i++) printf("%s", space);
-            if (pred->right != NULL) {
-                printf("%s ", pred->right->word);
-                enterVertexQueue(q, pred->right);
-            }
-            subTreesPrinted++;
-        }
-        printf("\n\n");
-        curr_depth++;
+// Taken from here
+// https://stackoverflow.com/questions/801740/c-how-to-draw-a-binary-tree-to-the-console
+int _print_t(Vertex *tree, int is_left, int offset, int depth, char s[20][255]) {
+    char b[20];
+    int width = 5;
+
+    if (!tree) return 0;
+
+    sprintf(b, "(%s)", tree->word);
+
+    int left  = _print_t(tree->left,  1, offset,                depth + 1, s);
+    int right = _print_t(tree->right, 0, offset + left + width, depth + 1, s);
+
+#ifdef COMPACT
+    for (int i = 0; i < width; i++)
+        s[depth][offset + left + i] = b[i];
+
+    if (depth && is_left) {
+
+        for (int i = 0; i < width + right; i++)
+            s[depth - 1][offset + left + width/2 + i] = '-';
+
+        s[depth - 1][offset + left + width/2] = '.';
+
+    } else if (depth && !is_left) {
+
+        for (int i = 0; i < left + width; i++)
+            s[depth - 1][offset - width/2 + i] = '-';
+
+        s[depth - 1][offset + left + width/2] = '.';
     }
+#else
+    for (int i = 0; i < width; i++)
+        s[2 * depth][offset + left + i] = b[i];
 
-    disposeVertexQueue(q);
+    if (depth && is_left) {
+
+        for (int i = 0; i < width + right; i++)
+            s[2 * depth - 1][offset + left + width/2 + i] = '-';
+
+        s[2 * depth - 1][offset + left + width/2] = '+';
+        s[2 * depth - 1][offset + left + width + right + width/2] = '+';
+
+    } else if (depth && !is_left) {
+
+        for (int i = 0; i < left + width; i++)
+            s[2 * depth - 1][offset - width/2 + i] = '-';
+
+        s[2 * depth - 1][offset + left + width/2] = '+';
+        s[2 * depth - 1][offset - width/2 - 1] = '+';
+    }
+#endif
+
+    return left + width + right;
 }
 
 int getDepth(Tree t) {

@@ -8,7 +8,7 @@ all: yaggle tests
 
 # Make will execute pagerank if any of the files after : change
 
-yaggle: yaggle.o searchPagerank.o pagerank.o readData.o graph.o vertexQueue.o queue.o list.o tree.o
+yaggle: yaggle.o searchPagerank.o pagerank.o readData.o graph.o queue.o list.o tree.o
 	$(CC) yaggle.o searchPagerank.o pagerank.o readData.o graph.o vertexQueue.o queue.o list.o tree.o -o yaggle
 
 yaggle.o: yaggle.c
