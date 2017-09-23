@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     Queue collectionUrls = getCollectionUrls();
     Graph urlGraph = createUrlGraph(collectionUrls);
     printImage("yaggleImage.txt");
-    printf(RED "               Welcome to Yaggle. Enter your query.\n" RESET);
+    printf(RED "\n\n               Welcome to Yaggle. Enter your query.\n" RESET);
     pageRankWeights(0.85, 0.00001, 1000, urlGraph);
     return EXIT_SUCCESS;
 }

@@ -1,17 +1,18 @@
-// queue.c ... simple Queue of Strings
+// queue.c ... Queue of vertices
 // Written by John Shepherd, September 2015
+// Modified by Kongwei Ying, September 2017
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
-#include "queue.h"
+#include "vertexQueue.h"
 
 typedef struct Node *Link;
 
 typedef struct Node
 {
-	char *val;
+	Vertex *val;
 	Link next;
 } Node;
 
@@ -21,23 +22,14 @@ typedef struct QueueRep
 	Link back;
 } QueueRep;
 
-// Function signatures
-
-Queue newQueue();
-void disposeQueue(Queue);
-void enterQueue(Queue, char *);
-char *leaveQueue(Queue);
-int emptyQueue(Queue);
-void showQueue(Queue q);
-
-static Link newNode(char *);
+static Link newNode(Vertex *);
 static void disposeNode(Link);
 
 // newQueue()
 // - create an initially empty Queue
-Queue newQueue()
+VertexQueue newVertexQueue()
 {
-	Queue new = malloc(sizeof(QueueRep));
+	VertexQueue new = malloc(sizeof(QueueRep));
 	assert(new != NULL);
 	new->front = NULL;
 	new->back = NULL;
@@ -46,7 +38,7 @@ Queue newQueue()
 
 // disposeQueue(Queue)
 // - clean up memory associated with Queue
-void disposeQueue(Queue q)
+void disposeVertexQueue(VertexQueue q)
 {
 	if (q == NULL)
 		return;
@@ -61,7 +53,7 @@ void disposeQueue(Queue q)
 
 // enterQueue(Queue,Str)
 // - add Str to back of Queue
-void enterQueue(Queue q, char *str)
+void enterVertexQueue(VertexQueue q, Vertex *str)
 {
 	Link new = newNode(str);
 	if (q->front == NULL)
@@ -76,10 +68,10 @@ void enterQueue(Queue q, char *str)
 
 // leaveQueue(Queue)
 // - return string at front of Queue
-char *leaveQueue(Queue q)
+Vertex *leaveVertexQueue(VertexQueue q)
 {
 	assert(q->front != NULL);
-	char *str = q->front->val;
+	Vertex *str = q->front->val;
 	Link old = q->front;
 	q->front = old->next;
 	if (q->front == NULL)
@@ -90,14 +82,14 @@ char *leaveQueue(Queue q)
 
 // emptyQueue(Queue)
 // - check whether Queue is empty
-int emptyQueue(Queue q)
+int emptyVertexQueue(VertexQueue q)
 {
 	return (q->front == NULL);
 }
 
 // showQueue(Queue)
 // - display Queue (for debugging)
-void showQueue(Queue q)
+void showVertexQueue(VertexQueue q)
 {
 	Link curr;
 	if (q->front == NULL)
@@ -109,7 +101,7 @@ void showQueue(Queue q)
 		curr = q->front;
 		while (curr != NULL)
 		{
-			printf("[%03d] %s\n", id, curr->val);
+			printf("[%03d] %s\n", id, curr->val->word);
 			id++;
 			curr = curr->next;
 		}
@@ -118,11 +110,11 @@ void showQueue(Queue q)
 
 // Helper functions
 
-static Link newNode(char *str)
+static Link newNode(Vertex *str)
 {
 	Link new = malloc(sizeof(Node));
 	assert(new != NULL);
-	new->val = strdup(str);
+	new->val = str;
 	new->next = NULL;
 	return new;
 }
