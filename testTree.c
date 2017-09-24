@@ -23,6 +23,6 @@ int main (int argc, char *argv[]) {
     addUrl(t, "cake", "url141");
     addUrl(t, "aadvark", "url141");
     showInOrder(t);
-    //dropTree(t);
+    dropTree(t);
     return EXIT_SUCCESS;
 }

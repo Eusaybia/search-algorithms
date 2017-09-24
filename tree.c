@@ -12,6 +12,7 @@ typedef struct TreeRep {
    struct Vertex *root; 
 } TreeRep;
 
+static void dropTraversal(Vertex *v);
 static int findDepth(Vertex *root);
 static int vertexKeyCompare(Vertex *v1, Vertex *v2);
 static void print_t(Vertex *tree);
@@ -20,12 +21,24 @@ static Vertex *newVertex(char *str);
 static Vertex *findVertex(Vertex *v, char *str);
 static void inOrderTraversal(Vertex *v);
 
-// TODO: Implement functions below
 Tree newTree() {
     Tree t = malloc(sizeof(struct TreeRep));
     return t;
 }
-void dropTree(Tree t); // Frees the tree's associated memory
+void dropTree(Tree t) {
+    dropTraversal(t->root);
+    free(t);
+}
+
+static void dropTraversal(Vertex *v) {
+    if (v != NULL) {
+        dropTraversal(v->left);
+        dropTraversal(v->right);
+        free(v->word);
+        dropList(v->urls);
+        free(v);
+    }
+}
 
 void insertIntoTree(Tree t, char *word) {
     Vertex *new = newVertex(word);
@@ -75,8 +88,6 @@ void addUrl(Tree t, char *word, char *url) {
         appendList(v->urls, url);
     }
 }
-
-int deleteFromTree(Tree t, char *word); // Deletes vertex with key, "word"
 
 void showInOrder(Tree t) {
     inOrderTraversal(t->root);
