@@ -17,6 +17,8 @@ static int vertexKeyCompare(Vertex *v1, Vertex *v2);
 static void print_t(Vertex *tree);
 int _print_t(Vertex *tree, int is_left, int offset, int depth, char s[20][255]);
 static Vertex *newVertex(char *str);
+static Vertex *findVertex(Vertex *v, char *str);
+static void inOrderTraversal(Vertex *v);
 
 // TODO: Implement functions below
 Tree newTree() {
@@ -38,7 +40,7 @@ void insertIntoTree(Tree t, char *word) {
     while (1) {
         // Check which branch pred should go down
         // If new.key < pred.key
-        if (vertexKeyCompare(new, pred) == -1) {
+        if (vertexKeyCompare(new, pred) < 0) {
             // If pred cannot
             if (pred->left == NULL)
                 break;
@@ -56,14 +58,38 @@ void insertIntoTree(Tree t, char *word) {
 
     new->parent = pred;
 
-    if (vertexKeyCompare(new, pred) == -1)
+    if (vertexKeyCompare(new, pred) < 0)
         pred->left = new;
     else
         pred->right = new;
 }
 
+void addUrl(Tree t, char *word, char *url) {
+    Vertex *v = findVertex(t->root, word);
+
+    if (v == NULL) {
+        fprintf(stderr, "Could not find word '%s' in tree\n", word);
+    }
+    else {
+        // Insert into the vertex's list of urls
+        appendList(v->urls, url);
+    }
+}
+
 int deleteFromTree(Tree t, char *word); // Deletes vertex with key, "word"
-void setVertexList(Tree t, char *word, List urls); // Sets the urls list of a vertex
+
+void showInOrder(Tree t) {
+    inOrderTraversal(t->root);
+}
+
+static void inOrderTraversal(Vertex *v) {
+    if (v != NULL) {
+        inOrderTraversal(v->left);
+        printf("%s ", v->word);
+        showList(v->urls);
+        inOrderTraversal(v->right);
+    }
+}
 
 // This function has a print depth limitation of 20 lines
 // Try changing the magic number 20 in the print_t and _print_t functions
@@ -157,14 +183,8 @@ static int findDepth(Vertex *root) {
     return (maxLeftDepth >= maxRightDepth) ? maxLeftDepth + 1 : maxRightDepth + 1;
 }
 
-// Return 1 if v1 > v2, 0 if v1 == v2/ -1 if v1 < v2
 static int vertexKeyCompare(Vertex *v1, Vertex *v2) {
-    for (int i = 0; i < MAX_CHAR; i++) {
-        if (v1->word[i] == '\0' || v2->word[i] == '\0') break;
-        if (v1->word[i] > v2->word[i]) return 1;
-        else if (v1->word[i] < v2->word[i]) return -1;
-    }
-    return 0;
+    return strcmp(v1->word, v2->word);
 }
 
 // Create a new Vertex for the tree
@@ -179,4 +199,17 @@ static Vertex *newVertex(char *str) {
     strcpy(v->word, str);
 
     return v;
+}
+
+static Vertex *findVertex(Vertex *v, char *str) {
+    if (v == NULL || strcmp(str, v->word)) {
+        return v;
+    }
+
+    if (strcmp(str, v->word) < 0) {
+        return findVertex(v->left, str);
+    }
+    else {
+        return findVertex(v->right, str);
+    }
 }

@@ -14,7 +14,15 @@ int main (int argc, char *argv[]) {
     insertIntoTree(t, "car");
     insertIntoTree(t, "cake");
     insertIntoTree(t, "cache");
+    insertIntoTree(t, "carrie");
     showTree(t);
+    addUrl(t, "banana", "url121");
+    addUrl(t, "apple", "url121");
+    addUrl(t, "carrot", "url131");
+    addUrl(t, "car", "url141");
+    addUrl(t, "cake", "url141");
+    addUrl(t, "aadvark", "url141");
+    showInOrder(t);
     //dropTree(t);
     return EXIT_SUCCESS;
 }

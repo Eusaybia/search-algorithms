@@ -20,7 +20,8 @@ Tree newTree();
 void dropTree(Tree t); // Frees the tree's associated memory
 void insertIntoTree(Tree t, char *word); // Inserts vertex with key, "word" 
 int deleteFromTree(Tree t, char *word); // Deletes vertex with key, "word"
-void setVertexList(Tree t, char *word, List urls); // Sets the urls list of a vertex
+void addUrl(Tree t, char *word, char *url); // Adds a url to the list inside the vertex with key word
+void showInOrder(Tree t);
 void showTree(Tree t);
 int getDepth(Tree t);
 

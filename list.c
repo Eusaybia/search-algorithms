@@ -97,6 +97,19 @@ int deleteFromList(List l, char *str) {
 }
 
 void showList(List l) {
+    Node *n = l->head;
+
+    if (n == NULL) {
+        printf("List is empty");
+    }
+
+    while (n != NULL) {
+        printf("%s ", n->str);
+        n = n->next;
+    }
+    printf("\n");
+/*     
+    // Debug mode
     printf("Forward : ");
     printf("(");
     Node *n = l->head;
@@ -114,7 +127,7 @@ void showList(List l) {
         if (n->prev != NULL) printf(",");
         n = n->prev;
     }
-    printf(")\n");
+    printf(")\n"); */
 }
 
 // Creates a new node
