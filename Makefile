@@ -1,7 +1,7 @@
 # Makefile for COMP2521 Assignment
 
 CC=gcc
-CFLAGS=-I -g -Wall -Werror
+CFLAGS= -ggdb -Wall -Werror
 TESTS=testGraph testList testTree
 
 all: yaggle tests
@@ -9,7 +9,7 @@ all: yaggle tests
 # Make will execute pagerank if any of the files after : change
 
 yaggle: yaggle.o searchPagerank.o pagerank.o readData.o graph.o queue.o list.o tree.o
-	$(CC) yaggle.o searchPagerank.o pagerank.o readData.o graph.o vertexQueue.o queue.o list.o tree.o -o yaggle
+	$(CC) yaggle.o searchPagerank.o pagerank.o readData.o graph.o queue.o list.o tree.o -o yaggle
 
 yaggle.o: yaggle.c
 	$(CC) -c yaggle.c
@@ -33,10 +33,10 @@ testGraph.o: testGraph.c
 	$(CC) -c testGraph.c
 
 testList: testList.o list.o
-	$(CC) list.o testList.o -o testList
+	$(CC) $(CFLAGS) list.c testList.c -o testList
 
 testList.o: testList.c
-	$(CC) -c testList.c
+	$(CC) $(CFLAGS) -c testList.c
 
 testTree: testTree.o tree.o list.o vertexQueue.o
 	$(CC) tree.o list.o vertexQueue.o testTree.o -o testTree
@@ -61,8 +61,8 @@ tree.o: tree.c tree.h list.c list.h vertexQueue.c vertexQueue.h
 	$(CC) -c tree.c list.c vertexQueue.c
 
 list.o: list.c list.h
-	$(CC) -c list.c
+	$(CC) $(CFLAGS) -c list.c
 
 clean:
 # Remove all object files
-	rm *o yaggle testGraph
+	rm *o 

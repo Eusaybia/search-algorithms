@@ -31,9 +31,10 @@ List newList() {
 void dropList(List l) {
     Node *n = l->head;
     while (n != NULL) {
+        Node *next = n->next;
         free(n->str);
         free(n);
-        n = n->next;
+        n = next;
     }
     free(l);
 }
@@ -64,15 +65,15 @@ void appendList(List l, char *str) {
 int deleteFromList(List l, char *str) {
     Node *curr = l->head;
     // Attempt to find the node
-    while (strcmp(curr->str, str) != 0 && curr != NULL) {
+    while (curr != NULL && strcmp(curr->str, str) != 0) {
         curr = curr->next;
     }
     if (curr != NULL) {
         if (l->head == l->tail) {
             free(curr->str);
             free(curr);
-            l->head == NULL;
-            l->tail == NULL;
+            l->head = NULL;
+            l->tail = NULL;
         }
         else {
             if (curr->prev == NULL) {
@@ -90,6 +91,7 @@ int deleteFromList(List l, char *str) {
             free(curr->str);
             free(curr);
         }
+        return 1;
     }
     else return 0; // String not in list
 }
