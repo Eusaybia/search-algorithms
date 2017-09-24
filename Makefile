@@ -44,7 +44,7 @@ testTree: testTree.o tree.o list.o vertexQueue.o
 testTree.o: testTree.c
 	$(CC) -c testTree.c
 
-# ADT Object Files 
+# ADT Object Files
 graph.o: graph.c graph.h
 	$(CC) -c graph.c
 
@@ -65,4 +65,4 @@ list.o: list.c list.h
 
 clean:
 # Remove all object files
-	rm *o 
+	rm *o yaggle testList testGraph testTree
