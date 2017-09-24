@@ -13,18 +13,19 @@ typedef struct TreeRep {
 } TreeRep;
 
 static void dropTraversal(Vertex *v);
-static int findDepth(Vertex *root);
-static int vertexKeyCompare(Vertex *v1, Vertex *v2);
-static void print_t(Vertex *tree);
-int _print_t(Vertex *tree, int is_left, int offset, int depth, char s[20][255]);
 static Vertex *newVertex(char *str);
 static Vertex *findVertex(Vertex *v, char *str);
 static void inOrderTraversal(Vertex *v);
+static void print_t(Vertex *tree);
+static int _print_t(Vertex *tree, int is_left, int offset, int depth, char s[20][255]);
+static int findDepth(Vertex *root);
+static int vertexKeyCompare(Vertex *v1, Vertex *v2);
 
 Tree newTree() {
     Tree t = malloc(sizeof(struct TreeRep));
     return t;
 }
+
 void dropTree(Tree t) {
     dropTraversal(t->root);
     free(t);
@@ -77,6 +78,20 @@ void insertIntoTree(Tree t, char *word) {
         pred->right = new;
 }
 
+// Create a new Vertex for the tree
+static Vertex *newVertex(char *str) {
+    Vertex *v = malloc(sizeof(struct Vertex));
+    v->left = NULL;
+    v->right = NULL;
+    v->parent = NULL;
+    v->word = malloc(sizeof(char) * MAX_CHAR);
+    v->urls = newList();
+
+    strcpy(v->word, str);
+
+    return v;
+}
+
 void addUrl(Tree t, char *word, char *url) {
     Vertex *v = findVertex(t->root, word);
 
@@ -86,6 +101,19 @@ void addUrl(Tree t, char *word, char *url) {
     else {
         // Insert into the vertex's list of urls
         appendList(v->urls, url);
+    }
+}
+
+static Vertex *findVertex(Vertex *v, char *str) {
+    if (v == NULL || strcmp(str, v->word)) {
+        return v;
+    }
+
+    if (strcmp(str, v->word) < 0) {
+        return findVertex(v->left, str);
+    }
+    else {
+        return findVertex(v->right, str);
     }
 }
 
@@ -124,7 +152,7 @@ static void print_t(Vertex *tree) {
 
 // Taken from here
 // https://stackoverflow.com/questions/801740/c-how-to-draw-a-binary-tree-to-the-console
-int _print_t(Vertex *tree, int is_left, int offset, int depth, char s[20][255]) {
+static int _print_t(Vertex *tree, int is_left, int offset, int depth, char s[20][255]) {
     char b[20];
     int width = 5;
 
@@ -198,29 +226,3 @@ static int vertexKeyCompare(Vertex *v1, Vertex *v2) {
     return strcmp(v1->word, v2->word);
 }
 
-// Create a new Vertex for the tree
-static Vertex *newVertex(char *str) {
-    Vertex *v = malloc(sizeof(struct Vertex));
-    v->left = NULL;
-    v->right = NULL;
-    v->parent = NULL;
-    v->word = malloc(sizeof(char) * MAX_CHAR);
-    v->urls = newList();
-
-    strcpy(v->word, str);
-
-    return v;
-}
-
-static Vertex *findVertex(Vertex *v, char *str) {
-    if (v == NULL || strcmp(str, v->word)) {
-        return v;
-    }
-
-    if (strcmp(str, v->word) < 0) {
-        return findVertex(v->left, str);
-    }
-    else {
-        return findVertex(v->right, str);
-    }
-}
