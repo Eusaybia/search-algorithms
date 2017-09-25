@@ -49,7 +49,5 @@ Tree getInvertedIndex(Queue collectionUrls) {
         }
     }
     showInOrder(t);
-    // TODO: Reorganise Makefile for easier debugging of every file
-    // TODO: Fix current condition dependant on uninitialised variable bug
     return t;
 }
