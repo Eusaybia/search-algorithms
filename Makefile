@@ -9,7 +9,7 @@ LIB_FILES = graph.c list.c queue.c set.c tree.c vertexQueue.c
 TEST_FILES = testGraph.c testList.c testTree.c
 
 # Automatically generated object file targets
-SRC_OBJ_FILES = $(SRC_FILES: .c = .o)
+SRC_OBJ_FILES = $(SRC_FILES: .c = .o) # Uses what's called a "substitution reference"
 LIB_OBJ_FILES = $(LIB_FILES: .c = .o)
 TEST_OBJ_FILES = $(TEST_FILES: .c = .o)
 
