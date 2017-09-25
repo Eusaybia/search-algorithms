@@ -3,6 +3,9 @@
 # Based off this:
 # https://stackoverflow.com/questions/12142865/debugging-using-gdb-properly-using-the-g-flag-with-several-files
 
+# Binary files
+BINARIES = yaggle testGraph testList testTree
+
 # All c files (add files here if more are added to the project)
 SRC_FILES = yaggle.c invertedIndex.c searchPagerank.c pagerank.c readData.c
 LIB_FILES = graph.c list.c queue.c set.c tree.c vertexQueue.c
@@ -50,6 +53,6 @@ testTree: testTree.o tree.o list.o vertexQueue.o
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$ 
 
-# Remove all object files
+# Remove all object files and binaries
 clean:
-	rm *o 
+	rm *o $(BINARIES)
