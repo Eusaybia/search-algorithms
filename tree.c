@@ -3,7 +3,6 @@
 
 #include "tree.h"
 #include "vertexQueue.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #define MAX_CHAR 256
@@ -15,7 +14,7 @@ typedef struct TreeRep {
 static void dropTraversal(Vertex *v);
 static Vertex *newVertex(char *str);
 static Vertex *findVertex(Vertex *v, char *str);
-static void inOrderTraversal(Vertex *v);
+static void inOrderTraversal(Vertex *v, FILE *fp);
 static void print_t(Vertex *tree);
 static int _print_t(Vertex *tree, int is_left, int offset, int depth, char s[20][255]);
 static int findDepth(Vertex *root);
@@ -123,16 +122,16 @@ static Vertex *findVertex(Vertex *v, char *str) {
         return findVertex(v->right, str);
 }
 
-void showInOrder(Tree t) {
-    inOrderTraversal(t->root);
+void showInOrder(Tree t, FILE *fp) {
+    inOrderTraversal(t->root, fp);
 }
 
-static void inOrderTraversal(Vertex *v) {
+static void inOrderTraversal(Vertex *v, FILE *fp) {
     if (v != NULL) {
-        inOrderTraversal(v->left);
-        printf("%s  ", v->word);
-        showList(v->urls);
-        inOrderTraversal(v->right);
+        inOrderTraversal(v->left, fp);
+        fprintf(fp,"%s  ", v->word);
+        showList(v->urls, fp);
+        inOrderTraversal(v->right, fp);
     }
 }
 

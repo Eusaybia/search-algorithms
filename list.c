@@ -2,7 +2,6 @@
 // Written by Kongwei Ying, September 2017
 
 #include "list.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #define MAX_CHAR 256
@@ -149,18 +148,18 @@ static void swap(Node *n1, Node *n2) {
     strcpy(n2->str, temp);
 }
 
-void showList(List l) {
+void showList(List l, FILE *fp) {
     Node *n = l->head;
 
     if (n == NULL) {
-        printf("List is empty");
+        fprintf(fp, "List is empty");
     }
 
     while (n != NULL) {
-        printf("%s ", n->str);
+        fprintf(fp, "%s ", n->str);
         n = n->next;
     }
-    printf("\n");
+    fprintf(fp, "\n");
 /*     
     // Debug mode
     printf("Forward : ");

@@ -4,6 +4,8 @@
 #ifndef LIST_H
 #define LIST_H
 
+#include <stdio.h>
+
 typedef struct ListRep *List;
 
 List newList();
@@ -12,6 +14,6 @@ int isEmpty(List l);
 void appendList(List l, char *str);
 int deleteFromList(List l, char *str);
 void sortList(List l);
-void showList(List l);
+void showList(List l, FILE *fp);
 
 #endif

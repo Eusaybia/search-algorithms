@@ -48,6 +48,7 @@ Tree getInvertedIndex(Queue collectionUrls) {
             addUrl(t, curr_word, url_from);
         }
     }
-    showInOrder(t);
+    FILE *invertedIndexFp = fopen("invertedIndex.txt", "w");
+    showInOrder(t, invertedIndexFp);
     return t;
 }

@@ -5,6 +5,7 @@
 #define TREE_H
 
 #include "list.h"
+#include <stdio.h>
 
 typedef struct TreeRep *Tree;
 
@@ -20,7 +21,7 @@ Tree newTree();
 void dropTree(Tree t); // Frees the tree's associated memory
 void insertIntoTree(Tree t, char *word); // Inserts vertex with key, "word" 
 void addUrl(Tree t, char *word, char *url); // Adds a url to the list inside the vertex with key word
-void showInOrder(Tree t);
+void showInOrder(Tree t, FILE *fp); // Either prints to a file, or can print to std streams
 void showTree(Tree t);
 int getDepth(Tree t);
 
