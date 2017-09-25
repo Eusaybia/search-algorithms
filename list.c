@@ -18,10 +18,11 @@ typedef struct ListRep {
     struct Node *tail;
 } ListRep;
 
-static Node *newNode(char *str);
+static int isElementList(List l, char *str);
 static void quickSort(Node *p, Node *r);
 static Node *partition(Node *p, Node *r);
 static void swap(Node *n1, Node *n2); 
+static Node *newNode(char *str);
 
 List newList() {
     List l = malloc(sizeof(struct ListRep));
@@ -47,6 +48,9 @@ int isEmpty(List l) {
 }
 
 void appendList(List l, char *str) {
+    // We want the list to be a set
+    if (isElementList(l, str)) return;
+
     if (isEmpty(l)) {
         l->head = newNode(str);
         l->tail = l->head;
@@ -63,6 +67,17 @@ void appendList(List l, char *str) {
         l->tail->next = new;
         l->tail = new;
     }
+}
+
+static int isElementList(List l, char *str) {
+    Node *n = l->head;
+    while (n != NULL) {
+        if (strcmp(n->str, str) == 0) {
+            return 1;
+        }
+        n = n->next;
+    }
+    return 0;
 }
 
 int deleteFromList(List l, char *str) {

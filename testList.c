@@ -15,6 +15,8 @@ int main(int argc, char* argv[]) {
     appendList(l, "eggplant");
     appendList(l, "apple");
     appendList(l, "banana");
+    appendList(l, "banana");
+    appendList(l, "banana");
     printf("Unsorted List: ");
     showList(l);
     sortList(l);
