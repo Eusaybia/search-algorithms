@@ -130,7 +130,7 @@ void showInOrder(Tree t) {
 static void inOrderTraversal(Vertex *v) {
     if (v != NULL) {
         inOrderTraversal(v->left);
-        printf("%s ", v->word);
+        printf("%s  ", v->word);
         showList(v->urls);
         inOrderTraversal(v->right);
     }
