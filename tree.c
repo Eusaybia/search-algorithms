@@ -42,6 +42,12 @@ static void dropTraversal(Vertex *v) {
 }
 
 void insertIntoTree(Tree t, char *word) {
+    // If the word we're trying to insert is already in the tree
+    if (findVertex(t->root, word) != NULL) {
+        printf("Vertex with word '%s' is already in the tree\n", word);
+        return;
+    }
+
     Vertex *new = newVertex(word);
     // pred always trails new
     Vertex *pred = t->root;   
@@ -105,16 +111,13 @@ void addUrl(Tree t, char *word, char *url) {
 }
 
 static Vertex *findVertex(Vertex *v, char *str) {
-    if (v == NULL || strcmp(str, v->word)) {
+    if (v == NULL || strcmp(str, v->word) == 0)
         return v;
-    }
 
-    if (strcmp(str, v->word) < 0) {
+    if (strcmp(str, v->word) < 0)
         return findVertex(v->left, str);
-    }
-    else {
+    else 
         return findVertex(v->right, str);
-    }
 }
 
 void showInOrder(Tree t) {
