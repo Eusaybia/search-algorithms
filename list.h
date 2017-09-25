@@ -11,6 +11,7 @@ void dropList(List l);
 int isEmpty(List l);
 void appendList(List l, char *str);
 int deleteFromList(List l, char *str);
+void sortList(List l);
 void showList(List l);
 
 #endif

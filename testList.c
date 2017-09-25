@@ -7,22 +7,18 @@
 
 int main(int argc, char* argv[]) {
     List l = newList();
-    appendList(l, "lol");
-    appendList(l, "mate");
-    appendList(l, "mate");
-    appendList(l, "mate");
-    appendList(l, "mate");
-    appendList(l, "mate");
-    appendList(l, "mate");
-    deleteFromList(l, "mate");
-    deleteFromList(l, "lol");
-    deleteFromList(l, "mate");
-    deleteFromList(l, "mate");
-    deleteFromList(l, "mate");
-    deleteFromList(l, "mate");
-    deleteFromList(l, "mate");
-    deleteFromList(l, "mate");
-    deleteFromList(l, "mate");
+    appendList(l, "carrot");
+    appendList(l, "durian");
+    appendList(l, "fruit");
+    appendList(l, "grape");
+    appendList(l, "ham");
+    appendList(l, "eggplant");
+    appendList(l, "apple");
+    appendList(l, "banana");
+    printf("Unsorted List: ");
+    showList(l);
+    sortList(l);
+    printf("Sorted List: ");
     showList(l);
     dropList(l);
     return EXIT_SUCCESS;

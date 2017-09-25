@@ -19,6 +19,9 @@ typedef struct ListRep {
 } ListRep;
 
 static Node *newNode(char *str);
+static void quickSort(Node *p, Node *r);
+static Node *partition(Node *p, Node *r);
+static void swap(Node *n1, Node *n2); 
 
 List newList() {
     List l = malloc(sizeof(struct ListRep));
@@ -94,6 +97,41 @@ int deleteFromList(List l, char *str) {
         return 1;
     }
     else return 0; // String not in list
+}
+
+void sortList(List l) {
+    quickSort(l->head, l->tail);
+}
+
+static void quickSort(Node *p, Node *r) {
+    if (r != NULL && p != r && p != r->next) {
+        Node *q = partition(p, r);
+        quickSort(p, q->prev);
+        quickSort(q->next, r);
+    }
+}
+
+// p is the beginning of the list, r is the end
+// A more concise implementation of the Lomuto partition on CLRS, p171
+// Removes the i + 1 offset
+static Node *partition(Node *p, Node *r) {
+    Node *pivot = r;
+    Node *i = p;
+    for (Node *j = p; j != r; j = j->next) {
+        if (strcmp(j->str, pivot->str) <= 0) {
+            swap(i, j);
+            i = i->next;
+        }
+    }
+    swap(i, r);
+    return i;
+}
+
+static void swap(Node *n1, Node *n2) {
+    char temp[MAX_CHAR] = {0};
+    strcpy(temp, n1->str);
+    strcpy(n1->str, n2->str);
+    strcpy(n2->str, temp);
 }
 
 void showList(List l) {
