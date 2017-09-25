@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "colours.h"
+#include "invertedIndex.h"
 #include "pagerank.h"
 #include "readData.h"
 #include "graph.h"
@@ -12,10 +13,12 @@
 void printImage(char *directory);
 
 int main(int argc, char* argv[]) {
-    Queue collectionUrls = getCollectionUrls();
-    Graph urlGraph = createUrlGraph(collectionUrls);
     printImage("yaggleImage.txt");
     printf(RED "\n\n               Welcome to Yaggle. Enter your query.\n" RESET);
+    Queue collectionUrls1 = getCollectionUrls();
+    Graph urlGraph = createUrlGraph(collectionUrls1);
+    Queue collectionUrls2 = getCollectionUrls();
+    getInvertedIndex(collectionUrls2);
     pageRankWeights(0.85, 0.00001, 1000, urlGraph);
     return EXIT_SUCCESS;
 }
