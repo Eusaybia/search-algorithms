@@ -32,7 +32,8 @@ void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g) {
 		diff = new_diff;
 		for(int i=0; i<N; i++) set_pagerank_before(g, i, get_pagerank_after(g, i));
 	}
-	//showPageRanks(g);
+	FILE *pagerankListFp = fopen("pagerankList.txt", "w");
+	showPageRanks(g, pagerankListFp);
 }
 // Function to calculate the product of PageRank, In-weight and Out-weight
 float pageRankIncoming(Graph g, int i){

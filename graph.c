@@ -206,13 +206,16 @@ void set_pagerank_after(Graph g, int i, float value){
 	g->vertices[i]->pagerank_after = value;
 }
 // Display the pageranks of all pages and the sum of the pagerank
-void showPageRanks(Graph g){
+void showPageRanks(Graph g, FILE *fp){
 	float sum = 0.0;
 	for(int i = 0; i < g->nV; i++){
 		sum += g->vertices[i]->pagerank_before;
-		printf("Pagerank for %s = %lf\n", g->vertices[i]->url, g->vertices[i]->pagerank_before);
+		fprintf(fp, "%s, %d, %.7lf\n", 
+			g->vertices[i]->url, 
+			g->vertices[i]->nOutLinks, 
+			g->vertices[i]->pagerank_before);
 	}
-	printf("Pagerank Sum = %lf\n", sum);
+	//fprintf(fp, "Pagerank Sum = %lf\n", sum);
 }
 // Set the values Page Info
 void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, float pagerank){
