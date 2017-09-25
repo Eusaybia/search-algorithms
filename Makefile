@@ -9,21 +9,22 @@ LIB_FILES = graph.c list.c queue.c set.c tree.c vertexQueue.c
 TEST_FILES = testGraph.c testList.c testTree.c
 
 # Automatically generated object file targets
-SRC_OBJ_FILES = $(addsuffix .o, $(basename, $(SRC_FILES)))
-LIB_OBJ_FILES = $(addsuffix .o, $(basename, $(LIB_FILES)))
-TEST_OBJ_FILES = $(addsuffix .o, $(basename, $(TEST_FILES)))
+SRC_OBJ_FILES = $(SRC_FILES: .c = .o)
+LIB_OBJ_FILES = $(LIB_FILES: .c = .o)
+TEST_OBJ_FILES = $(TEST_FILES: .c = .o)
 
 # Flags, options
 CC = gcc
 CFLAGS = -ggdb -Wall -Werror
 CFLAGS_LINK = -ggdb -Wall -Werror
+OUTPUT = yaggle
 
 # Default make target
 all: yaggle tests
 
 # Main yaggle program
 yaggle: $(SRC_OBJ_FILES) $(LIB_OBJ_FILES) 
-	$(CC) $(CFLAGS_LINK) $(SRC_OBJ_FILES) $(LIB_OBJ_FILES) -o yaggle  
+	$(CC) $(CFLAGS_LINK) -o $(OUTPUT) $(SRC_OBJ_FILES) $(LIB_OBJ_FILES) 
 
 # ADT Tests
 tests: testGraph testList testTree
