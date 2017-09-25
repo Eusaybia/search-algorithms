@@ -23,6 +23,8 @@ static int vertexKeyCompare(Vertex *v1, Vertex *v2);
 
 Tree newTree() {
     Tree t = malloc(sizeof(struct TreeRep));
+    t->root = NULL;
+
     return t;
 }
 
@@ -91,6 +93,7 @@ static Vertex *newVertex(char *str) {
     v->right = NULL;
     v->parent = NULL;
     v->word = malloc(sizeof(char) * MAX_CHAR);
+    memset(v->word, 0, sizeof(char) * MAX_CHAR);
     v->urls = newList();
 
     strcpy(v->word, str);
@@ -111,7 +114,7 @@ void addUrl(Tree t, char *word, char *url) {
 }
 
 static Vertex *findVertex(Vertex *v, char *str) {
-    if (v == NULL || strcmp(str, v->word) == 0)
+    if (v == NULL || strcmp(v->word, str) == 0)
         return v;
 
     if (strcmp(str, v->word) < 0)
