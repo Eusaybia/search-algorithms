@@ -6,7 +6,12 @@
 // Finds urls from invertedIndex that contain query words
 // Fills matchedUrlList with urls
 // Returns number of matched urls
-int findMatchedUrls(FILE *invertedIndexFp, char matchedUrlList[MAX_V][MAX_CHAR]) {
+int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
+    FILE *invertedIndexFp = fopen("invertedIndex.txt", "r");
+    if (invertedIndexFp == NULL) {
+        perror("Error opening file");
+        exit(1);
+    }
     char queries[MAX_QUERIES][MAX_CHAR] = {0};
     char buf[MAX_CHAR] = {0};
     int nQueries = 0;

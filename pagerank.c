@@ -11,7 +11,6 @@
 // http://www.cse.unsw.edu.au/~cs2521/17s2/ass/ass02/Ass2.html and
 // http://www.cse.unsw.edu.au/~cs2521/17s2/ass/ass02/page1725348.pdf
 void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g) {
-	//TODO: Write pageRankWeights function
 	// N = number of Urls in Graph
 	int N = nVertices(g);
 	// Initialise pageranks of all pages to 1/N
@@ -33,7 +32,10 @@ void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g) {
 		for(int i=0; i<N; i++) set_pagerank_before(g, i, get_pagerank_after(g, i));
 	}
 	FILE *pagerankListFp = fopen("pagerankList.txt", "w");
-	showPageRanks(g, pagerankListFp);
+	if (pagerankListFp == NULL) {
+        perror("Error, could not open file");
+	}
+	else showPageRanks(g, pagerankListFp);
 }
 // Function to calculate the product of PageRank, In-weight and Out-weight
 float pageRankIncoming(Graph g, int i){

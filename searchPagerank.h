@@ -9,8 +9,7 @@
 // Finds urls from invertedIndex that contain query words
 // Fills matchedUrlList with urls
 // Returns number of matched urls
-int findMatchedUrls(FILE *invertedIndexFp, 
-                        char matchedUrlList[MAX_V][MAX_CHAR]);
+int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]);
 
 // Orders matchedUrlList according to pagerankList
 void findPagerank(FILE *pagerankListFp, int nMatchedUrls,
