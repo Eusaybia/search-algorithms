@@ -8,8 +8,6 @@
 #include "graph.h"
 #include "searchPagerank.h"
 
-#define MAX_CHAR 256
-
 void printImage(char *directory);
 
 int main(int argc, char* argv[]) {
@@ -20,6 +18,11 @@ int main(int argc, char* argv[]) {
     Queue collectionUrls2 = getCollectionUrls();
     getInvertedIndex(collectionUrls2);
     pageRankWeights(0.85, 0.00001, 1000, urlGraph);
+    FILE *invertedIndexFp = fopen("invertedIndex.txt", "r");
+    char matchedUrlList[MAX_V][MAX_CHAR] = {0};
+    findMatchedUrls(invertedIndexFp, matchedUrlList);
+    // FILE *pagerankListFp = fopen("pagerankList.txt", "r");
+    // findPagerank(pagerankListFp, matchedUrlList);
     return EXIT_SUCCESS;
 }
 

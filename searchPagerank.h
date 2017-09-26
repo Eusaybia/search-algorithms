@@ -1,13 +1,18 @@
 #include <stdio.h>
+#define MAX_CHAR 256
+#define MAX_QUERIES 256
+#define MAX_V 256
 
 #ifndef SEARCHPAGERANKH_H
 #define SEARCHPAGERANKH_H
+
 // Finds urls from invertedIndex that contain query words
-// Returns a string array of urls
-char **findMatchedUrls(FILE *invertedIndexFp, char **queryWords);
+// Fills matchedUrlList with urls
+// Returns number of matched urls
+int findMatchedUrls(FILE *invertedIndexFp, 
+                        char matchedUrlList[MAX_V][MAX_CHAR]);
 
 // Orders matchedUrlList according to pagerankList
-// Returns a string array of urls
-char **findPagerank(FILE *pagerankListFp, char **matchedUrlList);
-
+void findPagerank(FILE *pagerankListFp, int nMatchedUrls,
+                        char matchedUrlList[MAX_V][MAX_CHAR]);
 #endif

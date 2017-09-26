@@ -138,11 +138,13 @@ static void inOrderTraversal(Vertex *v, FILE *fp) {
 // This function has a print depth limitation of 20 lines
 // Try changing the magic number 20 in the print_t and _print_t functions
 // if you need to increase the depth it prints up to
+// TODO: Remove before submission
 void showTree(Tree t) {
     print_t(t->root);
 }
 
 // Taken from here
+// TODO: Remove before submission
 // https://stackoverflow.com/questions/801740/c-how-to-draw-a-binary-tree-to-the-console
 static void print_t(Vertex *tree) {
     char s[20][255];
@@ -156,6 +158,7 @@ static void print_t(Vertex *tree) {
 }
 
 // Taken from here
+// TODO: Remove before submission
 // https://stackoverflow.com/questions/801740/c-how-to-draw-a-binary-tree-to-the-console
 static int _print_t(Vertex *tree, int is_left, int offset, int depth, char s[20][255]) {
     char b[20];
