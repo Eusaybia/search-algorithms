@@ -49,6 +49,9 @@ Tree getInvertedIndex(Queue collectionUrls) {
         }
     }
     FILE *invertedIndexFp = fopen("invertedIndex.txt", "w");
-    showInOrder(t, invertedIndexFp);
+	if (invertedIndexFp == NULL) {
+        perror("Error, could not open file");
+	}
+    else showInOrder(t, invertedIndexFp);
     return t;
 }
