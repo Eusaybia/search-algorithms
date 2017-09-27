@@ -35,7 +35,11 @@ void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g) {
 	if (pagerankListFp == NULL) {
         perror("Error, could not open file");
 	}
-	else showPageRanks(g, pagerankListFp);
+	else {
+		showPageRanks(g, pagerankListFp);
+		fclose(pagerankListFp);
+	}
+	//showPageRanks(g, stdout);
 }
 // Function to calculate the product of PageRank, In-weight and Out-weight
 float pageRankIncoming(Graph g, int i){

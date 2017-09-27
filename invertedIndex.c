@@ -52,6 +52,10 @@ Tree getInvertedIndex(Queue collectionUrls) {
 	if (invertedIndexFp == NULL) {
         perror("Error, could not open file");
 	}
-    else showInOrder(t, invertedIndexFp);
+    else {
+        showInOrder(t, invertedIndexFp);
+        fclose(invertedIndexFp);
+    }
+    //showInOrder(t, stdout);
     return t;
 }

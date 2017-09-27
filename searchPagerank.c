@@ -29,11 +29,10 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
         // printf("'%s;\n", queries[i]);
         query = strtok(NULL, " ");
     }
-
     while (1) {
         char invertedIndexStr[MAX_CHAR] = {0};
         // Scan every word of the invertedIndex
-        if (fscanf(invertedIndexFp, "%s", invertedIndexStr) == 0)
+        if (fscanf(invertedIndexFp, "%s", invertedIndexStr) == 0 || *invertedIndexStr == EOF)
             break;
         // If the query matches the word in the index, load the word's urls
         for (int i = 0; i < nQueries; i++) {
@@ -44,17 +43,19 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
                 // Then extract the strings and place them into matchedUrlList
                 char *url = NULL;
                 url = strtok(buf, " ");
-                for (int i = 0; url != NULL && i < MAX_QUERIES; i++) {
+                for (int j = 0; url != NULL && j < MAX_QUERIES; j++) {
                     // Remove non-char characters such as new lines from the string
                     if (sscanf(url, "%s", url) == EOF) break;
-                    strcpy(matchedUrlList[i], url);
+                    strcpy(matchedUrlList[j], url);
                     nMatchedUrls++;
-                    printf("%s\n", matchedUrlList[i]);
+                    printf("%d\n", nMatchedUrls);
+                    printf("%s\n", matchedUrlList[j]);
                     url = strtok(NULL, " ");
                 }
             }
         }
     }
+    fclose(invertedIndexFp);
     return nMatchedUrls;
 }
 
