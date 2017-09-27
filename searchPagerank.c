@@ -44,7 +44,7 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
                 // Then extract the strings and place them into matchedUrlList
                 char *url = NULL;
                 url = strtok(buf, " ");
-                for (int j = 0; url != NULL && j < MAX_QUERIES; j++) {
+                for (int j = nMatchedUrls; url != NULL && j < MAX_QUERIES; j++) {
                     // Remove non-char characters such as new lines from the string
                     if (sscanf(url, "%s", url) == EOF) break;
                     strcpy(matchedUrlList[j], url);
@@ -64,5 +64,5 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
 // Sorts matchedUrlList according to pagerankList
 // Returns a string array of urls
 void findPagerank(FILE *pagerankListFp, int nMatchedUrls, char matchedUrlList[MAX_V][MAX_CHAR]) {
-
+    
 }
