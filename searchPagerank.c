@@ -18,6 +18,7 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
     int nMatchedUrls = 0;
 
     // Scan queries
+    printf(RED "\n\n               Welcome to Yaggle. Enter your query.\n" RESET);
     fgets(buf, MAX_CHAR, stdin);
     char *query = NULL;
     query = strtok(buf, " ");
@@ -32,7 +33,7 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
     while (1) {
         char invertedIndexStr[MAX_CHAR] = {0};
         // Scan every word of the invertedIndex
-        if (fscanf(invertedIndexFp, "%s", invertedIndexStr) == 0 || *invertedIndexStr == EOF)
+        if (fscanf(invertedIndexFp, "%s", invertedIndexStr) == EOF)
             break;
         // If the query matches the word in the index, load the word's urls
         for (int i = 0; i < nQueries; i++) {
@@ -48,7 +49,7 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
                     if (sscanf(url, "%s", url) == EOF) break;
                     strcpy(matchedUrlList[j], url);
                     nMatchedUrls++;
-                    printf("%d\n", nMatchedUrls);
+                    // printf("%d\n", nMatchedUrls);
                     printf("%s\n", matchedUrlList[j]);
                     url = strtok(NULL, " ");
                 }
