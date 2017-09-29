@@ -1,6 +1,6 @@
 // invertedIndex.c - Generate an inverted index of words from urls
 // Written by Kongwei Ying, September 2017
-
+// Modified by Rahil Agrawal, September 2017
 #include "invertedIndex.h"
 #include <ctype.h>
 #define MAX_CHAR 256
