@@ -18,8 +18,8 @@ typedef struct ListRep {
 } ListRep;
 
 static int isElementList(List l, char *str);
-static void quickSort(Node *p, Node *r);
-static Node *partition(Node *p, Node *r);
+static void quickSort(Node *p, Node *r, int (*compar)(const void *, const void *));
+static Node *partition(Node *p, Node *r, int (*compar)(const void *, const void *));
 static void swap(Node *n1, Node *n2); 
 static Node *newNode(char *str);
 
@@ -113,26 +113,33 @@ int deleteFromList(List l, char *str) {
     else return 0; // String not in list
 }
 
-void sortList(List l) {
-    quickSort(l->head, l->tail);
+// Used as a comparator for sortList()
+// Sorts based on the Node's string value
+int cmpStr(const void *p1, const void *p2) {
+    return strcmp(((Node *)p1)->str, ((Node *)p2)->str);
 }
 
-static void quickSort(Node *p, Node *r) {
+// Sort list using an arbitrary comparator function
+void sortList(List l, int (*compar)(const void *, const void *)) {
+    quickSort(l->head, l->tail, compar);
+}
+
+static void quickSort(Node *p, Node *r, int (*compar)(const void *, const void *)) {
     if (r != NULL && p != r && p != r->next) {
-        Node *q = partition(p, r);
-        quickSort(p, q->prev);
-        quickSort(q->next, r);
+        Node *q = partition(p, r, compar);
+        quickSort(p, q->prev, compar);
+        quickSort(q->next, r, compar);
     }
 }
 
 // p is the beginning of the list, r is the end
-// A more concise implementation of the Lomuto partition on CLRS, p171
-// Removes the i + 1 offset
-static Node *partition(Node *p, Node *r) {
+// A more concise implementation of the Lomuto partition on CLRS p171
+// as it removes the unnecessary i + 1 offset
+static Node *partition(Node *p, Node *r, int (*compar)(const void *, const void *)) {
     Node *pivot = r;
     Node *i = p;
     for (Node *j = p; j != r; j = j->next) {
-        if (strcmp(j->str, pivot->str) <= 0) {
+        if (compar(j, pivot) <= 0) {
             swap(i, j);
             i = i->next;
         }

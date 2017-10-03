@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
     appendList(l, "banana");
     printf("Unsorted List: ");
     showList(l, stdout);
-    sortList(l);
+    sortList(l, cmpStr);
     printf("Sorted List: ");
     showList(l, stdout);
     dropList(l);
