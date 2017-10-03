@@ -19,8 +19,8 @@ int main(int argc, char* argv[]) {
     pageRankWeights(0.85, 0.00001, 1000, urlGraph);
     char matchedUrlList[MAX_V][MAX_CHAR] = {0};
     int nQueries = findMatchedUrls(matchedUrlList);
-    FILE *pagerankListFp = fopen("pagerankList.txt", "r");
-    findPagerank(pagerankListFp, nQueries, matchedUrlList, urlGraph);
+    // FILE *pagerankListFp = fopen("pagerankList.txt", "r");
+    findPagerank(/* pagerankListFp, */ nQueries, matchedUrlList);
     return EXIT_SUCCESS;
 }
 

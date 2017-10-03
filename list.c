@@ -196,15 +196,3 @@ static Node *newNode(char *str) {
 
     return n;
 }
-
-struct Node *getlisthead(List l){
-    return l->head;
-}
-
-char *getnodeurl(struct Node *curr){
-    return curr->str;
-}
-
-struct Node *next_node(struct Node *curr){
-    return curr->next;
-}
