@@ -69,11 +69,11 @@ void findPagerank(/* FILE *pagerankListFp, */ int nQueries, char matchedUrlList[
     for (int i = 0; i < nQueries; i++) {
         queryTable[i] = newList();
     }
-    for (int i = 0; !(*matchedUrlList[i]); i++) {
-        int count = 0;
+    for (int i = 0; *matchedUrlList[i]; i++) {
+        int count = 1;
         if (strcmp(matchedUrlList[i], "-1") == 0) continue;
-        for (int j = 0; !(*matchedUrlList[j]); j++) {
-            if (i != j && strcmp(matchedUrlList[i], matchedUrlList[j]) == 0 && strcmp(matchedUrlList[i], "-1") != 0) {
+        for (int j = 0; *matchedUrlList[j]; j++) {
+            if (i != j && strcmp(matchedUrlList[i], matchedUrlList[j]) == 0 && strcmp(matchedUrlList[j], "-1") != 0) {
                 strcpy(matchedUrlList[j], "-1");
                 count++;
             }
@@ -82,6 +82,7 @@ void findPagerank(/* FILE *pagerankListFp, */ int nQueries, char matchedUrlList[
             appendList(queryTable[count - 1], matchedUrlList[i]);
     }
     for (int i = 0; i < nQueries; i++) {
+        printf("%d query words: ",i+1);
         showList(queryTable[i], stdout);
     }
 }
