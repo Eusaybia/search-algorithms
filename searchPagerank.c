@@ -1,8 +1,12 @@
-#include "searchPagerank.h"
+// graph.c - Graph of vertices using adjacency matrix
+// Written by Kongwei Ying, September 2017
+// Modified by Rahil Agrawal, Kongwei Ying, October 2017
+
 #include "colours.h"
 #include "pagerank.h"
 #include "readData.h"
 #include "list.h"
+#include "searchPagerank.h"
 
 // Finds urls from invertedIndex that contain query words
 // Fills matchedUrlList with urls
@@ -63,12 +67,13 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
 
 // Sorts matchedUrlList according to pagerankList
 // Returns a string array of urls
-void findPagerank(/* FILE *pagerankListFp, */ int nQueries, char matchedUrlList[MAX_V][MAX_CHAR]) {
+void findPagerank(FILE *pagerankListFp, int nQueries, char matchedUrlList[MAX_V][MAX_CHAR], Graph g) {
     // An array of urls indexed by frequency of matching query words
     List *queryTable = malloc(sizeof(List) * nQueries);
     for (int i = 0; i < nQueries; i++) {
         queryTable[i] = newList();
     }
+    // Counting the number of queries a URL occurs
     for (int i = 0; *matchedUrlList[i]; i++) {
         int count = 1;
         if (strcmp(matchedUrlList[i], "-1") == 0) continue;
@@ -78,11 +83,19 @@ void findPagerank(/* FILE *pagerankListFp, */ int nQueries, char matchedUrlList[
                 count++;
             }
         }
+        // Add the URL to the list of urls that have frequency = count
         if (count > 0)
             appendList(queryTable[count - 1], matchedUrlList[i]);
     }
     for (int i = 0; i < nQueries; i++) {
-        printf("%d query words: ",i+1);
-        showList(queryTable[i], stdout);
+        printf("%d query words: \n",i+1);
+        struct Node *curr = getlisthead(queryTable[i]);
+        while(curr!=NULL){
+            double pagerank = get_pagerank_after(g, findVertexIdFromString(g, getnodeurl(curr)));
+            printf("%s : %lf\n", getnodeurl(curr), pagerank);
+            curr = next_node(curr);
+        }
+        //showList(queryTable[i], stdout);
     }
+
 }

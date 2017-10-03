@@ -15,5 +15,8 @@ void appendList(List l, char *str);
 int deleteFromList(List l, char *str);
 void sortList(List l);
 void showList(List l, FILE *fp);
+struct Node *getlisthead(List l);
+char *getnodeurl(struct Node *curr);
+struct Node *next_node(struct Node *curr);
 
 #endif

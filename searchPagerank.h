@@ -12,6 +12,6 @@
 int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]);
 
 // Orders matchedUrlList according to pagerankList
-void findPagerank(/* FILE *pagerankListFp, */ int nQueries,
-                        char matchedUrlList[MAX_V][MAX_CHAR]);
+void findPagerank(FILE *pagerankListFp, int nQueries,
+                        char matchedUrlList[MAX_V][MAX_CHAR], Graph g);
 #endif

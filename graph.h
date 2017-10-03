@@ -28,5 +28,6 @@ void 	showGraph(Graph g, int print_mode);
 void	setVertexInfo(Graph g, int vertexId, int numInlinks, int numOutlinks, float pagerank);
 char    *getVertexUrl(Graph g, int vertexId);
 void	setVertexUrl(Graph g, char *string, int vertexId);
+int 	findVertexIdFromString(Graph g, char *string);
 
 #endif
