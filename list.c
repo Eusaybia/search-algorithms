@@ -212,7 +212,7 @@ void showList(List l, FILE *fp, char delimiter, int nNodes) {
         n = n->next;
         nNodes--;
     }
-    fprintf(fp, "\n");
+    // fprintf(fp, "\n");
 /*     
     // Debug mode
     printf("Forward : ");
