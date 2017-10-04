@@ -4,6 +4,8 @@
 #include "list.h"
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+
 #define MAX_CHAR 256
 
 typedef struct Node {
@@ -114,9 +116,50 @@ int deleteFromList(List l, char *str) {
 }
 
 // Used as a comparator for sortList()
-// Sorts based on the Node's string value
+// Sorts based on the Node's string
 int cmpStr(const void *p1, const void *p2) {
     return strcmp(((Node *)p1)->str, ((Node *)p2)->str);
+}
+
+// Used as a comparator for sortList()
+// Sorts based on the Node's string==url's pagerank
+// Reads from the pagerank file
+int cmpPagerank(const void *p1, const void *p2) {
+    // Open the pagerank file
+    FILE *pagerankFp = fopen("pagerankList.txt", "r");
+    if (pagerankFp == NULL) {
+        perror("Error opening file");
+        exit(1);
+    }
+    // Scan all of pagerank into a buffer
+    char word[MAX_CHAR] = {0};
+    double pagerank1, pagerank2 = 0;
+    while (1) {
+        // Finish if we have both pageranks
+        if (pagerank1 && pagerank2) break;
+        double temp = 0;
+        char outlinks[MAX_CHAR] = {0};
+        // Scan the pagerankList.txt and scan strings without commas
+        if (fscanf(pagerankFp, "%[^,], %[^,], %lf%*c", word, outlinks, &temp) == EOF) break;
+        // printf("Word: %s\n", word);
+        // printf("Outlinks: %s\n", outlinks);
+        // printf("Temp: %lf\n", temp);
+        // Look for the first url
+        if (strcmp(word, ((Node *)p1)->str) == 0) {
+            pagerank1 = temp;
+        }
+        // Look for the second url
+        else if (strcmp(word, ((Node *)p2)->str) == 0) {
+            pagerank2 = temp;
+        }
+    }
+    // if (!pagerank1 && !pagerank2) {
+    //     printf("Pageranks not found!");
+    // }
+    // printf("pgrank1: %lf\n", pagerank1);
+    // printf("pgrank2: %lf\n", pagerank2);
+    if (pagerank1 == pagerank2) return 0;
+    return (pagerank1 - pagerank2 > 0) ? 1 : -1;
 }
 
 // Sort list using an arbitrary comparator function

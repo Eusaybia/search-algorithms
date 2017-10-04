@@ -82,7 +82,8 @@ void findPagerank(/* FILE *pagerankListFp, */ int nQueries, char matchedUrlList[
             appendList(queryTable[count - 1], matchedUrlList[i]);
     }
     for (int i = 0; i < nQueries; i++) {
-        printf("%d query words: ",i+1);
+        printf("Urls with %d query: ", i + 1);
+        sortList(queryTable[i], cmpPagerank);
         showList(queryTable[i], stdout);
     }
 }
