@@ -84,6 +84,7 @@ void findPagerank(int nQueries, char matchedUrlList[MAX_V][MAX_CHAR]) {
     for (int i = 0; i < nQueries; i++) {
         // printf("Urls with %d query: ", i + 1);
         sortList(queryTable[i], cmpPagerank);
-        showList(queryTable[i], stdout, '\n');
+        int nResults = 30;
+        showList(queryTable[i], stdout, '\n', nResults);
     }
 }

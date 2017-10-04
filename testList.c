@@ -18,10 +18,10 @@ int main(int argc, char* argv[]) {
     appendList(l, "banana");
     appendList(l, "banana");
     printf("Unsorted List: ");
-    showList(l, stdout, ' ');
+    showList(l, stdout, ' ', ALL_NODES);
     sortList(l, cmpStr);
     printf("Sorted List: ");
-    showList(l, stdout, ' ');
+    showList(l, stdout, ' ', ALL_NODES);
     dropList(l);
     return EXIT_SUCCESS;
 }
