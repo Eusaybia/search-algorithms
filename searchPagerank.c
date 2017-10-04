@@ -63,7 +63,7 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
 
 // Sorts matchedUrlList according to pagerankList
 // Returns a string array of urls
-void findPagerank(/* FILE *pagerankListFp, */ int nQueries, char matchedUrlList[MAX_V][MAX_CHAR]) {
+void findPagerank(int nQueries, char matchedUrlList[MAX_V][MAX_CHAR]) {
     // An array of urls indexed by frequency of matching query words
     List *queryTable = malloc(sizeof(List) * nQueries);
     for (int i = 0; i < nQueries; i++) {
