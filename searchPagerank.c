@@ -51,7 +51,7 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
                     strcpy(matchedUrlList[j], url);
                     nMatchedUrls++;
                     // printf("%d\n", nMatchedUrls);
-                    printf("%s\n", matchedUrlList[j]);
+                    // printf("%s\n", matchedUrlList[j]);
                     url = strtok(NULL, " ");
                 }
             }
@@ -82,8 +82,8 @@ void findPagerank(/* FILE *pagerankListFp, */ int nQueries, char matchedUrlList[
             appendList(queryTable[count - 1], matchedUrlList[i]);
     }
     for (int i = 0; i < nQueries; i++) {
-        printf("Urls with %d query: ", i + 1);
+        // printf("Urls with %d query: ", i + 1);
         sortList(queryTable[i], cmpPagerank);
-        showList(queryTable[i], stdout);
+        showList(queryTable[i], stdout, '\n');
     }
 }

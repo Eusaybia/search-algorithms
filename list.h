@@ -16,6 +16,6 @@ int deleteFromList(List l, char *str);
 int cmpStr(const void *p1, const void *p2);
 int cmpPagerank(const void *p1, const void *p2);
 void sortList(List l, int (*compar)(const void *, const void *));
-void showList(List l, FILE *fp);
+void showList(List l, FILE *fp, char delimiter);
 
 #endif

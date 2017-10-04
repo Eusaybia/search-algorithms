@@ -198,7 +198,7 @@ static void swap(Node *n1, Node *n2) {
     strcpy(n2->str, temp);
 }
 
-void showList(List l, FILE *fp) {
+void showList(List l, FILE *fp, char delimiter) {
     Node *n = l->head;
 
     if (n == NULL) {
@@ -206,7 +206,7 @@ void showList(List l, FILE *fp) {
     }
 
     while (n != NULL) {
-        fprintf(fp, "%s ", n->str);
+        fprintf(fp, "%s%c", n->str, delimiter);
         n = n->next;
     }
     fprintf(fp, "\n");
