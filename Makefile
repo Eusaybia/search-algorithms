@@ -23,11 +23,15 @@ CFLAGS_LINK = -ggdb -Wall -Werror
 OUTPUT = yaggle
 
 # Default make target
-all: yaggle tests
+all: yaggle tests searchTfIdf
 
 # Main yaggle program
-yaggle: $(SRC_OBJ_FILES) $(LIB_OBJ_FILES) 
-	$(CC) $(CFLAGS_LINK) -o $(OUTPUT) $(SRC_OBJ_FILES) $(LIB_OBJ_FILES) 
+yaggle: $(SRC_OBJ_FILES) $(LIB_OBJ_FILES)
+	$(CC) $(CFLAGS_LINK) -o $(OUTPUT) $(SRC_OBJ_FILES) $(LIB_OBJ_FILES)
+
+#Search tf-idf
+searchTfIdf: searchTfIdf.o searchPagerank.o
+	$(CC) $(CFLAGS_LINK) searchTfIdf.o searchPagerank.o -o searchTfIdf
 
 # ADT Tests
 tests: testGraph testList testTree
@@ -51,7 +55,7 @@ testTree: testTree.o tree.o list.o vertexQueue.o
 	@set -e; rm -f $@; \
 	$(CC) -M $(CPPFLAGS) $< > $@.$$$$; \
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
-	rm -f $@.$$$$ 
+	rm -f $@.$$$$
 
 # Remove all object files and binaries
 clean:
