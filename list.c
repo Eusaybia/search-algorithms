@@ -200,17 +200,17 @@ static void swap(Node *n1, Node *n2) {
 
 // delimiter controls what elements are printed with
 // nNodes controls how many elements are printed (-1 prints all elements)
-void showList(List l, FILE *fp, char delimiter, int nNodes) {
+void showList(List l, FILE *fp, char delimiter, int *nNodes) {
     Node *n = l->head;
 
     if (n == NULL) {
         fprintf(fp, "List is empty");
     }
 
-    while (n != NULL && nNodes != 0) {
+    while (n != NULL && *nNodes != 0) {
         fprintf(fp, "%s%c", n->str, delimiter);
         n = n->next;
-        nNodes--;
+        *nNodes = *nNodes - 1;
     }
     fprintf(fp, "\n");
 /*     
