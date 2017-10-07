@@ -22,7 +22,7 @@ typedef struct ListRep {
 static int isElementList(List l, char *str);
 static void quickSort(Node *p, Node *r, int (*compar)(const void *, const void *));
 static Node *partition(Node *p, Node *r, int (*compar)(const void *, const void *));
-static void swap(Node *n1, Node *n2); 
+static void swap(Node *n1, Node *n2);
 static Node *newNode(char *str);
 
 List newList() {
@@ -208,12 +208,12 @@ void showList(List l, FILE *fp, char delimiter, int *nNodes) {
     }
 
     while (n != NULL && *nNodes != 0) {
-        fprintf(fp, "%s%c", n->str, delimiter);
+        fprintf(fp, "%s%c", n->str, ((n->next!=NULL && *nNodes!=1) ? delimiter : ' '));
         n = n->next;
         *nNodes = *nNodes - 1;
     }
     fprintf(fp, "\n");
-/*     
+/*
     // Debug mode
     printf("Forward : ");
     printf("(");
