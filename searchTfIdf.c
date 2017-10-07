@@ -8,6 +8,7 @@
 int main(int argc, char * argv[]) {
 
 
+    //open invertedIndex file stream
 
     FILE *invertedIndexFp = fopen("invertedIndex.txt", "r");
     if (invertedIndexFp == NULL) {
@@ -15,11 +16,11 @@ int main(int argc, char * argv[]) {
         exit(1);
     }
 
+
+    //GET QUERIES FROM USER
     char queries[MAX_QUERIES][MAX_CHAR] = {{0}};
     char buf[MAX_CHAR] = {0};
     int nQueries = 0;
-
-
 
     // Scan queries
     printf(RED "\n\n               Welcome to Yaggle. Enter your tf-idf search query.\n" RESET);
@@ -66,60 +67,21 @@ int main(int argc, char * argv[]) {
                     url = strtok(NULL, " ");
                 }
 
-                for (int k = 0; k < nMatchedUrls; k++) {
-                    //for each url get tf and then idf
-                    int length = 0;
-                    int tc = 0;
-                    double tf = 0;
-                    double idf  = 0;
-                    float tfidf = 0;
-
+                for (int j = 0; j < nMatchedUrls; j++) {
 
                     char subdir[MAX_CHAR] = "./Sample1/";
                     char url_from_location[MAX_CHAR] = {0};
                     // e.g. ./Sample1/
                     strcpy(url_from_location, subdir);
                     // e.g. ./Sample1/url31
-                    strcat(url_from_location, matchedUrlList[k]);
+                    strcat(url_from_location, matchedUrlList[j]);
                     // e.g. ./Sample1/url31.txt
                     strcat(url_from_location, ".txt");
                     FILE *urlToOpen = fopen(url_from_location, "r");
-                    char curr_word[MAX_CHAR] = {0};
 
-                    while (1) {
-                        // If we reach the end of the file
-                        if (fscanf(urlToOpen, "%s", curr_word) == EOF) {
-                            break;
-                        }
 
-                        if (strcmp(curr_word, "#start") == 0) continue;
-                        // Skip words with first 7 letters "Section"
-                        else if (strncmp(curr_word, "Section", 7) == 0) continue;
-                        // Skip words with first 3 letters "url"
-                        else if (strncmp(curr_word, "url", 3) == 0) continue;
-                        else if (strcmp(curr_word, "#end") == 0) continue;
-
-                        // Convert word to lower case and remove full stops
-                        for (int i = 0; curr_word[i] != '\0'; i++) {
-                            curr_word[i] = tolower((unsigned char)curr_word[i]);
-                            if (curr_word[i] == '.') curr_word[i] = '\0';
-                        }
-
-                        for (int j = 0; queries[i][j] != '\0'; j++) {
-                            queries[i][j] = tolower((unsigned char)queries[i][j]);
-                        }
-
-                        if (strcmp(curr_word, queries[i]) == 0) {
-                            tc++;
-                        }
-                        length++;
-
-                    }
-                    tf = (double) tc/length;
-                    idf = log((double)7/nMatchedUrls);
-                    tfidf = tf*idf;
-
-                    printf("%s -- TC: %d, TF: %lf, IDF: %lf, TFIDF: %lf \n", matchedUrlList[k], tc, tf, idf, tfidf);
+                    //printf("%s -- TC: %d, length: %d TF: %lf, IDF: %lf, TFIDF: %lf \n", matchedUrlList[k], tc, length, tf, idf, tfidf);
+                    printf("%s -- TfIdf: %lf\n", matchedUrlList[j], getTfIdf(queries[i], urlToOpen, nMatchedUrls, 7));
 
                 }
             }
@@ -138,4 +100,56 @@ int main(int argc, char * argv[]) {
 
 
      return EXIT_SUCCESS;
+ }
+
+
+double getTfIdf(char term[MAX_CHAR], FILE *doc, int totalMatchedUrls, int totalDocs) {
+
+     //declare and initialise variables
+     int docLength = 0;
+     int tc = 0;
+     double tf = 0;
+     double idf  = 0;
+     double tfidf = 0;
+
+     //normalise search term
+     for (int i = 0; term[i] != '\0'; i++) {
+         term[i] = tolower((unsigned char)term[i]);
+     }
+
+     char curr_word[MAX_CHAR] = {0};
+
+     while (1) {
+         // If we reach the end of the file
+         if (fscanf(doc, "%s", curr_word) == EOF) {
+             break;
+         }
+
+         if (strcmp(curr_word, "#start") == 0) continue;
+         // Skip words with first 7 letters "Section"
+         else if (strncmp(curr_word, "Section", 7) == 0) continue;
+         // Skip words with first 3 letters "url"
+         else if (strncmp(curr_word, "url", 3) == 0) continue;
+         else if (strcmp(curr_word, "#end") == 0) continue;
+
+         // normalise words - Convert word to lower case and remove full stops
+         for (int i = 0; curr_word[i] != '\0'; i++) {
+             curr_word[i] = tolower((unsigned char)curr_word[i]);
+             if (curr_word[i] == '.') curr_word[i] = '\0';
+         }
+
+         if (strcmp(curr_word, term) == 0) {
+             tc++;
+         }
+
+         docLength++;
+
+     }
+
+     tf = (double) tc/docLength;
+     idf = log((double)totalDocs/totalMatchedUrls);
+     tfidf = tf * idf;
+
+     return tfidf;
+
  }

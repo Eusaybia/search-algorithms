@@ -13,8 +13,7 @@
 #ifndef SEARCHTFIDF_H
 #define SEARCHTFIDF_H
 
-
-
+double getTfIdf(char term[MAX_CHAR], FILE *doc, int totalMatchedUrls, int totalDocs);
 
 
 #endif

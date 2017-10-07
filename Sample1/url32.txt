@@ -4,9 +4,8 @@
 
 #start Section-2
 
-    Mars moon weather robotics landing red 
-    planet  volcano moon weather sun  
+    Mars moon weather robotics landing red
+    planet  volcano moon weather sun
     mars man promise  
 
 #end Section-2
-
