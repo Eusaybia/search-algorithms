@@ -4,6 +4,7 @@
 #include "colours.h"
 #include "pagerank.h"
 #include "readData.h"
+#include <math.h>
 
 int main(int argc, char * argv[]) {
 

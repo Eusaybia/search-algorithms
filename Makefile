@@ -4,7 +4,7 @@
 # https://stackoverflow.com/questions/12142865/debugging-using-gdb-properly-using-the-g-flag-with-several-files
 
 # Binary files
-BINARIES = yaggle testGraph testList testTree
+BINARIES = yaggle testGraph testList testTree searchTfIdf
 
 # All c files (add files here if more are added to the project)
 SRC_FILES = yaggle.c invertedIndex.c searchPagerank.c pagerank.c readData.c
@@ -31,7 +31,7 @@ yaggle: $(SRC_OBJ_FILES) $(LIB_OBJ_FILES)
 
 #Search tf-idf
 searchTfIdf: searchTfIdf.o searchPagerank.o
-	$(CC) $(CFLAGS_LINK) searchTfIdf.o searchPagerank.o -o searchTfIdf
+	$(CC) $(CFLAGS_LINK) searchTfIdf.o searchPagerank.o -o searchTfIdf -lm
 
 # ADT Tests
 tests: testGraph testList testTree
