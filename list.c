@@ -159,6 +159,7 @@ int cmpPagerank(const void *p1, const void *p2) {
     // printf("pgrank2: %lf\n", pagerank2);
     if (pagerank1 == pagerank2) return 0;
     return (pagerank1 - pagerank2 > 0) ? -1 : 1;
+    fclose(pagerankFp);
 }
 
 // Sort list using an arbitrary comparator function

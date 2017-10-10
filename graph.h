@@ -24,7 +24,7 @@ float	get_pagerank_before(Graph g, int i);
 float	get_pagerank_after(Graph g, int i);
 void 	set_pagerank_after(Graph g, int i, float value);
 void 	set_pagerank_before(Graph g, int i, float value);
-void 	showPageRanks(Graph g, FILE *fp);
+void 	showPageRanks(Graph g);
 void 	showGraph(Graph g, int print_mode);
 void	setVertexInfo(Graph g, int vertexId, int numInlinks, int numOutlinks, float pagerank);
 char    *getVertexUrl(Graph g, int vertexId);
