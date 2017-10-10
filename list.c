@@ -5,8 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
-#define MAX_CHAR 256
+#include <assert.h>
 
 typedef struct Node {
     struct Node *next;
@@ -248,4 +247,14 @@ static Node *newNode(char *str) {
     strcpy(n->str, str);
 
     return n;
+}
+
+void listToArray(List l, char sortedlist[][MAX_CHAR]){
+    assert(l!=NULL);
+    int counter = 0;
+    Node *curr = l->head;
+    while(curr!=NULL){
+        strcpy(sortedlist[counter++],curr->str);
+        curr = curr->next;
+    }
 }

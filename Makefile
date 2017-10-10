@@ -26,14 +26,14 @@ OUTPUT = yaggle
 all: yaggle tests
 
 # Main yaggle program
-yaggle: $(SRC_OBJ_FILES) $(LIB_OBJ_FILES) 
-	$(CC) $(CFLAGS_LINK) -o $(OUTPUT) $(SRC_OBJ_FILES) $(LIB_OBJ_FILES) 
+yaggle: $(SRC_OBJ_FILES) $(LIB_OBJ_FILES)
+	$(CC) $(CFLAGS_LINK) -o $(OUTPUT) $(SRC_OBJ_FILES) $(LIB_OBJ_FILES)
 
 # ADT Tests
 tests: testGraph testList testTree
 
-testGraph: testGraph.o graph.o
-	$(CC) $(CFLAGS_LINK) graph.o testGraph.o -o testGraph
+testGraph: testGraph.o graph.o list.o
+	$(CC) $(CFLAGS_LINK) graph.o list.o testGraph.o -o testGraph
 
 testList: testList.o list.o
 	$(CC) $(CFLAGS_LINK) list.c testList.c -o testList
@@ -41,9 +41,15 @@ testList: testList.o list.o
 testTree: testTree.o tree.o list.o vertexQueue.o
 	$(CC) $(CFLAGS_LINK) tree.o list.o vertexQueue.o testTree.o -o testTree
 
+#graph.o:
+#	$(CC) $(CFLAGS) -c graph.d list.d
+
 # An automatic object file generator
 %.o: %.d
 	$(CC) $(CFLAGS) -c %.d
+
+#graph.d:
+#	$(CC) $(CFLAGS) graph.c list.c
 
 # An automatic dependency generator
 # https://www.gnu.org/software/make/manual/html_node/Automatic-Prerequisites.html
@@ -51,7 +57,9 @@ testTree: testTree.o tree.o list.o vertexQueue.o
 	@set -e; rm -f $@; \
 	$(CC) -M $(CPPFLAGS) $< > $@.$$$$; \
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
-	rm -f $@.$$$$ 
+	rm -f $@.$$$$
+
+
 
 # Remove all object files and binaries
 clean:

@@ -6,6 +6,7 @@
 #define ALL_NODES -1
 
 #include <stdio.h>
+#define MAX_CHAR 256
 
 typedef struct ListRep *List;
 
@@ -18,5 +19,5 @@ int cmpStr(const void *p1, const void *p2);
 int cmpPagerank(const void *p1, const void *p2);
 void sortList(List l, int (*compar)(const void *, const void *));
 void showList(List l, FILE *fp, char delimiter, int *nNodes);
-
+void listToArray(List l, char sortedlist[][MAX_CHAR]);
 #endif
