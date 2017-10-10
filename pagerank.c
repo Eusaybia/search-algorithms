@@ -73,9 +73,8 @@ float Wout(Graph g, int j, int i){
 	float Outlinks_Sum = 0;
 	for (int k = 0; k<nVertices(g); k++){
 		if(isEdge(g,j,k)){
-			Outlinks_Sum += numOutlinks(g, k);
+			Outlinks_Sum += (numOutlinks(g, k) ? numOutlinks(g, k) : 0.5);
 		}
 	}
-	if (Outlinks_Sum == 0) Outlinks_Sum = 0.5;
 	return Outlinks_I*1.0/Outlinks_Sum;
 }

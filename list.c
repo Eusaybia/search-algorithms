@@ -4,6 +4,8 @@
 #include "list.h"
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+
 #define MAX_CHAR 256
 
 typedef struct Node {
@@ -18,9 +20,9 @@ typedef struct ListRep {
 } ListRep;
 
 static int isElementList(List l, char *str);
-static void quickSort(Node *p, Node *r);
-static Node *partition(Node *p, Node *r);
-static void swap(Node *n1, Node *n2); 
+static void quickSort(Node *p, Node *r, int (*compar)(const void *, const void *));
+static Node *partition(Node *p, Node *r, int (*compar)(const void *, const void *));
+static void swap(Node *n1, Node *n2);
 static Node *newNode(char *str);
 
 List newList() {
@@ -113,26 +115,74 @@ int deleteFromList(List l, char *str) {
     else return 0; // String not in list
 }
 
-void sortList(List l) {
-    quickSort(l->head, l->tail);
+// Used as a comparator for sortList()
+// Sorts based on the Node's string
+int cmpStr(const void *p1, const void *p2) {
+    return strcmp(((Node *)p1)->str, ((Node *)p2)->str);
 }
 
-static void quickSort(Node *p, Node *r) {
+// Used as a comparator for sortList()
+// Sorts based on the Node's string==url's pagerank
+// Reads from the pagerank file
+int cmpPagerank(const void *p1, const void *p2) {
+    // Open the pagerank file
+    FILE *pagerankFp = fopen("pagerankList.txt", "r");
+    if (pagerankFp == NULL) {
+        perror("Error opening file");
+        exit(1);
+    }
+    // Scan all of pagerank into a buffer
+    char word[MAX_CHAR] = {0};
+    double pagerank1, pagerank2 = 0;
+    while (1) {
+        // Finish if we have both pageranks
+        if (pagerank1 && pagerank2) break;
+        double temp = 0;
+        char outlinks[MAX_CHAR] = {0};
+        // Scan the pagerankList.txt and scan strings without commas
+        if (fscanf(pagerankFp, "%[^,], %[^,], %lf%*c", word, outlinks, &temp) == EOF) break;
+        // printf("Word: %s\n", word);
+        // printf("Outlinks: %s\n", outlinks);
+        // printf("Temp: %lf\n", temp);
+        // Look for the first url
+        if (strcmp(word, ((Node *)p1)->str) == 0) {
+            pagerank1 = temp;
+        }
+        // Look for the second url
+        else if (strcmp(word, ((Node *)p2)->str) == 0) {
+            pagerank2 = temp;
+        }
+    }
+    // if (!pagerank1 && !pagerank2) {
+    //     printf("Pageranks not found!");
+    // }
+    // printf("pgrank1: %lf\n", pagerank1);
+    // printf("pgrank2: %lf\n", pagerank2);
+    if (pagerank1 == pagerank2) return 0;
+    return (pagerank1 - pagerank2 > 0) ? -1 : 1;
+}
+
+// Sort list using an arbitrary comparator function
+void sortList(List l, int (*compar)(const void *, const void *)) {
+    quickSort(l->head, l->tail, compar);
+}
+
+static void quickSort(Node *p, Node *r, int (*compar)(const void *, const void *)) {
     if (r != NULL && p != r && p != r->next) {
-        Node *q = partition(p, r);
-        quickSort(p, q->prev);
-        quickSort(q->next, r);
+        Node *q = partition(p, r, compar);
+        quickSort(p, q->prev, compar);
+        quickSort(q->next, r, compar);
     }
 }
 
 // p is the beginning of the list, r is the end
-// A more concise implementation of the Lomuto partition on CLRS, p171
-// Removes the i + 1 offset
-static Node *partition(Node *p, Node *r) {
+// A more concise implementation of the Lomuto partition on CLRS p171
+// as it removes the unnecessary i + 1 offset
+static Node *partition(Node *p, Node *r, int (*compar)(const void *, const void *)) {
     Node *pivot = r;
     Node *i = p;
     for (Node *j = p; j != r; j = j->next) {
-        if (strcmp(j->str, pivot->str) <= 0) {
+        if (compar(j, pivot) <= 0) {
             swap(i, j);
             i = i->next;
         }
@@ -148,19 +198,22 @@ static void swap(Node *n1, Node *n2) {
     strcpy(n2->str, temp);
 }
 
-void showList(List l, FILE *fp) {
+// delimiter controls what elements are printed with
+// nNodes controls how many elements are printed (-1 prints all elements)
+void showList(List l, FILE *fp, char delimiter, int *nNodes) {
     Node *n = l->head;
 
     if (n == NULL) {
         fprintf(fp, "List is empty");
     }
 
-    while (n != NULL) {
-        fprintf(fp, "%s ", n->str);
+    while (n != NULL && *nNodes != 0) {
+        fprintf(fp, "%s%c", n->str, ((n->next!=NULL && *nNodes!=1) ? delimiter : ' '));
         n = n->next;
+        *nNodes = *nNodes - 1;
     }
     fprintf(fp, "\n");
-/*     
+/*
     // Debug mode
     printf("Forward : ");
     printf("(");
