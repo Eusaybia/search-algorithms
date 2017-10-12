@@ -61,7 +61,7 @@ float Win(Graph g, int j, int i){
 
 // Function to calculate the Out-Weight
 float Wout(Graph g, int j, int i){
-	int Outlinks_I = numOutlinks(g, i);
+	double Outlinks_I = (numOutlinks(g, i) ? numOutlinks(g, i) : 0.5);
 	float Outlinks_Sum = 0;
 	for (int k = 0; k<nVertices(g); k++){
 		if(isEdge(g,j,k)){
