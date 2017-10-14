@@ -130,7 +130,8 @@ static void inOrderTraversal(Vertex *v, FILE *fp) {
     if (v != NULL) {
         inOrderTraversal(v->left, fp);
         fprintf(fp,"%s  ", v->word);
-        showList(v->urls, fp);
+        int nNodes = ALL_NODES;
+        showList(v->urls, fp, ' ', &nNodes);
         inOrderTraversal(v->right, fp);
     }
 }

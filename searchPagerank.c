@@ -5,10 +5,11 @@
 #include "colours.h"
 #include "pagerank.h"
 #include "readData.h"
+#include "list.h"
 
 // Finds urls from invertedIndex that contain query words
 // Fills matchedUrlList with urls
-// Returns number of matched urls
+// Returns number of queries entered
 int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
     FILE *invertedIndexFp = fopen("invertedIndex.txt", "r");
     if (invertedIndexFp == NULL) {
@@ -47,25 +48,46 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
                 // Then extract the strings and place them into matchedUrlList
                 char *url = NULL;
                 url = strtok(buf, " ");
-                for (int j = 0; url != NULL && j < MAX_QUERIES; j++) {
+                for (int j = nMatchedUrls; url != NULL && j < MAX_QUERIES; j++) {
                     // Remove non-char characters such as new lines from the string
                     if (sscanf(url, "%s", url) == EOF) break;
                     strcpy(matchedUrlList[j], url);
                     nMatchedUrls++;
                     // printf("%d\n", nMatchedUrls);
-                    printf("%s\n", matchedUrlList[j]);
+                    // printf("%s\n", matchedUrlList[j]);
                     url = strtok(NULL, " ");
                 }
             }
         }
     }
     fclose(invertedIndexFp);
-    return nMatchedUrls;
+    return nQueries;
 }
-
 
 // Sorts matchedUrlList according to pagerankList
 // Returns a string array of urls
-void findPagerank(FILE *pagerankListFp, int nMatchedUrls, char matchedUrlList[MAX_V][MAX_CHAR]) {
-
+void findPagerank(int nQueries, char matchedUrlList[MAX_V][MAX_CHAR]) {
+    // An array of urls indexed by frequency of matching query words
+    List *queryTable = malloc(sizeof(List) * nQueries);
+    for (int i = 0; i < nQueries; i++) {
+        queryTable[i] = newList();
+    }
+    for (int i = 0; *matchedUrlList[i]; i++) {
+        int count = 1;
+        if (strcmp(matchedUrlList[i], "-1") == 0) continue;
+        for (int j = 0; *matchedUrlList[j]; j++) {
+            if (i != j && strcmp(matchedUrlList[i], matchedUrlList[j]) == 0 && strcmp(matchedUrlList[j], "-1") != 0) {
+                strcpy(matchedUrlList[j], "-1");
+                count++;
+            }
+        }
+        if (count > 0)
+            appendList(queryTable[count - 1], matchedUrlList[i]);
+    }
+    int nResults = 30;
+    for (int i = nQueries - 1; i >= 0; i--) {
+        // printf("Urls with %d query: ", i + 1);
+        sortList(queryTable[i], cmpPagerank);
+        showList(queryTable[i], stdout, '\n', &nResults);
+    }
 }
