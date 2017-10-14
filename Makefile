@@ -31,7 +31,7 @@ yaggle: $(SRC_OBJ_FILES) $(LIB_OBJ_FILES)
 
 #Search tf-idf
 searchTfIdf: searchTfIdf.o searchPagerank.o
-	$(CC) $(CFLAGS_LINK) searchTfIdf.o searchPagerank.o -o searchTfIdf -lm
+	$(CC) $(CFLAGS_LINK) searchTfIdf.o list.o -o searchTfIdf -lm
 
 # ADT Tests
 tests: testGraph testList testTree

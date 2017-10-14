@@ -7,16 +7,17 @@
 
 int main(int argc, char* argv[]) {
     List l = newList();
-    appendList(l, "carrot");
-    appendList(l, "durian");
-    appendList(l, "fruit");
-    appendList(l, "grape");
-    appendList(l, "ham");
-    appendList(l, "eggplant");
-    appendList(l, "apple");
-    appendList(l, "banana");
-    appendList(l, "banana");
-    appendList(l, "banana");
+    appendList(l, "carrot", 0, 0);
+    appendList(l, "durian", 0, 0);
+    appendList(l, "fruit", 0, 0);
+    appendList(l, "grape", 0, 0);
+    appendList(l, "ham", 0, 0);
+    appendList(l, "eggplant", 0, 0);
+    appendList(l, "apple", 0, 0);
+    appendList(l, "banana", 0, 0);
+    appendList(l, "banana", 0, 0);
+    appendList(l, "banana", 0, 0);
+
     printf("Unsorted List: ");
     int nNodes = ALL_NODES;
     showList(l, stdout, ' ', &nNodes);

@@ -1,12 +1,21 @@
 //Written by Dennis Gann, October 2017
 
 #include "searchTfIdf.h"
-#include "colours.h"
-#include "pagerank.h"
-#include "readData.h"
 #include <math.h>
 
 int main(int argc, char * argv[]) {
+
+    //GET QUERIES FROM COMMAND LINE ARGS
+    char queries[MAX_QUERIES][MAX_CHAR] = {{0}};
+    int nQueries = argc - 1;
+    if (nQueries == 0) {
+        perror("Please supply search terms");
+        exit(1);
+    }
+
+    for (int i = 1; i < argc; i++) {
+        strcpy(queries[i-1], argv[i]);
+    }
 
 
     //open invertedIndex file stream
@@ -17,41 +26,24 @@ int main(int argc, char * argv[]) {
         exit(1);
     }
 
-
-    //GET QUERIES FROM USER
-    char queries[MAX_QUERIES][MAX_CHAR] = {{0}};
+    int totalDocs = getTotalDocs("./Sample1/collection.txt");
+    List urlList = newList();
     char buf[MAX_CHAR] = {0};
-    int nQueries = 0;
-
-    // Scan queries
-    printf(RED "\n\n               Welcome to Yaggle. Enter your tf-idf search query.\n" RESET);
-    fgets(buf, MAX_CHAR, stdin);
-    char *query = NULL;
-    query = strtok(buf, " ");
-    for (int i = 0; query != NULL && i < MAX_QUERIES; i++) {
-        // Remove non-char characters from the string
-        if (sscanf(query, "%s", query) == EOF) break;
-        strcpy(queries[i], query);
-        nQueries++;
-        // printf("'%s;\n", queries[i]);
-        query = strtok(NULL, " ");
-    }
-
-
 
     while (1) {
         char invertedIndexStr[MAX_CHAR] = {0};
+
         // Scan every word of the invertedIndex
         if (fscanf(invertedIndexFp, "%s", invertedIndexStr) == EOF)
             break;
+
         // If the query matches the word in the index, load the word's urls
+        char matchedUrlList[MAX_V][MAX_CHAR] = {{0}};
+        int nMatchedUrls = 0;
+
         for (int i = 0; i < nQueries; i++) {
-            char matchedUrlList[MAX_V][MAX_CHAR] = {{0}};
-            int nMatchedUrls = 0;
-
             if (strcmp(invertedIndexStr, queries[i]) == 0) {
-
-                printf("%s:\n", queries[i]);
+                //scanned word matches one of query terms
 
                 // Read the rest of the line into buf
                 memset(buf, 0, MAX_CHAR);
@@ -80,27 +72,21 @@ int main(int argc, char * argv[]) {
                     strcat(url_from_location, ".txt");
                     FILE *urlToOpen = fopen(url_from_location, "r");
 
+                    double tfidf = getTfIdf(queries[i], urlToOpen, nMatchedUrls, totalDocs);
+                    //printf("%s %.6lf\n", matchedUrlList[j], tfidf);
+                    addTfIdf(urlList, matchedUrlList[j], tfidf, 1);
 
-                    //printf("%s -- TC: %d, length: %d TF: %lf, IDF: %lf, TFIDF: %lf \n", matchedUrlList[k], tc, length, tf, idf, tfidf);
-                    printf("%s -- TfIdf: %lf\n", matchedUrlList[j], getTfIdf(queries[i], urlToOpen, nMatchedUrls, 7));
+                    fclose(urlToOpen);
 
                 }
             }
         }
     }
 
-
     fclose(invertedIndexFp);
-
-
-
-
-
-
-
-
-
-     return EXIT_SUCCESS;
+    //sortList(urlList, cmpNum);
+    showTfIdfList(urlList, stdout, 30);
+    return EXIT_SUCCESS;
  }
 
 
@@ -148,9 +134,25 @@ double getTfIdf(char term[MAX_CHAR], FILE *doc, int totalMatchedUrls, int totalD
      }
 
      tf = (double) tc/docLength;
-     idf = log((double)totalDocs/totalMatchedUrls);
+     idf = log10((double)totalDocs/totalMatchedUrls);
      tfidf = tf * idf;
 
      return tfidf;
 
  }
+
+
+//usage e.g. getTotalDocs("./Sample1/collection.txt")
+ int getTotalDocs(char * filePath) {
+
+     FILE *collectionFp = fopen(filePath, "r");
+     assert(collectionFp != NULL);
+     char str[MAX_CHAR] = {0};
+     int totalDocs = 0;
+     while (fscanf(collectionFp, "%s", str) != EOF) {
+        totalDocs++;
+     }
+     fclose(collectionFp);
+     return totalDocs;
+
+}

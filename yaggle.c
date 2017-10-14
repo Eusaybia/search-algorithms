@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     Queue collectionUrls2 = getCollectionUrls();
     getInvertedIndex(collectionUrls2);
     pageRankWeights(0.85, 0.00001, 1000, urlGraph);
-    char matchedUrlList[MAX_V][MAX_CHAR] = {0};
+    char matchedUrlList[MAX_V][MAX_CHAR] = {{0}};
     int nQueries = findMatchedUrls(matchedUrlList);
     findPagerank(nQueries, matchedUrlList);
     return EXIT_SUCCESS;
