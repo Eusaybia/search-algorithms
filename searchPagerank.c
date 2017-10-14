@@ -16,7 +16,7 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR]) {
         perror("Error opening file");
         exit(1);
     }
-    char queries[MAX_QUERIES][MAX_CHAR] = {0};
+    char queries[MAX_QUERIES][MAX_CHAR] = {{0}};
     char buf[MAX_CHAR] = {0};
     int nQueries = 0;
     int nMatchedUrls = 0;

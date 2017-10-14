@@ -133,7 +133,8 @@ int cmpPagerank(const void *p1, const void *p2) {
     }
     // Scan all of pagerank into a buffer
     char word[MAX_CHAR] = {0};
-    double pagerank1, pagerank2 = 0;
+    double pagerank1 = 0;
+    double pagerank2 = 0;
     while (1) {
         // Finish if we have both pageranks
         if (pagerank1 && pagerank2) break;
