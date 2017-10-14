@@ -5,8 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
-#define MAX_CHAR 256
+#include <assert.h>
 
 typedef struct Node {
     struct Node *next;
@@ -186,6 +185,7 @@ int cmpPagerank(const void *p1, const void *p2) {
     // printf("pgrank2: %lf\n", pagerank2);
     if (pagerank1 == pagerank2) return 0;
     return (pagerank1 - pagerank2 > 0) ? -1 : 1;
+    fclose(pagerankFp);
 }
 
 // Sort list using an arbitrary comparator function
@@ -293,4 +293,14 @@ static Node *newNode(char *str, double val, int terms) {
     n->terms = terms;
 
     return n;
+}
+
+void listToArray(List l, char sortedlist[][MAX_CHAR]){
+    assert(l!=NULL);
+    int counter = 0;
+    Node *curr = l->head;
+    while(curr!=NULL){
+        strcpy(sortedlist[counter++],curr->str);
+        curr = curr->next;
+    }
 }
