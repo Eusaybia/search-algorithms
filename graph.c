@@ -247,7 +247,7 @@ void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, float pag
 void graphToList(Graph g, char sortedlist[][MAX_CHAR]){
 	List l = newList();
 	for(int i = 0; i < g->nV; i++){
-		appendList(l, g->vertices[i]->url);
+		appendList(l, g->vertices[i]->url, 0.0, 0);
 	}
 	int no = -1;
 	showList(l, stdout, ' ', &no);

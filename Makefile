@@ -62,11 +62,6 @@ testTree: testTree.o tree.o list.o vertexQueue.o
 	$(CC) -M $(CPPFLAGS) $< > $@.$$$$; \
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
-<<<<<<< HEAD
-=======
-
-
->>>>>>> rahil-pagerank-output
 
 # Remove all object files and binaries
 clean:
