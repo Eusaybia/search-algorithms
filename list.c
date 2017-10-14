@@ -5,13 +5,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
-#define MAX_CHAR 256
+#include <assert.h>
 
 typedef struct Node {
     struct Node *next;
     struct Node *prev;
     char *str;
+    double val;
+    int terms;
 } Node;
 
 typedef struct ListRep {
@@ -23,7 +24,7 @@ static int isElementList(List l, char *str);
 static void quickSort(Node *p, Node *r, int (*compar)(const void *, const void *));
 static Node *partition(Node *p, Node *r, int (*compar)(const void *, const void *));
 static void swap(Node *n1, Node *n2);
-static Node *newNode(char *str);
+static Node *newNode(char *str, double val, int terms);
 
 List newList() {
     List l = malloc(sizeof(struct ListRep));
@@ -48,22 +49,22 @@ int isEmpty(List l) {
     return (l->head == NULL) ? 1 : 0;
 }
 
-void appendList(List l, char *str) {
+void appendList(List l, char *str, double val, int terms) {
     // We want the list to be a set
     if (isElementList(l, str)) return;
 
     if (isEmpty(l)) {
-        l->head = newNode(str);
+        l->head = newNode(str, val, terms);
         l->tail = l->head;
     }
     else if (l->head == l->tail) {
-        l->head->next = newNode(str);
+        l->head->next = newNode(str, val, terms);
         l->tail = l->head->next;
 
         l->tail->prev = l->head;
     }
     else {
-        Node *new = newNode(str);
+        Node *new = newNode(str, val, terms);
         new->prev = l->tail;
         l->tail->next = new;
         l->tail = new;
@@ -79,6 +80,20 @@ static int isElementList(List l, char *str) {
         n = n->next;
     }
     return 0;
+}
+
+void addTfIdf(List l, char *str, double val, int terms) {
+    if (!isElementList(l, str)) appendList(l, str, val, terms);
+    else {
+        Node *n = l->head;
+        while (n != NULL) {
+            if (strcmp(n->str, str) == 0) {
+                n->val += val;
+                n->terms += terms;
+            }
+            n = n->next;
+        }
+    }
 }
 
 int deleteFromList(List l, char *str) {
@@ -113,6 +128,15 @@ int deleteFromList(List l, char *str) {
         return 1;
     }
     else return 0; // String not in list
+}
+
+// Used as a comparator for sortList()
+int cmpNum(const void *p1, const void *p2) {
+
+    if (((Node *)p1)->val < ((Node *)p2)->val) return -1;
+    else if (((Node *)p1)->val > ((Node *)p2)->val) return 1;
+    else return 0;
+
 }
 
 // Used as a comparator for sortList()
@@ -161,6 +185,7 @@ int cmpPagerank(const void *p1, const void *p2) {
     // printf("pgrank2: %lf\n", pagerank2);
     if (pagerank1 == pagerank2) return 0;
     return (pagerank1 - pagerank2 > 0) ? -1 : 1;
+    fclose(pagerankFp);
 }
 
 // Sort list using an arbitrary comparator function
@@ -236,8 +261,24 @@ void showList(List l, FILE *fp, char delimiter, int *nNodes) {
     printf(")\n"); */
 }
 
+
+void showTfIdfList(List l, FILE *fp, int nUrls) {
+    Node *n = l->head;
+
+    if (n == NULL) {
+        fprintf(fp, "List is empty");
+    }
+
+    while (n != NULL && nUrls != 0) {
+        fprintf(fp, "%s %.6f %d\n", n->str, n->val, n->terms);
+        n = n->next;
+        nUrls -= 1;
+    }
+    fprintf(fp, "\n");
+}
+
 // Creates a new node
-static Node *newNode(char *str) {
+static Node *newNode(char *str, double val, int terms) {
     Node *n = malloc(sizeof(struct Node));
     n->next = NULL;
     n->prev = NULL;
@@ -248,5 +289,18 @@ static Node *newNode(char *str) {
 
     strcpy(n->str, str);
 
+    n->val = val;
+    n->terms = terms;
+
     return n;
+}
+
+void listToArray(List l, char sortedlist[][MAX_CHAR]){
+    assert(l!=NULL);
+    int counter = 0;
+    Node *curr = l->head;
+    while(curr!=NULL){
+        strcpy(sortedlist[counter++],curr->str);
+        curr = curr->next;
+    }
 }

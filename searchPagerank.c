@@ -82,7 +82,7 @@ void findPagerank(int nQueries, char matchedUrlList[MAX_V][MAX_CHAR]) {
             }
         }
         if (count > 0)
-            appendList(queryTable[count - 1], matchedUrlList[i]);
+            appendList(queryTable[count - 1], matchedUrlList[i], 0, 0);
     }
     int nResults = 30;
     for (int i = nQueries - 1; i >= 0; i--) {

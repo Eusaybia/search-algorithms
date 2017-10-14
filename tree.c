@@ -1,4 +1,4 @@
-// tree.c - Interface to binary search tree 
+// tree.c - Interface to binary search tree
 // Written by Kongwei Ying, September 2017
 
 #include "tree.h"
@@ -8,7 +8,7 @@
 #define MAX_CHAR 256
 
 typedef struct TreeRep {
-   struct Vertex *root; 
+   struct Vertex *root;
 } TreeRep;
 
 static void dropTraversal(Vertex *v);
@@ -51,7 +51,7 @@ void insertIntoTree(Tree t, char *word) {
 
     Vertex *new = newVertex(word);
     // pred always trails new
-    Vertex *pred = t->root;   
+    Vertex *pred = t->root;
 
     if (pred == NULL) {
         t->root = new;
@@ -66,13 +66,13 @@ void insertIntoTree(Tree t, char *word) {
             if (pred->left == NULL)
                 break;
             // If pred can, go down the left branch
-            else    
+            else
                 pred = pred->left;
         }
         else
             if (pred->right == NULL)
                 break;
-            else    
+            else
                 pred = pred->right;
 
     }
@@ -108,7 +108,7 @@ void addUrl(Tree t, char *word, char *url) {
     }
     else {
         // Insert into the vertex's list of urls
-        appendList(v->urls, url);
+        appendList(v->urls, url, 0, 0);
     }
 }
 
@@ -118,7 +118,7 @@ static Vertex *findVertex(Vertex *v, char *str) {
 
     if (strcmp(str, v->word) < 0)
         return findVertex(v->left, str);
-    else 
+    else
         return findVertex(v->right, str);
 }
 
@@ -224,7 +224,7 @@ static int findDepth(Vertex *root) {
     int maxLeftDepth = 0;
     int maxRightDepth = 0;
     if (root == NULL) return 0;
-    
+
     maxLeftDepth = findDepth(root->left);
     maxRightDepth = findDepth(root->right);
 
@@ -234,4 +234,3 @@ static int findDepth(Vertex *root) {
 static int vertexKeyCompare(Vertex *v1, Vertex *v2) {
     return strcmp(v1->word, v2->word);
 }
-
