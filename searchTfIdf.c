@@ -14,6 +14,11 @@ int main(int argc, char * argv[]) {
     }
 
     for (int i = 1; i < argc; i++) {
+        int j = 0;
+        for (; argv[i][j] != '\0'; j++) {
+            argv[i][j] = tolower((unsigned char)argv[i][j]);
+        }
+        if (argv[i][j-1] == '.' || argv[i][j-1] == ',' || argv[i][j-1] == ';' || argv[i][j-1] == '?') argv[i][j-1] = '\0';
         strcpy(queries[i-1], argv[i]);
     }
 
@@ -99,11 +104,6 @@ double getTfIdf(char term[MAX_CHAR], FILE *doc, int totalMatchedUrls, int totalD
      double idf  = 0;
      double tfidf = 0;
 
-     //normalise search term
-     for (int i = 0; term[i] != '\0'; i++) {
-         term[i] = tolower((unsigned char)term[i]);
-     }
-
      char curr_word[MAX_CHAR] = {0};
 
      while (1) {
@@ -123,6 +123,10 @@ double getTfIdf(char term[MAX_CHAR], FILE *doc, int totalMatchedUrls, int totalD
          for (int i = 0; curr_word[i] != '\0'; i++) {
              curr_word[i] = tolower((unsigned char)curr_word[i]);
              if (curr_word[i] == '.') curr_word[i] = '\0';
+             if (curr_word[i] == ',') curr_word[i] = '\0';
+             if (curr_word[i] == ';') curr_word[i] = '\0';
+             if (curr_word[i] == '?') curr_word[i] = '\0';
+
          }
 
          if (strcmp(curr_word, term) == 0) {
