@@ -23,4 +23,5 @@ void showList(List l, FILE *fp, char delimiter, int *nNodes);
 void addTfIdf(List l, char *str, double val, int terms);
 void showTfIdfList(List l, FILE *fp, int nUrls);
 void listToArray(List l, char sortedlist[][MAX_CHAR]);
+int cmptfidf(const void *p1, const void *p2);
 #endif

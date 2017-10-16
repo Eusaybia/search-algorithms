@@ -222,6 +222,14 @@ static void swap(Node *n1, Node *n2) {
     strcpy(temp, n1->str);
     strcpy(n1->str, n2->str);
     strcpy(n2->str, temp);
+
+    double temp_value = n1->val;
+    n1->val = n2->val;
+    n2->val = temp_value;
+
+    int temp_terms = n1->terms;
+    n1->terms = n2->terms;
+    n2->terms = temp_terms;
 }
 
 // delimiter controls what elements are printed with
@@ -263,6 +271,7 @@ void showList(List l, FILE *fp, char delimiter, int *nNodes) {
 
 
 void showTfIdfList(List l, FILE *fp, int nUrls) {
+    sortList(l, cmptfidf);
     Node *n = l->head;
 
     if (n == NULL) {
@@ -303,4 +312,14 @@ void listToArray(List l, char sortedlist[][MAX_CHAR]){
         strcpy(sortedlist[counter++],curr->str);
         curr = curr->next;
     }
+}
+
+int cmptfidf(const void *p1, const void *p2){
+
+    if (((Node *)p1)->terms == ((Node *)p2)->terms){
+        if (((Node *)p1)->val == ((Node *)p2)->val) return 0;
+        return (((Node *)p1)->val > ((Node *)p2)->val) ? -1 : 1;
+    }
+    return (((Node *)p1)->terms >((Node *)p2)->terms) ? -1 :1;
+
 }
