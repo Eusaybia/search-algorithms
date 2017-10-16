@@ -218,6 +218,8 @@ static Node *partition(Node *p, Node *r, int (*compar)(const void *, const void 
 }
 
 static void swap(Node *n1, Node *n2) {
+    if(n1==n2)
+        return;
     char temp[MAX_CHAR] = {0};
     strcpy(temp, n1->str);
     strcpy(n1->str, n2->str);
