@@ -7,7 +7,6 @@
 #include <assert.h>
 #include "list.h"
 
-
 #define MAX_CHAR 256
 #define MAX_QUERIES 256
 #define MAX_V 256

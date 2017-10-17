@@ -1,10 +1,17 @@
 //Written by Dennis Gann, October 2017
 
 #include "searchTfIdf.h"
+#include "colours.h"
+#include "pagerank.h"
+#include "readData.h"
+#include "list.h"
+#include "invertedIndex.h"
+#include "graph.h"
 #include <math.h>
 
 int main(int argc, char * argv[]) {
-
+    Queue collectionUrls1 = getCollectionUrls();
+    getInvertedIndex(collectionUrls1);
     //GET QUERIES FROM COMMAND LINE ARGS
     char queries[MAX_QUERIES][MAX_CHAR] = {{0}};
     int nQueries = argc - 1;

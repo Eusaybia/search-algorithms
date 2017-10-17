@@ -1,11 +1,27 @@
-//
-//
+// Main file for Yaggle search engine
 // Modified by Rahil Agrawal, September
-#include "searchPagerank.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "colours.h"
 #include "pagerank.h"
 #include "readData.h"
 #include "list.h"
+#include "invertedIndex.h"
+#include "graph.h"
+#include "searchPagerank.h"
+
+
+int main(int argc, char* argv[]) {
+    Queue collectionUrls1 = getCollectionUrls();
+    Graph urlGraph = createUrlGraph(collectionUrls1);
+    Queue collectionUrls2 = getCollectionUrls();
+    getInvertedIndex(collectionUrls2);
+    pageRankWeights(0.85, 0.00001, 1000, urlGraph);
+    char matchedUrlList[MAX_V][MAX_CHAR] = {{0}};
+    int nQueries = findMatchedUrls(matchedUrlList);
+    findPagerank(nQueries, matchedUrlList);
+    return EXIT_SUCCESS;
+}
 
 // Finds urls from invertedIndex that contain query words
 // Fills matchedUrlList with urls
