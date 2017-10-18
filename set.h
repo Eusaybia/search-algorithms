@@ -5,6 +5,7 @@
 #define SET_H
 
 typedef struct SetRep *Set;
+#include "headers.h"
 
 // Function signatures
 

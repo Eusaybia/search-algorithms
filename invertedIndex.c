@@ -2,8 +2,6 @@
 // Written by Kongwei Ying, September 2017
 // Modified by Rahil Agrawal, September 2017
 #include "invertedIndex.h"
-#include <ctype.h>
-#define MAX_CHAR 256
 
 // Very similar logic to createUrlGraph() in readData.c
 Tree getInvertedIndex(Queue collectionUrls) {
@@ -37,11 +35,11 @@ Tree getInvertedIndex(Queue collectionUrls) {
             else if (strcmp(curr_word, "#end") == 0) continue;
 
             // Convert word to lower case and remove full stops
-            for (int i = 0; curr_word[i] != '\0'; i++) {
-                curr_word[i] = tolower((unsigned char)curr_word[i]);
-                if (curr_word[i] == '.') curr_word[i] = '\0';
-            }
-
+            // for (int i = 0; curr_word[i] != '\0'; i++) {
+            //     curr_word[i] = tolower((unsigned char)curr_word[i]);
+            //     if (curr_word[i] == '.') curr_word[i] = '\0';
+            // }
+            normalize(curr_word);
             // If not in the tree, adds vertex curr_word to the tree
             insertIntoTree(t, curr_word);
             // Adds or updates the list urls within the vertex curr_word

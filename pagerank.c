@@ -1,11 +1,7 @@
 // pagerank.c - Calculate pageranks
 // Written by Rahil Agrawal, September 2017
-
+// Modified by Rahil Agrawal, October 2017
 #include "pagerank.h"
-#include <math.h>
-
-#define MAX_V 100
-#define MAX_CHAR 256
 
 // Base function to calculate pageranks using formula provided in
 // http://www.cse.unsw.edu.au/~cs2521/17s2/ass/ass02/Ass2.html and

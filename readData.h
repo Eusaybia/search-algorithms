@@ -5,9 +5,7 @@
 #ifndef READDATA_H
 #define READDATA_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "headers.h"
 #include "queue.h"
 #include "graph.h"
 #include "tree.h"

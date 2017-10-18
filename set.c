@@ -1,10 +1,6 @@
 // set.c ... simple, inefficient Set of Strings
 // Written by John Shepherd, September 2015
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include <string.h>
 #include "set.h"
 
 #define strEQ(s,t) (strcmp((s),(t)) == 0)
@@ -16,7 +12,7 @@ typedef struct Node {
 	char *val;
 	Link  next;
 } Node;
-	
+
 typedef struct SetRep {
 	int   nelems;
 	Link  elems;
@@ -55,7 +51,7 @@ void disposeSet(Set s)
 	Link next, curr = s->elems;
 	while (curr != NULL) {
 		next = curr->next;
-		disposeNode(curr);	
+		disposeNode(curr);
 		curr = next;
 	}
 }

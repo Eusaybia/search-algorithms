@@ -3,8 +3,7 @@
 
 #include "tree.h"
 #include "vertexQueue.h"
-#include <stdlib.h>
-#include <string.h>
+
 #define MAX_CHAR 256
 
 typedef struct TreeRep {

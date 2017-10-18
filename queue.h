@@ -4,6 +4,8 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#include "headers.h"
+
 typedef struct QueueRep *Queue;
 
 // Function signatures

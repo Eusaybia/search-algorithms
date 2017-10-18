@@ -1,5 +1,6 @@
-//Written by Dennis Gann, October 2017
-
+// searchTfIdf.c : Main file for searchtfidf
+// Written by Dennis Gann, October 2017
+// Modified by Rahil Agrawal, October 2017
 #include "searchTfIdf.h"
 #include "colours.h"
 #include "pagerank.h"
@@ -7,7 +8,7 @@
 #include "list.h"
 #include "invertedIndex.h"
 #include "graph.h"
-#include <math.h>
+#include "searchFunctions.h"
 
 int main(int argc, char * argv[]) {
     Queue collectionUrls1 = getCollectionUrls();
@@ -20,15 +21,7 @@ int main(int argc, char * argv[]) {
         exit(1);
     }
 
-    for (int i = 1; i < argc; i++) {
-        int j = 0;
-        for (; argv[i][j] != '\0'; j++) {
-            argv[i][j] = tolower((unsigned char)argv[i][j]);
-        }
-        if (argv[i][j-1] == '.' || argv[i][j-1] == ',' || argv[i][j-1] == ';' || argv[i][j-1] == '?') argv[i][j-1] = '\0';
-        strcpy(queries[i-1], argv[i]);
-    }
-
+    getQueries(argc, argv, queries);
 
     //open invertedIndex file stream
 
@@ -96,7 +89,6 @@ int main(int argc, char * argv[]) {
     }
 
     fclose(invertedIndexFp);
-    //sortList(urlList, cmpNum);
     showTfIdfList(urlList, stdout, 30);
     return EXIT_SUCCESS;
  }
@@ -126,15 +118,7 @@ double getTfIdf(char term[MAX_CHAR], FILE *doc, int totalMatchedUrls, int totalD
          else if (strncmp(curr_word, "url", 3) == 0) continue;
          else if (strcmp(curr_word, "#end") == 0) continue;
 
-         // normalise words - Convert word to lower case and remove full stops
-         for (int i = 0; curr_word[i] != '\0'; i++) {
-             curr_word[i] = tolower((unsigned char)curr_word[i]);
-             if (curr_word[i] == '.') curr_word[i] = '\0';
-             if (curr_word[i] == ',') curr_word[i] = '\0';
-             if (curr_word[i] == ';') curr_word[i] = '\0';
-             if (curr_word[i] == '?') curr_word[i] = '\0';
-
-         }
+        normalize(curr_word);
 
          if (strcmp(curr_word, term) == 0) {
              tc++;

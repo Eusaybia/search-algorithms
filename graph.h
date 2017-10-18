@@ -1,14 +1,14 @@
 // graph.h - Interface to Graph of strings
 // Written by Kongwei Ying, September 2017
-
+// Modified by Rahil Agrawal, Sept-Oct 2017
 #ifndef GRAPH_H
 #define GRAPH_H
 
 #define DENSE 0
 #define TERSE 1
-#define MAX_CHAR 256
-#include <stdio.h>
+#include "headers.h"
 #include "list.h"
+#include "colours.h"
 
 typedef struct GraphRep *Graph;
 

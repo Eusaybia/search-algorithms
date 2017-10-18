@@ -5,8 +5,7 @@
 #define LIST_H
 #define ALL_NODES -1
 
-#include <stdio.h>
-#define MAX_CHAR 256
+#include "headers.h"
 
 typedef struct ListRep *List;
 

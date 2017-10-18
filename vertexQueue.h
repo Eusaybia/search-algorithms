@@ -6,7 +6,7 @@
 #define QUEUE_H
 
 #include "tree.h"
-
+#include "headers.h"
 typedef struct QueueRep *VertexQueue;
 
 // Function signatures
@@ -19,4 +19,3 @@ int emptyVertexQueue(VertexQueue);
 void showVertexQueue(VertexQueue q);
 
 #endif
-

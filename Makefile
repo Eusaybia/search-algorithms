@@ -9,7 +9,7 @@ BINARIES = searchPagerank searchTfIdf #testList testTree testGraph
 # All c files (add files here if more are added to the project)
 SRC_FILES_1 = invertedIndex.c searchPagerank.c pagerank.c readData.c
 SRC_FILES_2 = invertedIndex.c readData.c searchTfIdf.c
-LIB_FILES = graph.c list.c queue.c set.c tree.c vertexQueue.c
+LIB_FILES = graph.c list.c queue.c set.c tree.c vertexQueue.c searchFunctions.c
 #TEST_FILES = testGraph.c testList.c testTree.c
 
 # Automatically generated object file targets
@@ -62,4 +62,4 @@ searchTfIdf: $(SRC_OBJ_FILES_2) $(LIB_OBJ_FILES)
 
 # Remove all object files and binaries
 clean:
-	rm *o $(BINARIES)
+	rm $(BINARIES)
