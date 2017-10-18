@@ -229,7 +229,7 @@ void showList(List l, FILE *fp, char delimiter, int *nNodes) {
     Node *n = l->head;
 
     if (n == NULL) {
-        fprintf(fp, "List is empty");
+        return;
     }
 
     while (n != NULL && *nNodes != 0) {
@@ -246,7 +246,7 @@ void showTfIdfList(List l, FILE *fp, int nUrls) {
     Node *n = l->head;
 
     if (n == NULL) {
-        fprintf(fp, "List is empty");
+        return;
     }
 
     while (n != NULL && nUrls != 0) {
