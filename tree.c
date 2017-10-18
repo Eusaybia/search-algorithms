@@ -44,7 +44,6 @@ static void dropTraversal(Vertex *v) {
 void insertIntoTree(Tree t, char *word) {
     // If the word we're trying to insert is already in the tree
     if (findVertex(t->root, word) != NULL) {
-        //printf("Vertex with word '%s' is already in the tree\n", word);
         return;
     }
 

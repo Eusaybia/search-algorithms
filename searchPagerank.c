@@ -57,8 +57,6 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR], char queries[MAX_QUERI
                     if (sscanf(url, "%s", url) == EOF) break;
                     strcpy(matchedUrlList[j], url);
                     nMatchedUrls++;
-                    // printf("%d\n", nMatchedUrls);
-                    // printf("%s\n", matchedUrlList[j]);
                     url = strtok(NULL, " ");
                 }
             }

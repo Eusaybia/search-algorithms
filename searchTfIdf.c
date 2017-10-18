@@ -61,7 +61,6 @@ int main(int argc, char * argv[]) {
                     if (sscanf(url, "%s", url) == EOF) break;
                     strcpy(matchedUrlList[j], url);
                     nMatchedUrls++;
-                    // printf("%d\n", nMatchedUrls);
                     url = strtok(NULL, " ");
                 }
 
@@ -78,7 +77,6 @@ int main(int argc, char * argv[]) {
                     FILE *urlToOpen = fopen(url_from_location, "r");
 
                     double tfidf = getTfIdf(queries[i], urlToOpen, nMatchedUrls, totalDocs);
-                    //printf("%s %.6lf\n", matchedUrlList[j], tfidf);
                     addTfIdf(urlList, matchedUrlList[j], tfidf, 1);
 
                     fclose(urlToOpen);

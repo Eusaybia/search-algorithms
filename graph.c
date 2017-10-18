@@ -228,7 +228,6 @@ void showPageRanks(Graph g){
 			g->vertices[vertexId]->pagerank_before);
 	}
 	fclose(fp2);
-	//fprintf(fp, "Pagerank Sum = %lf\n", sum);
 }
 // Set the values Page Info
 void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, float pagerank){

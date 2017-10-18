@@ -237,7 +237,7 @@ void showList(List l, FILE *fp, char delimiter, int *nNodes) {
         n = n->next;
         *nNodes = *nNodes - 1;
     }
-            fprintf(fp, "\n");
+    fprintf(fp, "\n");
 }
 
 
