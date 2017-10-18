@@ -2,10 +2,7 @@
 // Written by John Shepherd, September 2015
 // Modified by Kongwei Ying, September 2017
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include <string.h>
+
 #include "vertexQueue.h"
 
 typedef struct Node *Link;

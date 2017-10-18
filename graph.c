@@ -2,14 +2,7 @@
 // Written by Kongwei Ying, September 2017
 // Modified by Rahil Agrawal, September 2017
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <string.h>
 #include "graph.h"
-#include "list.h"
-#include "colours.h"
-
 
 typedef unsigned char Bit;
 
@@ -235,7 +228,6 @@ void showPageRanks(Graph g){
 			g->vertices[vertexId]->pagerank_before);
 	}
 	fclose(fp2);
-	//fprintf(fp, "Pagerank Sum = %lf\n", sum);
 }
 // Set the values Page Info
 void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, float pagerank){
@@ -249,10 +241,6 @@ void graphToList(Graph g, char sortedlist[][MAX_CHAR]){
 	for(int i = 0; i < g->nV; i++){
 		appendList(l, g->vertices[i]->url, 0.0, 0);
 	}
-	int no = -1;
-	showList(l, stdout, ' ', &no);
 	sortList(l, cmpPagerank);
-	no = -1;
-	showList(l, stdout, ' ', &no);
 	listToArray(l, sortedlist);
 }

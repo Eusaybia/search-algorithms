@@ -1,10 +1,6 @@
 // queue.c ... simple Queue of Strings
 // Written by John Shepherd, September 2015
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include <string.h>
 #include "queue.h"
 
 typedef struct Node *Link;

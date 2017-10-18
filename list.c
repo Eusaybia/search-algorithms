@@ -2,10 +2,6 @@
 // Written by Kongwei Ying, September 2017
 
 #include "list.h"
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <assert.h>
 
 typedef struct Node {
     struct Node *next;
@@ -166,9 +162,7 @@ int cmpPagerank(const void *p1, const void *p2) {
         char outlinks[MAX_CHAR] = {0};
         // Scan the pagerankList.txt and scan strings without commas
         if (fscanf(pagerankFp, "%[^,], %[^,], %lf%*c", word, outlinks, &temp) == EOF) break;
-        // printf("Word: %s\n", word);
-        // printf("Outlinks: %s\n", outlinks);
-        // printf("Temp: %lf\n", temp);
+
         // Look for the first url
         if (strcmp(word, ((Node *)p1)->str) == 0) {
             pagerank1 = temp;
@@ -178,11 +172,6 @@ int cmpPagerank(const void *p1, const void *p2) {
             pagerank2 = temp;
         }
     }
-    // if (!pagerank1 && !pagerank2) {
-    //     printf("Pageranks not found!");
-    // }
-    // printf("pgrank1: %lf\n", pagerank1);
-    // printf("pgrank2: %lf\n", pagerank2);
     if (pagerank1 == pagerank2) return 0;
     return (pagerank1 - pagerank2 > 0) ? -1 : 1;
     fclose(pagerankFp);
@@ -249,26 +238,6 @@ void showList(List l, FILE *fp, char delimiter, int *nNodes) {
         *nNodes = *nNodes - 1;
     }
     fprintf(fp, "\n");
-/*
-    // Debug mode
-    printf("Forward : ");
-    printf("(");
-    Node *n = l->head;
-    while (n != NULL) {
-        printf("%s", n->str);
-        if (n->next != NULL) printf(",");
-        n = n->next;
-    }
-    printf(")\n");
-    printf("Backward: ");
-    printf("(");
-    n = l->tail;
-    while (n != NULL) {
-        printf("%s", n->str);
-        if (n->prev != NULL) printf(",");
-        n = n->prev;
-    }
-    printf(")\n"); */
 }
 
 
@@ -281,11 +250,12 @@ void showTfIdfList(List l, FILE *fp, int nUrls) {
     }
 
     while (n != NULL && nUrls != 0) {
-        fprintf(fp, "%s %.6f %d\n", n->str, n->val, n->terms);
+        fprintf(fp, "%s %.6f\n", n->str, n->val);
         n = n->next;
         nUrls -= 1;
     }
-    fprintf(fp, "\n");
+    setbuf(stdout, NULL);
+
 }
 
 // Creates a new node
