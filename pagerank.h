@@ -6,6 +6,7 @@
 
 #include "headers.h"
 #include "graph.h"
+#include "invertedIndex.h"
 
 void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g);
 float pageRankIncoming(Graph g, int i);

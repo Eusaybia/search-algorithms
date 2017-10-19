@@ -2,7 +2,20 @@
 // Written by Rahil Agrawal, September 2017
 // Modified by Rahil Agrawal, October 2017
 #include "pagerank.h"
+#include "readData.h"
+#include "list.h"
 
+int main(int argc, char* argv[]){
+	Queue collectionUrls1 = getCollectionUrls();
+    Graph urlGraph = createUrlGraph(collectionUrls1);
+	if(argc!=4)
+		pageRankWeights(0.85, 0.00001, 1000, urlGraph);
+	else{
+		char *buf;
+		pageRankWeights(strtod(argv[1], &buf), strtod(argv[2], &buf), atoi(argv[3]), urlGraph);
+	}
+	return EXIT_SUCCESS;
+}
 // Base function to calculate pageranks using formula provided in
 // http://www.cse.unsw.edu.au/~cs2521/17s2/ass/ass02/Ass2.html and
 // http://www.cse.unsw.edu.au/~cs2521/17s2/ass/ass02/page1725348.pdf

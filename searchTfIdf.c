@@ -11,8 +11,6 @@
 #include "searchFunctions.h"
 
 int main(int argc, char * argv[]) {
-    Queue collectionUrls1 = getCollectionUrls();
-    getInvertedIndex(collectionUrls1);
     //GET QUERIES FROM COMMAND LINE ARGS
     char queries[MAX_QUERIES][MAX_CHAR] = {{0}};
     int nQueries = argc - 1;
@@ -31,7 +29,7 @@ int main(int argc, char * argv[]) {
         exit(1);
     }
 
-    int totalDocs = getTotalDocs("./Sample1/collection.txt");
+    int totalDocs = getTotalDocs("./collection.txt");
     List urlList = newList();
     char buf[MAX_CHAR] = {0};
 
@@ -66,7 +64,7 @@ int main(int argc, char * argv[]) {
 
                 for (int j = 0; j < nMatchedUrls; j++) {
 
-                    char subdir[MAX_CHAR] = "./Sample1/";
+                    char subdir[MAX_CHAR] = "./";
                     char url_from_location[MAX_CHAR] = {0};
                     // e.g. ./Sample1/
                     strcpy(url_from_location, subdir);

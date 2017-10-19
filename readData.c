@@ -5,7 +5,7 @@
 // Get URLs from collection.txt and put it into set
 Queue getCollectionUrls() {
     Queue collectionUrls = newQueue();
-    FILE *collectionFp = fopen("./Sample1/collection.txt", "r");
+    FILE *collectionFp = fopen("./collection.txt", "r");
     assert(collectionFp != NULL);
     char str[MAX_CHAR] = {0};
     while (fscanf(collectionFp, "%s", str) != EOF) {
@@ -19,7 +19,7 @@ Queue getCollectionUrls() {
 Graph createUrlGraph(Queue collectionUrls) {
     Graph urlGraph = newGraph(MAX_V);
     char url_from[MAX_CHAR] = {0};
-    char subdir[MAX_CHAR] = "./Sample1/";
+    char subdir[MAX_CHAR] = "./";
     while(!emptyQueue(collectionUrls)) {
         strcpy(url_from, leaveQueue(collectionUrls));
         char url_from_location[MAX_CHAR] = {0};
@@ -30,6 +30,10 @@ Graph createUrlGraph(Queue collectionUrls) {
         // e.g. ./Sample1/url31.txt
         strcat(url_from_location, ".txt");
         FILE *nextUrlFp = fopen(url_from_location, "r");
+        if(!nextUrlFp) {
+            fprintf(stderr, "Couldn't open %s\n", url_from_location);
+            exit(0);
+        }
         // We want to look for urls and ignore all other strings
         char url_to[MAX_CHAR] = {0};
         while(1) {

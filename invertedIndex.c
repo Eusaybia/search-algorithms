@@ -3,12 +3,17 @@
 // Modified by Rahil Agrawal, September 2017
 #include "invertedIndex.h"
 
+int main(int argc, char* argv[]){
+    Queue collectionUrls2 = getCollectionUrls();
+    getInvertedIndex(collectionUrls2);
+    return EXIT_SUCCESS;
+}
 // Very similar logic to createUrlGraph() in readData.c
 Tree getInvertedIndex(Queue collectionUrls) {
     Tree t = newTree();
     // e.g. url31
     char url_from[MAX_CHAR] = {0};
-    char subdir[MAX_CHAR] = "./Sample1/";
+    char subdir[MAX_CHAR] = "./";
     while (!emptyQueue(collectionUrls)) {
         strcpy(url_from, leaveQueue(collectionUrls));
         char url_from_location[MAX_CHAR] = {0};
