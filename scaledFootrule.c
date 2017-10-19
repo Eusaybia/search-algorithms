@@ -7,12 +7,12 @@
 #define N_ROWS 100
 
 int argsOk(int argc, char *argv[]);
-int *readRankFile(char *file, int *array);
+void readRankFile(char *filename, int *array);
 
 int main(int argc, char *argv[]) {
     // A 2d array to hold different ranking list rankings
     int **rankArrays = NULL;
-    assert(argsOk(argc, argv));
+    assert(argsOk(argc, argv) == 1);
 
     // Create columns
     rankArrays = malloc(sizeof(int *) * (argc - 1));
@@ -28,9 +28,12 @@ int main(int argc, char *argv[]) {
 
 void readRankFile(char *filename, int *array) {
     FILE *fp = fopen(filename, "r");
-    for (int i = 0; ; i++)
-        if (fscanf("%d", array));
+    for (int i = 0; ; i++) {
+        if (fscanf(fp, "%d", &array[i]) == EOF) break;
+        printf("%d\n", array[i]);
+    }
     fclose(fp);
+    printf("\n");
 }
 
 // Checks if correct number of commandline arguments are given
