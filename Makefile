@@ -1,10 +1,11 @@
 # Makefile for COMP2521 Assignment
 # Written by Kongwei Ying, September 2017
+# Modified by Rahil Agrawal, October 2017
 # Based off this:
 # https://stackoverflow.com/questions/12142865/debugging-using-gdb-properly-using-the-g-flag-with-several-files
 
 # Binary files
-BINARIES = searchPagerank searchTfIdf pagerank inverted invertedIndex.txt pagerankList.txt #testList testTree testGraph
+BINARIES = searchPagerank searchTfIdf pagerank inverted #testList testTree testGraph
 
 # All c files (add files here if more are added to the project)
 SRC_FILES_1 = searchPagerank.c readData.c
@@ -16,7 +17,7 @@ LIB_FILES = graph.c list.c queue.c tree.c vertexQueue.c searchFunctions.c
 
 # Automatically generated object file targets
 SRC_OBJ_FILES_1 = $(SRC_FILES_1: .c = .o) # Uses what's called a "substitution reference"
-SRC_OBJ_FILES_2 = $(SRC_FILES_2: .c = .o) # Uses what's called a "substitution reference"
+SRC_OBJ_FILES_2 = $(SRC_FILES_2: .c = .o)
 SRC_OBJ_FILES_3 = $(SRC_FILES_3: .c = .o)
 SRC_OBJ_FILES_4 = $(SRC_FILES_4: .c = .o)
 
