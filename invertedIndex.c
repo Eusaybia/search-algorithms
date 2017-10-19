@@ -39,11 +39,6 @@ Tree getInvertedIndex(Queue collectionUrls) {
             else if (strncmp(curr_word, "url", 3) == 0) continue;
             else if (strcmp(curr_word, "#end") == 0) continue;
 
-            // Convert word to lower case and remove full stops
-            // for (int i = 0; curr_word[i] != '\0'; i++) {
-            //     curr_word[i] = tolower((unsigned char)curr_word[i]);
-            //     if (curr_word[i] == '.') curr_word[i] = '\0';
-            // }
             normalize(curr_word);
             // If not in the tree, adds vertex curr_word to the tree
             insertIntoTree(t, curr_word);
