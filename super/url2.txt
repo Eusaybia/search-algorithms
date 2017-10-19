@@ -1,0 +1,48 @@
+#start Section-1
+
+url99   url80   url19  url78  url25   url93     url20 url81
+
+
+url56 url97 url96       url1 url68      url80  url84    url10   url28  url46  url67 url6   url48   url87    url85
+
+#end Section-1
+
+#start Section-2
+
+Edsger W. Dijkstra
+From Wikipedia, the free encyclopedia
+
+Edsger Wybe Dijkstra (Dutch: [ˈɛtsxər ˈʋibə ˈdɛikstra] (About this sound listen); 11 May 1930 –
+6 August 2002) was a Dutch computer scientist and an early pioneer in many research areas of
+computing science who held the Schlumberger Centennial Chair in Computer Sciences at the University
+of Texas at Austin from 1984 until his retirement in 1999. A theoretical physicist by training, he
+worked as a programmer at the Mathematisch Centrum (Amsterdam) from 1952 to 1962. He was a professor
+of mathematics at the Eindhoven University of Technology (1962–1984) and a research fellow at the
+Burroughs Corporation (1973–1984).
+
+One of the most influential members of computing science's founding generation, Dijkstra helped
+shape the new discipline from both an engineering and a theoretical perspective. Many of his
+papers are the source of new research areas. Several concepts and problems that are now standard in
+computer science were first identified by Dijkstra or bear names coined by him.
+
+Computer programming in the 1950s to 1960s was not recognized as an academic discipline; Dijkstra,
+who had a background in mathematics and physics, was one of the driving forces behind the acceptance
+of computer programming as a scientific discipline. Dijkstra coined the phrase "structured
+programming" and during the 1970s this became the new programming orthodoxy. Dijkstra's
+ideas about structured programming helped lay the foundations for the birth and development of the
+professional discipline of software engineering, enabling programmers to organize and manage
+increasingly complex software projects.
+
+The academic study of concurrent computing started in the 1960s, with Dijkstra (1965) credited with
+being the first paper in this field, identifying and solving the mutual exclusion problem. He
+was also one of the early pioneers of the research on principles of distributed computing. His
+foundational work on concurrency, semaphores, mutual exclusion (mutex), deadlock (deadly embrace),
+finding shortest paths in graphs, fault-tolerance, self-stabilization, among many other
+contributions comprises many of the pillars upon which the field of distributed computing is built.
+Shortly before his death in 2002, he received the ACM PODC Influential-Paper Award in distributed
+computing for his work on self-stabilization of program computation. This annual award was renamed
+the Dijkstra Prize (Edsger W. Dijkstra Prize in Distributed Computing) the following year, in his
+honor.
+
+#end Section-2
+

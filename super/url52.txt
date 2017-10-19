@@ -1,0 +1,7 @@
+#start Section-1
+url32
+#end Section-1
+
+#start Section-2
+An ice core is a core sample that is typically removed from an ice sheet or a high mountain glacier
+#end Section-2

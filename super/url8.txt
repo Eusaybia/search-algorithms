@@ -1,0 +1,52 @@
+#start Section-1
+
+url84   url37  url7   url16     url67  url68  url12     url21   url46   url28 url26   url30  url66  url73 url10
+  url34   url56   url48 url19  url31   url3 url63         url90   url42  url18 url86      url36   url58
+url11   url61  url62  url64     url81  url76    url44 url87     url77 url89  url49   url96
+url17   url65   url93   url32   url98   url35   url1
+
+url85 url39 url46 url51 url8 url5  url81        url17   url93 url23  url88  url63
+  url94 url78   url71 url86 url42   url11         url62   url92   url20   url56  url72  url19   url7      url77 url36 url15   url55       url61   url95           url52 url33 url12   url4
+url54           url73   url60 url64   url70 url83  url29   url22   url76   url50  url32         url37 url79
+url14   url96  url0 url97       url28   url74 url3      url90   url41   url75  url31 url69  url91 url26   url87  url21  url16
+   url89 url82   url53  url48  url45  url27   url25
+url99   url40   url6   url24    url13   url47  url58
+
+url30   url14  url11   url51 url6   url49  url76   url27
+   url87  url82    url18
+url80   url0 url57      url28  url50    url3    url4  url9      url71  url22  url85     url77   url52   url69
+url54  url84   url94    url41  url53 url5   url46
+   url44 url96  url47   url1
+url63   url12  url31   url75
+url88 url7   url10      url29  url32   url66 url19 url97  url59   url90 url56   url68  url20  url67  url13 url93        url48  url78  url16
+        url36   url70  url40 url64 url26 url60  url91 url86   url24  url74 url43   url72   url33 url79  url2
+url35 url34 url92
+
+#end Section-1
+
+#start Section-2
+
+André-Gilles Fortin
+From Wikipedia, the free encyclopedia
+
+André-Gilles Fortin (November 13, 1943 – June 24, 1977) was a Canadian politician in the 1970s.
+Fortin was a member of the Canadian House of Commons for Lotbinière. He was first elected in the
+1968 federal election for the Ralliement Créditiste, which in 1971 merged with the Social Credit
+Party of Canada.
+
+Fortin was elected leader of the party on November 7, 1976 after his popular predecessor, Réal
+Caouette, was forced to resign due to illness. The party was then struggling, having lost almost
+all its support in the west and in decline in Quebec where its members were divided between support
+for Canadian federalism and for sovereignty association for Quebec, a position supported by René
+Matte whom Fortin defeated for the leadership. Fortin's efforts to rebuild the party were cut short
+when he was killed after only eight months as leader.
+
+Fortin died in a car crash at about three in the morning on June 24, 1977 at the age of 33. It is
+believed that he fell asleep while driving, and his car went off the highway, where it missed a
+bridge and jumped over a river, slamming into the embankment on the other side. The accident took
+place on the Trans-Canada Highway between Montreal and Quebec City. At the time of his death, he had
+two young children.
+
+Réal Caouette's son, Gilles Caouette, became acting leader of the party five days later.
+
+#end Section-2

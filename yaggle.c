@@ -39,6 +39,6 @@ void printImage(char *directory) {
 
     while(fgets(read_string,sizeof(read_string),fptr) != NULL)
         printf(CYN "%s" RESET,read_string);
-
+    fclose(fptr);
     printf("\n");
 }

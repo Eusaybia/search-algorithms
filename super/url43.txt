@@ -1,0 +1,19 @@
+#start Section-1
+
+    url49 url40 url48
+    url63    url18 url99     url5 url47   url5     url84      url58 url41 url37
+url87 url53 url52
+url42 url27 url40 url56 url17 url98 url61 url78   url3 url88 url52
+url8 url41 url49 url36 url16 url84     url16 url73 url80
+
+url43 url13 url17  url8 url78      url2 url98   url74
+
+#end Section-1
+
+#start Section-2
+
+    Lost Luggage is an action video game developed and released in 1982 for the Atari 2600 by Texas-based studio Games by Apollo. The player controls skycaps working at an airport and tries to collect pieces of luggage that fall overhead from a frantic luggage carousel. A two-player mode, in which the second player controls the direction the luggage falls, is also available.
+
+    Programmer Ed Salvo was inspired to make Lost Luggage when he was waiting for his luggage at the Dallas/Fort Worth International Airport, and the game took around four weeks to produce. Reviewers criticized the game's similarity to Activision's Kaboom!—which itself is based on Avalanche—believing Lost Luggage to be an inferior clone.
+
+#end Section-2

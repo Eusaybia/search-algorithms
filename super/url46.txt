@@ -1,0 +1,21 @@
+#start Section-1
+    url40 url45
+    url69 url81 url33
+url6
+url98 url27   url80 url29 url71 url4 url61      url13 url92 url27 url8 url8 url84 url63 url39 url93 url92 url76    url63   url34 url18
+ url33 url92 url88 url83 url72 url88 url27 url90 url61 url75 url36 url45  url7 url89
+
+
+#end Section-1
+
+#start Section-2
+
+    A baggage carousel is a device, generally at an airport, that delivers checked luggage to the passengers at the baggage claim area at their final destination. Not all airports use these devices. Airports that do not have carousels generally deliver baggage by placing it on the floor or sliding it through an opening in a wall.
+
+    In a single-level system, the belt will deliver bags into the terminal from an opening in the wall. The belt generally runs along the wall for a short distance and then turns into the terminal forming a long oval that allows many passengers to access the belt. The belt continues back to the loading area through a second opening in the wall.
+
+    In a multilevel system, the bags are generally loaded from above or below the carousel and then delivered onto a moving oval-shaped carousel. It is common for this type of system to have two delivery belts, increasing the speed with which bags can be delivered to the passenger level.
+
+    There is also a variety of carousel that is a combination of the two systems. These occur mainly in Europe. Bags are loaded from an upper level and end up on a revolving oval, as is normal. However, the very back portion of the oval, in this case, runs in and out of the wall, so it can be accessed by baggage handlers.
+
+#end Section-2

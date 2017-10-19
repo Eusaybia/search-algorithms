@@ -1,0 +1,9 @@
+#start Section-1
+
+#end Section-1
+
+#start Section-2
+
+    404; page not found
+
+#end Section-2

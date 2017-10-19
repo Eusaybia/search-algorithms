@@ -19,12 +19,12 @@ typedef struct QueueRep
 
 // Function signatures
 
-Queue newQueue();
-void disposeQueue(Queue);
-void enterQueue(Queue, char *);
-char *leaveQueue(Queue);
-int emptyQueue(Queue);
-void showQueue(Queue q);
+// Queue newQueue();
+// void disposeQueue(Queue);
+// void enterQueue(Queue, char *);
+// char *leaveQueue(Queue);
+// int emptyQueue(Queue);
+// void showQueue(Queue q);
 
 static Link newNode(char *);
 static void disposeNode(Link);

@@ -22,7 +22,7 @@ typedef struct GraphRep {
 	Bit **edges;		// 2D array of Bits
 } GraphRep;
 
-static int findVertexIdFromString(Graph g, char *string);
+
 static int addVertex(Graph g, char *string);
 // Create a new Graph and initialise data as required
 Graph newGraph(int maxV) {
@@ -80,9 +80,12 @@ int addEdge(Graph g, char *from, char *to) {
 		return 0;
 	}
 	// Add an edge
-	g->edges[from_index][to_index] += 1;
-	g->vertices[to_index]->nInLinks++;
-	g->vertices[from_index]->nOutLinks++;
+	if(!(g->edges[from_index][to_index])){
+		g->edges[from_index][to_index] += 1;
+		g->vertices[to_index]->nInLinks++;
+		g->vertices[from_index]->nOutLinks++;
+	}
+
 	return 1;
 }
 
@@ -146,7 +149,7 @@ void setVertexUrl(Graph g, char *string, int vertexId) {
 }
 
 // Return: The vertex id with the string, or -1 if it couldn't be found
-static int findVertexIdFromString(Graph g, char *string) {
+int findVertexIdFromString(Graph g, char *string) {
 	// TODO: After addVertex implements insertion sort, implement binary search
 	int id = -1;
 	for (int i = 0; i < g->nV; i++) {

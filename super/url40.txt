@@ -1,0 +1,33 @@
+#start Section-1
+
+    url44 url41 url49
+    url71 url96 url66
+url31 url52 url58
+url43 url15 url85 url10 url35 url84
+url44    url55
+url75 url94 url1    url21    url53      url18 url77  url45     url98 url66 url36      url60
+
+#end Section-1
+
+#start Section-2
+
+    A baggage handling system (BHS) is a type of conveyor system installed in airports that transports checked luggage from ticket counters to areas where the bags can be loaded onto airplanes. A BHS also transports checked baggage coming from airplanes to baggage claims or to an area where the bag can be loaded onto another airplane.
+
+    Although the primary function of a BHS is the transportation of bags, a typical BHS will serve other functions involved in making sure that a bag gets to the correct location in the airport. Sortation is the process of identifying a bag and the information associated with it, to decide where the bag should be directed within the system.
+
+    In addition to sortation, a BHS may also perform the following functions:
+
+    Detection of bag jams
+    Volume regulation (to ensure that input points are controlled to avoid overloading system)
+    Load balancing (to evenly distribute bag volume between conveyor sub-systems)
+    Bag counting
+    Bag tracking
+    Redirection of bags via pusher or diverter
+    Automatic Tag Reader (ATR) (Reads the tags on the luggage provided by the airlines)
+    There is an entire process that the BHS controls. From the moment the bag is set on the inbound conveyor, to the gathering conveyor, through sorting until it arrives at the designated aircraft and onto the baggage carousel after the flight, the BHS has control over the bag
+
+    Many baggage handling systems offer software to better manage the system. There has also been a breakthrough with "mobile" BHS software where managers of the system can check and correct problems from their mobile phone.
+
+    Post September 11, 2001, majority of airports around the world began to implement baggage screening directly into BHS. These systems are referred to as "Checked Baggage Inspection System" by the Transportation Security Administration (TSA) in the USA, where baggage are fed directly into Explosive Detection System (EDS) machines. A CBIS can sort baggage based on each bag's security status assigned by an EDS machine or by a security screening operator. CBIS design standards and guidelines are issued by the TSA once every year since 2008. All CBIS built in the USA must comply with the standard set forth by the TSA. The latest standards can be downloaded from the TSA's website here.
+
+#end Section-2

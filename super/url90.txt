@@ -1,0 +1,21 @@
+#start Section-1
+
+  url11       url34  url32         url31 
+url2 url3 url90 url91 url10
+
+#end Section-1
+
+#start Section-2
+
+    experiments NASA EU  Japan robot 
+    planet  volcano moon weather 
+    mars jupiter moon planets 
+yeah but also this. this is cool too.
+I will type some common words;  that could be useful for debugging the tfidf
+
+a.
+
+i. I, this? ThIS?     the the, the    the a. A  A   a    A. 
+
+#end Section-2
+

@@ -1,0 +1,16 @@
+#start Section-1
+
+     url40 url47 url43
+     url3 url71 url97 url43    url32 url84  url55  url89 url37 url34 url4
+
+url90     url73     url74 url49 url16
+
+#end Section-1
+
+#start Section-2
+
+    A typical baggage claim area contains baggage carousels or conveyor systems that deliver checked baggage to the passenger. The baggage claim area generally contains the airline's customer service counter for claiming oversized baggage or to report missing baggage.
+
+    Some airports required that passengers display their baggage check receipt so that it can be positively matched against the bag they are trying to remove from baggage claim. This serves two purposes: first it reduces baggage theft, and secondly it helps to prevent passengers from accidentally leaving the airport with another passenger's bag that bears resemblance to their own.
+
+#end Section-2

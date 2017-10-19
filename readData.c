@@ -19,15 +19,10 @@ Queue getCollectionUrls() {
 Graph createUrlGraph(Queue collectionUrls) {
     Graph urlGraph = newGraph(MAX_V);
     char url_from[MAX_CHAR] = {0};
-    char subdir[MAX_CHAR] = "./";
     while(!emptyQueue(collectionUrls)) {
         strcpy(url_from, leaveQueue(collectionUrls));
         char url_from_location[MAX_CHAR] = {0};
-        // e.g. ./Sample1/
-        strcpy(url_from_location, subdir);
-        // e.g. ./Sample1/url31
         strcat(url_from_location, url_from);
-        // e.g. ./Sample1/url31.txt
         strcat(url_from_location, ".txt");
         FILE *nextUrlFp = fopen(url_from_location, "r");
         if(!nextUrlFp) {
@@ -44,10 +39,18 @@ Graph createUrlGraph(Queue collectionUrls) {
             if (strcmp(url_to, "#start") == 0) continue;
             else if (strcmp(url_to, "Section-1") == 0) continue;
             else if (strcmp(url_to, "#end") == 0) break;
-
+            char url_to_location[MAX_CHAR] = {0};
+            strcat(url_to_location, url_to);
+            strcat(url_to_location, ".txt");
+            FILE *urlTo = fopen(url_to_location, "r");
+            if(urlTo == NULL) {
+                continue;
+            }
+            fclose(urlTo);
             if(strcmp(url_from,url_to))
                 addEdge(urlGraph, url_from, url_to);
         }
+        fclose(nextUrlFp);
     }
     //showGraph(urlGraph, DENSE);
     return urlGraph;

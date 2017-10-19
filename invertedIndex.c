@@ -50,6 +50,7 @@ Tree getInvertedIndex(Queue collectionUrls) {
             // Adds or updates the list urls within the vertex curr_word
             addUrl(t, curr_word, url_from);
         }
+        fclose(nextUrlFp);
     }
     FILE *invertedIndexFp = fopen("invertedIndex.txt", "w");
 	if (invertedIndexFp == NULL) {
