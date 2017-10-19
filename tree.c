@@ -1,10 +1,8 @@
 // tree.c - Interface to binary search tree
 // Written by Kongwei Ying, September 2017
-
+// Modified by Rahil Agrawal, October 2017
 #include "tree.h"
 #include "vertexQueue.h"
-
-#define MAX_CHAR 256
 
 typedef struct TreeRep {
    struct Vertex *root;

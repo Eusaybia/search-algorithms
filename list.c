@@ -276,7 +276,6 @@ static Node *newNode(char *str, double val, int terms) {
     n->next = NULL;
     n->prev = NULL;
 
-    // TODO: Need to change and use centralised MAX_CHAR across all files!
     n->str = malloc(sizeof(char) * MAX_CHAR);
     memset(n->str, 0, sizeof(char) * MAX_CHAR);
 

@@ -1,9 +1,5 @@
-//Written by Dennis Gann, October 2017
-
-
-#define MAX_CHAR 256
-#define MAX_QUERIES 256
-#define MAX_V 256
+// Written by Dennis Gann, October 2017
+// Modified by Rahil Agrawal, October 2017
 
 #include "headers.h"
 #include "list.h"
