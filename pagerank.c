@@ -30,7 +30,7 @@ void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g) {
 	while (iteration < maxIterations && diff >= diffPR){
 		new_diff = 0.0;
 		for (int i = 0; i< N; i++){
-			float value = (1.0 - damp)*1.0/(double)N + damp*pageRankIncoming(g, i);
+			double value = (double)(1.0 - damp)/(double)N + damp*pageRankIncoming(g, i);
 			set_pagerank_after(g, i, value);
 		}
 		for (int i = 0; i < N; i++){
@@ -43,9 +43,9 @@ void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g) {
 	showPageRanks(g);
 }
 // Function to calculate the product of PageRank, In-weight and Out-weight
-float pageRankIncoming(Graph g, int i){
-	float product = 1.0;
-	float sum = 0.0;
+double pageRankIncoming(Graph g, int i){
+	double product = 1.0;
+	double sum = 0.0;
 	for(int j = 0; j < nVertices(g) ; j++){
 		if(isEdge(g, j, i)){
 			product = get_pagerank_before(g, j) * Win(g, j, i) * Wout(g, j, i);
@@ -57,7 +57,7 @@ float pageRankIncoming(Graph g, int i){
 }
 
 // Function to calculate the In-Weight
-float Win(Graph g, int j, int i){
+double Win(Graph g, int j, int i){
 	int Inlinks_I = numInlinks(g, i);
 	int Inlinks_Sum = 0;
 	for (int k = 0; k<nVertices(g); k++){
@@ -65,17 +65,17 @@ float Win(Graph g, int j, int i){
 			Inlinks_Sum += numInlinks(g, k);
 		}
 	}
-	return Inlinks_I*1.0/(double) Inlinks_Sum;
+	return (double)Inlinks_I/(double)Inlinks_Sum;
 }
 
 // Function to calculate the Out-Weight
-float Wout(Graph g, int j, int i){
+double Wout(Graph g, int j, int i){
 	double Outlinks_I = (numOutlinks(g, i) ? numOutlinks(g, i) : 0.5);
-	float Outlinks_Sum = 0;
+	double Outlinks_Sum = 0;
 	for (int k = 0; k<nVertices(g); k++){
 		if(isEdge(g,j,k)){
 			Outlinks_Sum += (numOutlinks(g, k) ? numOutlinks(g, k) : 0.5);
 		}
 	}
-	return Outlinks_I*1.0/Outlinks_Sum;
+	return (double)Outlinks_I/(double)Outlinks_Sum;
 }

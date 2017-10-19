@@ -204,20 +204,31 @@ void set_pagerank_after(Graph g, int i, float value){
 }
 // Display the pageranks of all pages and the sum of the pagerank
 void showPageRanks(Graph g){
+	FILE *fp = fopen("pagerankList.txt", "w");
+	if (fp == NULL) {
+		perror("Error, could not open file");
+ 	}
+ 	for(int i = 0; i < g->nV; i++){
+ 		fprintf(fp, "%s, %d, %.17lf\n",
+ 			g->vertices[i]->url,
+ 			g->vertices[i]->nOutLinks,
+ 			g->vertices[i]->pagerank_before);
+ 	}
+ 	fclose(fp);
 	char sortedlist[g->maxV][MAX_CHAR];
 	graphToList(g, sortedlist);
-	FILE *fp2 = fopen("pagerankList.txt", "w");
-	if (fp2 == NULL) {
+	fp = fopen("pagerankList.txt", "w");
+	if (fp == NULL) {
         perror("Error, could not open file");
 	}
 	for(int i = 0; i < g->nV; i++){
 		int vertexId = findVertexIdFromString(g, sortedlist[i]);
-		fprintf(fp2, "%s, %d, %.7lf\n",
+		fprintf(fp, "%s, %d, %.17lf\n",
 			g->vertices[vertexId]->url,
 			g->vertices[vertexId]->nOutLinks,
 			g->vertices[vertexId]->pagerank_before);
 	}
-	fclose(fp2);
+	fclose(fp);
 }
 // Set the values Page Info
 void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, float pagerank){

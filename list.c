@@ -172,7 +172,7 @@ int cmpPagerank(const void *p1, const void *p2) {
             pagerank2 = temp;
         }
     }
-    if (pagerank1 == pagerank2) return (strcmp((((Node *)p1)->str), ((Node *)p2)->str));
+    if (pagerank1 == pagerank2) return 0;
     return (pagerank1 - pagerank2 > 0) ? -1 : 1;
     fclose(pagerankFp);
 }
