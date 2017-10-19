@@ -242,7 +242,10 @@ void showList(List l, FILE *fp, char delimiter, int *nNodes) {
     }
 
     while (n != NULL && *nNodes != 0) {
-        fprintf(fp, "%s%c", n->str, ((n->next!=NULL && *nNodes!=1) ? delimiter : ' '));
+        if(n->next!=NULL && *nNodes!=1)
+            fprintf(fp, "%s%c", n->str, delimiter);
+        else
+            fprintf(fp, "%s", n->str);
         n = n->next;
         *nNodes = *nNodes - 1;
     }

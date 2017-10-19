@@ -60,6 +60,5 @@ Tree getInvertedIndex(Queue collectionUrls) {
         showInOrder(t, invertedIndexFp);
         fclose(invertedIndexFp);
     }
-    //showInOrder(t, stdout);
     return t;
 }
