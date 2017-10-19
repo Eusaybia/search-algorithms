@@ -177,6 +177,14 @@ int cmpPagerank(const void *p1, const void *p2) {
     fclose(pagerankFp);
 }
 
+int cmpPagerankValues(const void *p1, const void *p2) {
+
+    if (((Node *)p1)->val < ((Node *)p2)->val) return 1;
+    else if (((Node *)p1)->val > ((Node *)p2)->val) return -1;
+    else return 0;
+
+}
+
 // Sort list using an arbitrary comparator function
 void sortList(List l, int (*compar)(const void *, const void *)) {
     quickSort(l->head, l->tail, compar);

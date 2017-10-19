@@ -11,8 +11,8 @@ typedef struct Vertex {
 	char url[MAX_CHAR]; // Link/URL of the page
 	int nInLinks; // Number of incoming links to the page
 	int nOutLinks; // Number of outgoing links from the page
-	float pagerank_before; // pagerank of page at time t
-	float pagerank_after; // pagerank of page at time t+1
+	double pagerank_before; // pagerank of page at time t
+	double pagerank_after; // pagerank of page at time t+1
 } Vertex;
 
 typedef struct GraphRep {
@@ -187,43 +187,32 @@ int numInlinks(Graph g, int i){
 	return g->vertices[i]->nInLinks;
 }
 // Return the pagerank of a page at time t given its vertexId
-float get_pagerank_before(Graph g, int i){
+double get_pagerank_before(Graph g, int i){
 	return g->vertices[i]->pagerank_before;
 }
 // Return the pagerank of a page at time t+1 given its vertexId
-float get_pagerank_after(Graph g, int i){
+double get_pagerank_after(Graph g, int i){
 	return g->vertices[i]->pagerank_after;
 }
 // Set the pagerank of a page at time t given the pagerank and page's VertexId
-void set_pagerank_before(Graph g, int i, float value){
+void set_pagerank_before(Graph g, int i, double value){
 	g->vertices[i]->pagerank_before = value;
 }
 // Set the pagerank of a page at time t+1 given the pagerank and page's VertexId
-void set_pagerank_after(Graph g, int i, float value){
+void set_pagerank_after(Graph g, int i, double value){
 	g->vertices[i]->pagerank_after = value;
 }
 // Display the pageranks of all pages and the sum of the pagerank
 void showPageRanks(Graph g){
-	FILE *fp = fopen("pagerankList.txt", "w");
-	if (fp == NULL) {
-		perror("Error, could not open file");
- 	}
- 	for(int i = 0; i < g->nV; i++){
- 		fprintf(fp, "%s, %d, %.17lf\n",
- 			g->vertices[i]->url,
- 			g->vertices[i]->nOutLinks,
- 			g->vertices[i]->pagerank_before);
- 	}
- 	fclose(fp);
 	char sortedlist[g->maxV][MAX_CHAR];
 	graphToList(g, sortedlist);
-	fp = fopen("pagerankList.txt", "w");
+	FILE *fp = fopen("pagerankList.txt", "w");
 	if (fp == NULL) {
         perror("Error, could not open file");
 	}
 	for(int i = 0; i < g->nV; i++){
 		int vertexId = findVertexIdFromString(g, sortedlist[i]);
-		fprintf(fp, "%s, %d, %.17lf\n",
+		fprintf(fp, "%s, %d, %.7lf\n",
 			g->vertices[vertexId]->url,
 			g->vertices[vertexId]->nOutLinks,
 			g->vertices[vertexId]->pagerank_before);
@@ -231,7 +220,7 @@ void showPageRanks(Graph g){
 	fclose(fp);
 }
 // Set the values Page Info
-void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, float pagerank){
+void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, double pagerank){
 	g->vertices[vertexId]->pagerank_before = pagerank;
 	g->vertices[vertexId]->nInLinks = nInLinks;
 	g->vertices[vertexId]->nOutLinks = nOutLinks;
@@ -240,8 +229,8 @@ void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, float pag
 void graphToList(Graph g, char sortedlist[][MAX_CHAR]){
 	List l = newList();
 	for(int i = 0; i < g->nV; i++){
-		appendList(l, g->vertices[i]->url, 0.0, 0);
+		appendList(l, g->vertices[i]->url, g->vertices[i]->pagerank_before, 0);
 	}
-	sortList(l, cmpPagerank);
+	sortList(l, cmpPagerankValues);
 	listToArray(l, sortedlist);
 }
