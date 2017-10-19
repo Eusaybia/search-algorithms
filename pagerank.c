@@ -23,7 +23,7 @@ void pageRankWeights(double damp, double diffPR, int maxIterations, Graph g) {
 	// N = number of Urls in Graph
 	int N = nVertices(g);
 	// Initialise pageranks of all pages to 1/N
-	for (int i = 0; i < N ; i++) set_pagerank_before(g, i, (1.0/(double)N)); //showPageRanks(g);
+	for (int i = 0; i < N ; i++) set_pagerank_before(g, i, (1.0/(double)N));
 	int iteration = 0;
 	double diff = diffPR;
 	double new_diff = 0.0;

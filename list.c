@@ -1,5 +1,6 @@
 // list.c - Implementation of a list of strings
 // Written by Kongwei Ying, September 2017
+// Modified by Rahil Agrawal, October 2017
 
 #include "list.h"
 
