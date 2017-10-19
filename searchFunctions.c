@@ -4,7 +4,7 @@
 #include "searchFunctions.h"
 
 void normalize(char strings[MAX_CHAR]){
-    int j    = 0;
+    int j = 0;
     for (; strings[j] != '\0'; j++) {
         strings[j] = tolower((unsigned char)strings[j]);
     }

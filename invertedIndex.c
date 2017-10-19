@@ -26,13 +26,17 @@ Tree getInvertedIndex(Queue collectionUrls) {
             if (fscanf(nextUrlFp, "%s", curr_word) == EOF) {
                 break;
             }
-
-            if (strcmp(curr_word, "#start") == 0) continue;
-            // Skip words with first 7 letters "Section"
-            else if (strncmp(curr_word, "Section", 7) == 0) continue;
+            
+            if (strcmp(curr_word, "#start") == 0){
+                fscanf(nextUrlFp, "%s", curr_word);
+                continue;
+            }
             // Skip words with first 3 letters "url"
             else if (strncmp(curr_word, "url", 3) == 0) continue;
-            else if (strcmp(curr_word, "#end") == 0) continue;
+            else if (strcmp(curr_word, "#end") == 0){
+                fscanf(nextUrlFp, "%s", curr_word);
+                continue;
+            }
 
             // Convert word to lower case and remove full stops
             normalize(curr_word);
