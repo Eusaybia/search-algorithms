@@ -64,13 +64,8 @@ int main(int argc, char * argv[]) {
 
                 for (int j = 0; j < nMatchedUrls; j++) {
 
-                    char subdir[MAX_CHAR] = "./";
                     char url_from_location[MAX_CHAR] = {0};
-                    // e.g. ./Sample1/
-                    strcpy(url_from_location, subdir);
-                    // e.g. ./Sample1/url31
                     strcat(url_from_location, matchedUrlList[j]);
-                    // e.g. ./Sample1/url31.txt
                     strcat(url_from_location, ".txt");
                     FILE *urlToOpen = fopen(url_from_location, "r");
 

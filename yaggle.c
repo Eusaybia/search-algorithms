@@ -1,4 +1,6 @@
 // Main file for Yaggle search engine
+// Writen by Kongwei Ying, September 2017
+// Modified by Rahil Agrawal, October 2017
 #include <stdio.h>
 #include <stdlib.h>
 #include "colours.h"
