@@ -129,6 +129,7 @@ static void inOrderTraversal(Vertex *v, FILE *fp) {
         inOrderTraversal(v->left, fp);
         fprintf(fp,"%s  ", v->word);
         int nNodes = ALL_NODES;
+        sortList(v->urls, cmpStr);
         showList(v->urls, fp, ' ', &nNodes);
         inOrderTraversal(v->right, fp);
     }
