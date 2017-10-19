@@ -11,7 +11,7 @@ int argsOk(int argc, char *argv[]);
 void readRankFile(char *filename, int *array, int *maxRows);
 int factorial(int n);
 void swap (int v[], int i, int j);
-void perm (int v[], int n, int i);
+void perm (int v[], int n, int i, int *permArrays, int *permNum);
 
 int main(int argc, char *argv[]) {
     // A 2d array to hold different ranking list rankings
@@ -34,15 +34,25 @@ int main(int argc, char *argv[]) {
     // Create a perms array to hold all the combinations of url positions
     // Create n! columns (each column representing a perm) with maxRows
     // number of rows (each row representing a url's position for that perm)
-    // int **permArrays = malloc(sizeof(int *) * nPerms);
-    // for (int i = 0; i < nPerms; i++) {
-    //     rankArrays[i] = malloc(sizeof(int) * maxRows);
-    // }
+    // This is a 2d array represented as a 1d array
+    int *permArrays = malloc(sizeof(int[nPerms][maxRows]));
     
+    // Create an array of sorted numbers to create perms from
     int *permNums = malloc(sizeof(int) * maxRows);
     for (int i = 1; i <= maxRows; i++) permNums[i - 1] = i;
     
-    perm(permNums, maxRows, 0);
+    // Populate permArrays with all possible permutations
+    int permNum = 0;
+    perm(permNums, maxRows, 0, permArrays, &permNum);
+    
+    // Print the permArrays for testing
+    // for (int i = 0; i < nPerms; i++) {
+    //     printf("Perm %d:\n", i);
+    //     for (int j = 0; j < maxRows; j++) {
+    //         printf("%d ", permArrays[i * maxRows + j]);
+    //     }
+    //     printf("\n");
+    // }
 
     return EXIT_SUCCESS;
 }
@@ -65,7 +75,7 @@ void swap (int v[], int i, int j) {
 }
 
 /* recursive function to generate permutations */
-void perm (int v[], int n, int i, ) {
+void perm (int v[], int n, int i, int *permArrays, int *permNum) {
 
 	/* this function generates the permutations of the array
 	 * from element i to element n-1
@@ -77,8 +87,12 @@ void perm (int v[], int n, int i, ) {
 	 * array off to some other function that uses it for something
 	 */
 	if (i == n) {
-		for (j=0; j<n; j++) printf ("%d ", v[j]);
-		printf ("\n");
+        for (j=0; j<n; j++) {
+            printf ("%d ", v[j]);
+            permArrays[(*permNum) * n + j] = v[j];
+        }
+        (*permNum)++;
+        printf ("\n");
 	} else
 		/* recursively explore the permutations starting
 		 * at index i going through index n-1
@@ -88,7 +102,7 @@ void perm (int v[], int n, int i, ) {
 			/* try the array with i and j switched */
 
 			swap (v, i, j);
-			perm (v, n, i+1);
+			perm (v, n, i+1, permArrays, permNum);
 
 			/* swap them back the way they were */
 
