@@ -71,7 +71,6 @@ int main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 
-
 // Reads the rank list into an array
 void readRankFile(char *filename, int *array, int *maxRows) {
     FILE *fp = fopen(filename, "r");
