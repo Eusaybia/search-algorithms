@@ -4,8 +4,9 @@
 #include "invertedIndex.h"
 
 int main(int argc, char *argv[]) {
-	Queue collectionUrls = getCollectionUrls();
+    Queue collectionUrls = getCollectionUrls();
     getInvertedIndex(collectionUrls);
+    showQueue(collectionUrls);
     disposeQueue(collectionUrls);
 	return EXIT_SUCCESS;
 }

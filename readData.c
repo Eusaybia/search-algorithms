@@ -52,6 +52,5 @@ Graph createUrlGraph(Queue collectionUrls) {
 		}
 		fclose(nextUrlFp) ;
 	}
-	disposeGraph(urlGraph);
 	return urlGraph ;
 }

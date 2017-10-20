@@ -33,8 +33,9 @@ Queue newQueue() {
 // disposeQueue(Queue)
 // - clean up memory associated with Queue
 void disposeQueue(Queue q) {
-	if (q == NULL)
+	if (q == NULL) {
 		return ;
+	}
 	Link next, curr = q->front ;
 	while (curr != NULL)
 	{
