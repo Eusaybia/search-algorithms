@@ -210,7 +210,7 @@ double solveHungarian(hProblem p) {
 							//if slack is 0.0 we have a zero
 							if (slack[c] == 0.0) {
 								//if no row has been matched so far, we have an improved path
-								if (rowMatch[c] < 0) goto breakthrough;
+								if (rowMatch[c] < 0) goto improveMatching;
 								//set parentRow of c to r
 								parentRow[c] = r;
 								//add row matched to col to unchosenRows
@@ -270,8 +270,8 @@ double solveHungarian(hProblem p) {
 									colInc[nc] += leastVal;
 								}
 							}
-							//if no row has been matched so far, go to breakthrough
-							goto breakthrough;
+							//if no row has been matched so far, go to improveMatching
+							goto improveMatching;
 
 						} else {
 							//set parent row of col to row of newly created 0
@@ -291,7 +291,7 @@ double solveHungarian(hProblem p) {
 
 
 		//IMPROVE MATCHING
-		breakthrough:
+		improveMatching:
 
 		while (1) {
 			//get old matched col
