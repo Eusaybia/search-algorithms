@@ -5,13 +5,14 @@
 # https://stackoverflow.com/questions/12142865/debugging-using-gdb-properly-using-the-g-flag-with-several-files
 
 # Binary files
-BINARIES = searchPagerank searchTfIdf pagerank inverted #testList testTree testGraph
+BINARIES = searchPagerank searchTfIdf pagerank inverted scaledFootrule #testList testTree testGraph
 
 # All c files (add files here if more are added to the project)
 SRC_FILES_1 = searchPagerank.c readData.c
 SRC_FILES_2 = readData.c searchTfIdf.c
 SRC_FILES_3 = pagerank.c readData.c
 SRC_FILES_4 = invertedIndex.c readData.c
+SRC_FILES_5 = scaledFootrule.c
 LIB_FILES = graph.c list.c queue.c tree.c vertexQueue.c searchFunctions.c
 #TEST_FILES = testGraph.c testList.c testTree.c
 
@@ -20,6 +21,7 @@ SRC_OBJ_FILES_1 = $(SRC_FILES_1: .c = .o) # Uses what's called a "substitution r
 SRC_OBJ_FILES_2 = $(SRC_FILES_2: .c = .o)
 SRC_OBJ_FILES_3 = $(SRC_FILES_3: .c = .o)
 SRC_OBJ_FILES_4 = $(SRC_FILES_4: .c = .o)
+SRC_OBJ_FILES_5 = $(SRC_FILES_5: .c = .o)
 
 LIB_OBJ_FILES = $(LIB_FILES: .c = .o)
 #TEST_OBJ_FILES = $(TEST_FILES: .c = .o)
@@ -28,10 +30,10 @@ LIB_OBJ_FILES = $(LIB_FILES: .c = .o)
 CC = gcc
 CFLAGS = -ggdb -Wall -Werror
 CFLAGS_LINK = -ggdb -Wall -Werror
-OUTPUT = searchPagerank searchTfIdf pagerank inverted
+OUTPUT = searchPagerank searchTfIdf pagerank inverted scaledFootrule
 
 # Default make target
-all: searchPagerank searchTfIdf pagerank inverted #tests
+all: searchPagerank searchTfIdf pagerank inverted scaledFootrule #tests
 
 # Main yaggle program
 searchPagerank: $(SRC_OBJ_FILES_1) $(LIB_OBJ_FILES)
@@ -46,6 +48,9 @@ pagerank: $(SRC_OBJ_FILES_3) $(LIB_OBJ_FILES)
 
 inverted: $(SRC_OBJ_FILES_4) $(LIB_OBJ_FILES)
 	$(CC) $(CFLAGS_LINK) -o inverted $(SRC_OBJ_FILES_4) $(LIB_OBJ_FILES) -lm
+	
+scaledFootrule: $(SRC_OBJ_FILES_5) $(LIB_OBJ_FILES)
+	$(CC) $(CFLAGS_LINK) -o scaledFootrule $(SRC_OBJ_FILES_5) $(LIB_OBJ_FILES) -lm
 # ADT Tests
 # tests: testGraph testList testTree
 #
