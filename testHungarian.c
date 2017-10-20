@@ -1,9 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "headers.h"
 #include "hungarian.h"
 
 int main() {
-
 
 	// an example cost matrix
 
@@ -28,20 +26,20 @@ int main() {
 	}
 
 	//initialise hungarian
-	h_problem p = hungarian_init(m , 10) ;
+	hProblem p = newHungarian(m , 10) ;
 
 	printf("Cost Matrix:\n");
 	//print cost matrix
-	hungarian_print_costmatrix(p);
+	printHungarianCostMatrix(p);
 
 	//solve
-	printf("Cost: %lf\n", hungarian_solve(p));
+	printf("Cost: %lf\n", solveHungarian(p));
 
 	//print assignment
 	printf("Assignemnt:\n");
-	hungarian_print_assignment(p);
+	printHungarianAssignment(p);
 
-	hungarian_free(p);
+	disposeHungarian(p);
 
 	return 0;
 }
