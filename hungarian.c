@@ -1,145 +1,72 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
+/*
+	=== Weighted Bipartite Graph Minimum Matching Problem ===
+	--- solved using a derivation of Hungarian Algorithm  ---
+
+	Algorithm to solve matchign problem briefly described:
+		0. Subtract column minima
+		1. Initialise matchings by finding minimum val in row and matching the
+			row and associated col (if not matched already), else add to
+			unchosen/unmatched rows array
+		2. While there are unmatched rows:
+			Search for an improving path for any unmatched rows
+			a. If found, Improve/Update Matchings
+			b. Else, Create new zeroes by decreasing unchosen elements to
+				produce zeroes, achieved by adjusting decrements and increments
+		3. Create final assignment based on matched rows and cols
+
+	The following websites were used to research and develop an implementation
+	- https://en.wikipedia.org/wiki/Hungarian_algorithm
+	- http://www.hungarianalgorithm.com
+	- http://rgrig.appspot.com/static/programs/spoj/scities.pdf
+*/
+
 #include "hungarian.h"
 
 #define INF (0x7FFFFFFF)//define infinity (almost)
 
-typedef struct h_problem_rep {
-	int size ;
-	double **cost ;
-	int **assignment ;
-} h_problem_rep ;
+//Hungarian problem representation
+typedef struct hProblemRep{
+	int size;
+	double** cost;
+	int** assignment;
+} hProblemRep;
 
-//returns total cost
-static double subtractColMins(h_problem p) {
+//Static function prototypes called in solveHungarian
+static double subtractColMins(hProblem p);
+static int match(hProblem p, double * rowDec, int * colMatch, int * rowMatch, int * unchosenRows);
 
-	//row and col counters
-	int r, c ;
-	//total cost
-	double tCost = 0.0 ;
-	//loop through each column
-	for (c = 0 ; c < p->size ; c++){
-		//set inital colMin to first [0] element of col
-		double colMin = p->cost[0][c] ;
-		//loop through all rows in col (ie. all elements of col)
-		for (r = 1 ; r < p->size ; r++)
-			//check if cost < s
-			if (p->cost[r][c] < colMin)
-				//yes, set new colMin to cost
-				colMin = p->cost[r][c] ;
-		//add colMin to cost
-		tCost += colMin ;
-		//if colMin isnt 0
-		if (colMin != 0)
-			//remove colMin from each col entry, row by row
-			for (r = 0 ; r < p->size ; r++)
-				p->cost[r][c] -= colMin ;
-	}
-
-	return tCost ;
-
-}
-
-//returns number of unchosen rows
-static int match(h_problem p, double *row_dec, int *col_match, int *row_match, int *unchosen_row) {
-
-	int nUnchosenRows = 0 ;
-	int r, c ;	//row and col counters
-
-	//loop through each row
-	for (r = 0 ; r < p->size ; r++){
-		//get the rowMin
-		//set inital rowMin to first element of row
-		double rowMin = p->cost[r][0] ;
-		//loop through each column
-		for (c = 1 ; c < p->size ; c++){
-			//check if cost at current [r][c] < the current rowMin
-			if (p->cost[r][c] < rowMin)
-				//if yes, set new rowMin
-				rowMin = p->cost[r][c] ;
+//Prints the current p assignment matrix to stdout
+void printHungarianAssignment(hProblem p) {
+	printf("\n");
+	for (int r = 0; r < p->size; r++) {
+		printf(" [");
+		for (int c = 0; c < p->size; c++) {
+			printf("%5d ",p->assignment[r][c]);
 		}
-
-		//set row dercrement to found rowMin
-		row_dec[r] = rowMin ;
-
-		//declare and initialise rowDone flag
-		int rowDone = 0 ;
-
-		//loop through each col in current row (r)
-		for (c = 0 ; c < p->size ; c++){
-			//if we find element equal to rowMin that hasn't been matched
-			if (rowMin == p->cost[r][c] && row_match[c] < 0){
-				//set match
-				col_match[r] = c ;
-				row_match[c] = r ;
-
-				//set rowDone flag
-				rowDone = 1 ; break ;
-			}
-		}
-
-		//if we aren't done with row
-		if (!rowDone){
-			//set col match for row to -1
-			col_match[r] = -1 ;
-			//set next unchosen row to current row
-			unchosen_row[nUnchosenRows++] = r ;
-		}
+		printf("]\n");
 	}
-	//return no of unchosen rows
-	return nUnchosenRows ;
-
+	printf("\n");
 }
 
-int hungarian_url_from_rank(h_problem p, int position, int nElems) {
-	for (int y = 0 ; y < nElems ; y++){
-		if (p->assignment[y][position]) return y ;
-	}
-	fprintf(stderr, "No url found for this position, incorrect assignment!\n") ;
-	return -1 ;
-}
-
-void hungarian_print_assignment(h_problem p) {
-	int i, j ;
-	fprintf(stderr, "\n") ;
-	for (i = 0 ; i < p->size ; i++){
-		fprintf(stderr, " [") ;
-		for (j = 0 ; j < p->size ; j++){
-			fprintf(stderr, "%5d ", p->assignment[i][j]) ;
+//Prints the current p cost matrix to stdout
+void printHungarianCostMatrix(hProblem p) {
+	printf("\n");
+	for (int r = 0; r < p->size; r++) {
+		printf(" [");
+		for (int c = 0; c < p->size; c++) {
+			printf("%5.1lf ",p->cost[r][c]);
 		}
-		fprintf(stderr, "]\n") ;
+		printf("]\n");
 	}
-	fprintf(stderr, "\n") ;
+	printf("\n");
 }
 
-void hungarian_print_costmatrix(h_problem p) {
-	int i, j ;
-	fprintf(stderr, "\n") ;
-	for (i = 0 ; i < p->size ; i++){
-		fprintf(stderr, " [") ;
-		for (j = 0 ; j < p->size ; j++){
-			fprintf(stderr, "%5.2lf ", p->cost[i][j]) ;
-		}
-		fprintf(stderr, "]\n") ;
-	}
-	fprintf(stderr, "\n") ;
-}
+//Initialises hungarian problem p
+hProblem newHungarian(double** costMatrix, int size) {
 
-void hungarian_print_status(h_problem p) {
-
-	fprintf(stderr, "cost:\n") ;
-	hungarian_print_costmatrix(p) ;
-
-	fprintf(stderr, "assignment:\n") ;
-	hungarian_print_assignment(p) ;
-
-}
-
-h_problem hungarian_init(double **cost_matrix, int size) {
-
-	h_problem_rep *p = (h_problem_rep *)malloc(sizeof(h_problem_rep)) ;
-	assert(p != NULL) ;
+	//create and allocate memory to new Hungarian problem p
+	hProblemRep *p = (hProblemRep *)malloc(sizeof(hProblemRep));
+	assert(p != NULL);
 
 	//set problem size to size of square cost matrix
 	p->size = size ;
@@ -158,15 +85,17 @@ h_problem hungarian_init(double **cost_matrix, int size) {
 		assert(p->assignment[i] != NULL) ;
 
 		//initialise values of cost matrix to those supplied
-		for (int j = 0 ; j < p->size ; j++){
-			p->cost[i][j] =  cost_matrix[i][j] ;
+		for (int j = 0; j < p->size; j++) {
+			p->cost[i][j] =  costMatrix[i][j];
 		}
 	}
 
-	return p ;
+	//return pointer to Hungarian problem p
+	return p;
 }
 
-void hungarian_free(h_problem p) {
+//Free all malloced memory associated with the Hungarian problem p
+void disposeHungarian(hProblem p) {
 
 	//free 2nd dimension cost and assigment matrix memory
 	for (int i = 0 ; i < p->size ; i++){
@@ -178,69 +107,71 @@ void hungarian_free(h_problem p) {
 	free(p->assignment) ;
 
 	//set cost and assignment in problem to NULL
-	p->cost = NULL ;
-	p->assignment = NULL ;
+	p->cost = NULL;
+	p->assignment = NULL;
+
+	free(p);
 }
 
-double hungarian_solve(h_problem p) {
-	int j, unmatched, nUnchosenRows, nRowsExpl ;
-	int r, c ;	//row and col counters
-	double s ;
+//Solves Hungarian problem p
+double solveHungarian(hProblem p) {
+	int nUnchosenRows; //no. of ucnhosen/uncovered rows
+	int nRowsExpl; //no. of unchosen rows explored
+	int unmatched; //no. of unmatched rows
+	int r, c; //row and col counters
 
 	//matchings
-	int *col_match ;
-	int *row_match ;
-	//e.g. if col c is matched with row r then col_match[r] == c and row_match[c] == r
+	int* colMatch;
+	int* rowMatch;
+	//e.g. if col c is matched with row r then colMatch[r] == c and rowMatch[c] == r
 
-	int *parent_row ;	//keep track of preceeding row
-	int *unchosen_row ;	//
+	int* parentRow; //keep track of preceeding row of col
+	int* unchosenRows; //store unchosen/uncovered rows
 
-	double *row_dec ;	//row decrements
-	double *col_inc ;	//col increments
-	double *slack ;	//minimum of each column (ignores chosen rows)
-	int *slack_row ;//track row where col min occurs for each col
+	double* rowDec; //row decrements
+	double* colInc; //col increments
+	double* slack; //minimum of each column (ignores chosen rows)
+	int* slackRow; //track row where col min occurs for each col
 
 	double cost = 0.0 ;	//cost of assignment
 
 	//allocate memory to our helper arrays
-	col_match = (int *)calloc(p->size, sizeof(int)) ;
-	assert(col_match != NULL) ;
-	unchosen_row = (int *)calloc(p->size, sizeof(int)) ;
-	assert(unchosen_row != NULL) ;
-	row_dec  = (double *)calloc(p->size, sizeof(double)) ;
-	assert(row_dec != NULL) ;
-	slack_row  = (int *)calloc(p->size, sizeof(int)) ;
-	assert(slack_row != NULL) ;
+	colMatch = (int*)calloc(p->size,sizeof(int));
+	assert(colMatch != NULL);
+	unchosenRows = (int*)calloc(p->size,sizeof(int));
+	assert(unchosenRows != NULL);
+	rowDec  = (double*)calloc(p->size,sizeof(double));
+	assert(rowDec != NULL);
+	slackRow  = (int*)calloc(p->size,sizeof(int));
+	assert(slackRow != NULL);
 
-	row_match = (int *)calloc(p->size, sizeof(int)) ;
-	assert(row_match != NULL) ;
-	parent_row = (int *)calloc(p->size, sizeof(int)) ;
-	assert(parent_row != NULL) ;
-	col_inc = (double *)calloc(p->size, sizeof(double)) ;
-	assert(col_inc != NULL) ;
-	slack = (double *)calloc(p->size, sizeof(double)) ;
-	assert(slack != NULL) ;
+	rowMatch = (int*)calloc(p->size,sizeof(int));
+	assert(rowMatch != NULL);
+	parentRow = (int*)calloc(p->size,sizeof(int));
+	assert(parentRow != NULL);
+	colInc = (double*)calloc(p->size,sizeof(double));
+	assert(colInc != NULL);
+	slack = (double*)calloc(p->size,sizeof(double));
+	assert(slack != NULL);
 
 	//initialise helper arrays to defaults
-	for (int i = 0 ; i < p->size ; i++){
-		row_match[i] = -1 ;
-		parent_row[i] = -1 ;
-		col_inc[i] = 0.0 ;
-		slack[i] = INF ;
+	for (int i = 0; i < p->size; i++) {
+		rowMatch[i] = -1;
+		parentRow[i] = -1;
+		colInc[i] = 0.0;
+		slack[i] = INF;
 	}
 
 
-	// SUBTRACT COLUMN MINIMUMS
-	cost += subtractColMins(p) ;
-	// END ------------------------
+	//SUBTRACT COLUMN MINIMUMS
+	cost += subtractColMins(p);
 
-	// MATCHING ROWS AND COLS
-	nUnchosenRows = match(p, row_dec, col_match, row_match, unchosen_row) ;
-	//END
+	//INITIALISE ROW AND COL MATCHINGS/COVERS
+	nUnchosenRows = match(p, rowDec, colMatch, rowMatch, unchosenRows);
 
 
-	//check how many unchosen rows
-	if (nUnchosenRows == 0){
+	//check how many unchosen/uncovered rows
+	if (nUnchosenRows == 0) {
 		//if none, we are done
 		goto done ;
 	}
@@ -255,36 +186,40 @@ double hungarian_solve(h_problem p) {
 
 		while (1){
 
+			//SEARCH FOR AN IMPROVING PATH
+
 			//while more rows to explore
 			while (nRowsExpl < nUnchosenRows){
 
-				// Begin explore next node/row (nRowsExpl)
-
 				//set current row to next unchosen row
-				r = unchosen_row[nRowsExpl] ;
-				//set the rowMin to row_dec[r] calculated in matchRowCol
-				double rowMin = row_dec[r] ;
+				r = unchosenRows[nRowsExpl];
 
-				//loop through each col in row
-				for (c = 0 ; c < p->size ; c++){
-					//if col has a min
-					if (slack[c]){
+				//loop through cols
+				for (c = 0; c < p->size; c++) {
+					//only concerned with unchosen cols
+					//(note that slack[c] == 0 for chosen cols)
+					if (slack[c]) {
 
+						//path weight = cost - row decrements + col increments
+						double weight = p->cost[r][c] - rowDec[r] + colInc[c];
 
-						double del = p->cost[r][c] - rowMin + col_inc[c] ;
+						//check if weight is less than current slack
+						if (weight < slack[c]) {
+							//yes, set new slack
+							slack[c] = weight;
 
-						if (del < slack[c]){
-							if (del == 0.0){
-								if (row_match[c] < 0) goto breakthrough ;
+							//if slack is 0.0 we have a zero
+							if (slack[c] == 0.0) {
+								//if no row has been matched so far, we have an improved path
+								if (rowMatch[c] < 0) goto breakthrough;
+								//set parentRow of c to r
+								parentRow[c] = r;
+								//add row matched to col to unchosenRows
+								unchosenRows[nUnchosenRows++] = rowMatch[c];
 
-								slack[c] = 0.0 ;
-								parent_row[c] = r ;
-
-								unchosen_row[nUnchosenRows++] = row_match[c] ;
-							}
-							else {
-								slack[c] = del ;
-								slack_row[c] = r ;
+							} else {
+								//update slack row for col
+								slackRow[c] = r;
 							}
 						}
 					}
@@ -294,61 +229,86 @@ double hungarian_solve(h_problem p) {
 				nRowsExpl++ ;
 			}
 
-			// INTRODUCE NEW ZEROES, by decresing uncovered elements to produce zeroes
+			//CREATE NEW ZEROES
+			//by decreasing uncovered elements to produce zeroes
 
-			s = INF ;
-			for (c = 0 ; c < p->size ; c++){
-				if (slack[c] && slack[c] < s)
-					s = slack[c] ;
+			//find smallest element/value of uncovered rows & cols
+			double leastVal = INF; //least col min
+			//loop through all cols
+			for (c = 0; c < p->size; c++) {
+				//if the col min in slack[c] is less than leastVal found so far
+				if (slack[c] && slack[c] < leastVal)
+					//set new leastVal
+					leastVal = slack[c];
 			}
-			for (nRowsExpl = 0 ; nRowsExpl < nUnchosenRows ; nRowsExpl++){
-				row_dec[unchosen_row[nRowsExpl]] += s ;
+
+			//for each row that hasn't been chosen (ie. uncovered)
+			for (nRowsExpl=0; nRowsExpl < nUnchosenRows; nRowsExpl++) {
+				//increase row decrement by leastVal
+				rowDec[unchosenRows[nRowsExpl]] += leastVal;
 			}
 
-			for (c = 0 ; c < p->size ; c++)
-				if (slack[c]){
-					slack[c] -= s ;
-					if (slack[c] == 0){
+			//loop through each column
+			for (c = 0; c < p->size; c++) {
+				//only concerned with unchosen cols
+				//(note that slack[c] == 0 for chosen cols)
+				if (slack[c]) {
 
-						// look at newly created zeroes
-						r = slack_row[c] ;
+					//update slack values for each column
+					slack[c] -= leastVal;
 
-						//Decreasing uncovered elements produces zero at [r,c]
-						if (row_match[c] < 0){
-							for (j = c + 1 ; j < p->size ; j++)
-								if (slack[j] == 0.0)
-									col_inc[j] += s ;
-							goto breakthrough ;
+					//if the slack of a col is 0.0, then we have created new zero
+					if (slack[c] == 0.0) {
+						//get row of newly created zero
+						r = slackRow[c];
 
-						}
-						else {
-							parent_row[c] = r ;
-							unchosen_row[nUnchosenRows++] = row_match[c] ;
+						//check if col has not been matched (ie. uncovered)
+						if (rowMatch[c] < 0) {
+							for (int nc = c + 1; nc < p->size; nc++) {
+								//if chosen col (ie. slack[c] == 0.0)
+								if (slack[nc] == 0.0) {
+									//increment col by the leastVal
+									colInc[nc] += leastVal;
+								}
+							}
+							//if no row has been matched so far, go to breakthrough
+							goto breakthrough;
+
+						} else {
+							//set parent row of col to row of newly created 0
+							parentRow[c] = r;
+							//add the row matching col to unchosenRows
+							unchosenRows[nUnchosenRows++] = rowMatch[c];
 						}
 					}
 
+				} else {
+					//increment colInc by leastVal
+					colInc[c] += leastVal;
 				}
-				else {
-					col_inc[c] += s ;
-				}
+			}
 
 		}
 
 
-breakthrough:
-		// UPDATE MATCHING
+		//IMPROVE MATCHING
+		breakthrough:
 
-		while (1){
-			j = col_match[r] ;
-			col_match[r] = c ;
-			row_match[c] = r ;
+		while (1) {
+			//get old matched col
+			int oldCol = colMatch[r];
+			//update/set new matching based on current row and col
+			colMatch[r] = c;
+			rowMatch[c] = r;
 
-			if (j < 0)
-				break ;
-			r = parent_row[j] ;
-			c = j ;
+			//if oldCol
+			if (oldCol < 0)
+				break;
+			//update current row and col to those corresp. oldCol
+			r = parentRow[oldCol];
+			c = oldCol;
 		}
-		//END --------------
+
 
 		//reduce unmatched, check if unmatched is 0
 		if (--unmatched == 0)
@@ -356,55 +316,142 @@ breakthrough:
 			goto done ;
 
 
-		// Get ready for another stage
+		//get ready for another stage
 		//re-initialise values to defaults
-		nUnchosenRows = 0 ;
-		//loop through each col
-		for (c = 0 ; c < p->size ; c++){
-			parent_row[c] = -1 ;
-			slack[c] = INF ;
+		nUnchosenRows = 0;
+		for (c = 0; c < p->size; c++) {
+			parentRow[c]= -1;
+			slack[c] = INF;
 		}
-		//loop through each row
-		for (r = 0 ; r < p->size ; r++)
-			if (col_match[r] < 0){
-				unchosen_row[nUnchosenRows++] = r ;
+
+		for (r = 0; r < p->size; r++)
+			if (colMatch[r] < 0) {
+				//if no column matched to row, set it as an unchosen row
+				unchosenRows[nUnchosenRows++] = r;
 			}
 	}
 
-
-
-	//DONE//
-
-done:
+	//DONE - CREATE FINAL ASSIGNMENT
+	done:
 	//loop through each row
-	for (int r = 0 ; r < p->size ; r++){
-		//for each row and its col match entry set corresponding assignment to 1
-		p->assignment[r][col_match[r]] = 1 ;
+	for (int r = 0; r < p->size; r++) {
+		//for each row and its matched column set corresponding assignment to 1
+		p->assignment[r][colMatch[r]] = 1;
 	}
 
 	//loop through each row
 	for (int r = 0 ; r < p->size ; r++){
 		//increase cost by row decrements
-		cost += row_dec[r] ;
+		cost += rowDec[r];
 	}
 
 	//loop though each col
 	for (int c = 0 ; c < p->size ; c++){
 		//reduce cost by col increments
-		cost -= col_inc[c] ;
+		cost -= colInc[c];
 	}
 
-	//free helper arrays
-	free(slack) ;
-	free(col_inc) ;
-	free(parent_row) ;
-	free(row_match) ;
-	free(slack_row) ;
-	free(row_dec) ;
-	free(unchosen_row) ;
-	free(col_match) ;
+    //free helper arrays
+	free(slack);
+	free(colInc);
+	free(parentRow);
+	free(rowMatch);
+	free(slackRow);
+	free(rowDec);
+	free(unchosenRows);
+	free(colMatch);
 
-	//return cost of assignment
-	return cost ;
+    //return cost of assignment
+    return cost;
 
+}
+
+// Gets the position of a url, given a rank
+int getUrlFromRank(hProblem p, int position, int nElems) {
+	for (int y = 0 ; y < nElems ; y++){
+		if (p->assignment[y][position]) return y ;
+	}
+	fprintf(stderr, "No url found for this position, incorrect assignment!\n") ;
+	return -1 ;
+}
+
+//STATIC: Subtracts column mins in p
+static double subtractColMins(hProblem p) {
+
+	//row and col counters
+	int r, c;
+	//total cost
+	double tCost = 0.0;
+	//loop through each column
+	for (c = 0; c < p->size; c++) {
+		//set inital colMin to first [0] element of col
+		double colMin = p->cost[0][c];
+		//loop through all rows in col (ie. all elements of col)
+		for (r = 1; r < p->size; r++) {
+			//check if cost < s
+			if (p->cost[r][c] < colMin) {
+				//yes, set new colMin to cost
+				colMin = p->cost[r][c];
+			}
+		}
+		//add colMin to cost
+		tCost += colMin;
+		//if colMin isnt 0
+		if (colMin != 0.0)
+			//remove colMin from each col entry, row by row
+			for (r = 0; r < p->size; r++)
+				p->cost[r][c] -= colMin;
+	}
+	return tCost;
+
+}
+
+//STATIC: Matches rows & cols in p
+static int match(hProblem p, double * rowDec, int * colMatch, int * rowMatch, int * unchosenRows) {
+
+	int nUnchosenRows = 0;
+	int r, c; //row and col counters
+
+    //loop through each row
+	for (r = 0; r < p->size; r++) {
+        //get the rowMin
+        //set inital rowMin to first element of row
+		double rowMin = p->cost[r][0];
+        //loop through each column
+		for (c = 1; c < p->size; c++) {
+            //check if cost at current [r][c] < the current rowMin
+            if (p->cost[r][c] < rowMin)
+                //if yes, set new rowMin
+				rowMin = p->cost[r][c];
+        }
+
+        //set row decrement to found rowMin
+        rowDec[r] = rowMin;
+
+        //declare and initialise rowDone flag
+        int rowDone = 0;
+
+        //loop through each col in current row (r)
+		for (c = 0; c < p->size; c++) {
+            //if we find element equal to rowMin that hasn't been matched to another row
+			if (rowMin == p->cost[r][c] && rowMatch[c] < 0) {
+                //set match
+				colMatch[r] = c;
+				rowMatch[c] = r;
+
+                //set rowDone flag
+				rowDone = 1; break;
+            }
+        }
+
+		//if we aren't done with row, ie. the rowMin column has been matched to another row
+        if (!rowDone) {
+			//set col match for row to -1
+            colMatch[r]= -1;
+			//set next unchosen row to current row
+            unchosenRows[nUnchosenRows++] = r;
+        }
+	}
+	//return no of unchosen/uncovered rows
+	return nUnchosenRows;
 }

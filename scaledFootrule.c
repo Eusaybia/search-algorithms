@@ -75,23 +75,23 @@ int main(int argc, char *argv[]) {
     }
 
 	//initialise hungarian
-	h_problem p = hungarian_init(costMatrix, nElems);
+	hProblem p = newHungarian(costMatrix, nElems);
 
 	//print cost matrix
 	// hungarian_print_costmatrix(p);
 
 	//solve
-	printf("%.6lf\n", hungarian_solve(p));
+	printf("%.6lf\n", solveHungarian(p));
 
 	//print assignment
 	// printf("Assignment:\n");
     // hungarian_print_assignment(p);
     
     for (int i = 0; i < nElems; i++) {
-        printf("%s\n", urlSet[hungarian_url_from_rank(p, i, nElems)]->url);
+        printf("%s\n", urlSet[getUrlFromRank(p, i, nElems)]->url);
     }
 
-    hungarian_free(p);
+    disposeHungarian(p);
     
     // Free urlSet
     for (int i = 0; i < MAX_LISTS * N_ROWS; i++) free(urlSet[i]);

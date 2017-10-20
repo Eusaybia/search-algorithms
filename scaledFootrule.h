@@ -1,6 +1,5 @@
 #define N_ROWS 100
 #define MAX_LISTS 100
-#define MAX_CHAR 256
 
 typedef struct UrlRep *Url;
 
