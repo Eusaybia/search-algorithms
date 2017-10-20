@@ -14,11 +14,11 @@ int main(int argc, char *argv[]) {
 // Generate InvertedIndex BST from URLs
 Tree getInvertedIndex(Queue collectionUrls) {
 	Tree t = newTree() ;
-	char url_from[MAX_CHAR] = {0} ;
+	char *url_from;
 	char url_from_location[MAX_CHAR] = {0} ;
 	char curr_word[MAX_CHAR] = {0} ;
 	while (!emptyQueue(collectionUrls)){
-		strcpy(url_from, leaveQueue(collectionUrls)) ;
+		url_from = leaveQueue(collectionUrls);
 		strcpy(url_from_location, url_from) ;
 		strcat(url_from_location, ".txt") ;
 		FILE *nextUrlFp = fopen(url_from_location, "r") ;
@@ -45,6 +45,7 @@ Tree getInvertedIndex(Queue collectionUrls) {
 			// Adds the url_from into the list of urls for curr_word
 			addUrl(t, curr_word, url_from) ;
 		}
+        free(url_from);
 		fclose(nextUrlFp) ;
 	}
 	FILE *invertedIndexFp = fopen("invertedIndex.txt", "w") ;
