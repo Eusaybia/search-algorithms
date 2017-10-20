@@ -73,4 +73,4 @@ inverted: $(SRC_OBJ_FILES_4) $(LIB_OBJ_FILES)
 
 # Remove all object files and binaries
 clean:
-	rm $(BINARIES)
+	rm $(BINARIES) *.o
