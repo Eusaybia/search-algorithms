@@ -4,11 +4,13 @@
 #include "searchFunctions.h"
 
 void normalize(char strings[MAX_CHAR]){
-    int j = 0;
-    for (; strings[j] != '\0'; j++) {
-        strings[j] = tolower((unsigned char)strings[j]);
+    int i = 0;
+    for (i = 0; strings[i] != '\0'; i++) {
+        strings[i] = tolower((unsigned char)strings[i]);
     }
-    if (strings[j-1] == '.' || strings[j-1] == ',' || strings[j-1] == ';' || strings[j-1] == '?') strings[j-1] = '\0';
+    
+    i--;
+    if (strings[i] == '.' || strings[i] == ',' || strings[i] == ';' || strings[i] == '?') strings[i] = '\0';
 }
 
 void getQueries(int argc, char* argv[], char queries[MAX_QUERIES][MAX_CHAR]){

@@ -16,4 +16,6 @@
 #define MAX_QUERIES 256
 #define MAX_V 256
 
+extern char *strdup(const char *s);
+
 #endif

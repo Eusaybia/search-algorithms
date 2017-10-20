@@ -13,10 +13,10 @@
 // Get URLs from collection.txt and put it into set
 Queue getCollectionUrls();
 
+// Converts a url into its directory
+void nameToDirectory(char *urlDirectory, char *url);
+
 // Generate graph from URLs
 Graph createUrlGraph(Queue collectionUrls);
-
-// Generate empty inverted index BST
-// TODO: Create BST list structure
 
 #endif

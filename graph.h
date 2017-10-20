@@ -30,6 +30,6 @@ void	setVertexInfo(Graph g, int vertexId, int numInlinks, int numOutlinks, doubl
 char    *getVertexUrl(Graph g, int vertexId);
 void	setVertexUrl(Graph g, char *string, int vertexId);
 void 	graphToList(Graph g, char sortedlist[][MAX_CHAR]);
-int findVertexIdFromString(Graph g, char *string);
+int     findVertexIdFromString(Graph g, char *string);
 
 #endif
