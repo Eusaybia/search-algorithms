@@ -99,7 +99,7 @@ void findPagerank(int nQueries, char matchedUrlList[MAX_V][MAX_CHAR]) {
 
 	// Free queryTable
 	for (int i = 0 ; i < nQueries ; i++){
-		dropList(queryTable[i]);
+		dropList(queryTable[i]) ;
 	}
-	free(queryTable);
+	free(queryTable) ;
 }

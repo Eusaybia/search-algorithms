@@ -256,5 +256,5 @@ void graphToList(Graph g, char sortedlist[][MAX_CHAR]) {
 	sortList(l, cmpPagerankValues) ;
 	// Convert the list to an array of strings
 	listToArray(l, sortedlist) ;
-	dropList(l);
+	dropList(l) ;
 }

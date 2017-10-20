@@ -4,21 +4,21 @@
 #include "invertedIndex.h"
 
 int main(int argc, char *argv[]) {
-    Queue collectionUrls = getCollectionUrls();
-    getInvertedIndex(collectionUrls);
-    showQueue(collectionUrls);
-    disposeQueue(collectionUrls);
-	return EXIT_SUCCESS;
+	Queue collectionUrls = getCollectionUrls() ;
+	getInvertedIndex(collectionUrls) ;
+	showQueue(collectionUrls) ;
+	disposeQueue(collectionUrls) ;
+	return EXIT_SUCCESS ;
 }
 
 // Generate InvertedIndex BST from URLs
 Tree getInvertedIndex(Queue collectionUrls) {
 	Tree t = newTree() ;
-	char *url_from;
+	char *url_from ;
 	char url_from_location[MAX_CHAR] = {0} ;
 	char curr_word[MAX_CHAR] = {0} ;
 	while (!emptyQueue(collectionUrls)){
-		url_from = leaveQueue(collectionUrls);
+		url_from = leaveQueue(collectionUrls) ;
 		strcpy(url_from_location, url_from) ;
 		strcat(url_from_location, ".txt") ;
 		FILE *nextUrlFp = fopen(url_from_location, "r") ;
@@ -41,11 +41,11 @@ Tree getInvertedIndex(Queue collectionUrls) {
 			// Strip words of punctuation
 			normalize(curr_word) ;
 			// Adds curr_word to the tree
-			insertIntoTree(t, curr_word);
+			insertIntoTree(t, curr_word) ;
 			// Adds the url_from into the list of urls for curr_word
 			addUrl(t, curr_word, url_from) ;
 		}
-        free(url_from);
+		free(url_from) ;
 		fclose(nextUrlFp) ;
 	}
 	FILE *invertedIndexFp = fopen("invertedIndex.txt", "w") ;
@@ -56,7 +56,7 @@ Tree getInvertedIndex(Queue collectionUrls) {
 		// Print the inverted index tree into invertedIndex.txt
 		printInOrder(t, invertedIndexFp) ;
 		fclose(invertedIndexFp) ;
-    }
-    dropTree(t);
-	return t;
+	}
+	dropTree(t) ;
+	return t ;
 }

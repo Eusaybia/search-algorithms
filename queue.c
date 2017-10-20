@@ -33,7 +33,7 @@ Queue newQueue() {
 // disposeQueue(Queue)
 // - clean up memory associated with Queue
 void disposeQueue(Queue q) {
-	if (q == NULL) {
+	if (q == NULL){
 		return ;
 	}
 	Link next, curr = q->front ;
@@ -43,7 +43,7 @@ void disposeQueue(Queue q) {
 		disposeNode(curr) ;
 		curr = next ;
 	}
-	free(q);
+	free(q) ;
 }
 
 // enterQueue(Queue,Str)
@@ -69,7 +69,7 @@ char *leaveQueue(Queue q) {
 	q->front = old->next ;
 	if (q->front == NULL)
 		q->back = NULL ;
-	free(old->val);
+	free(old->val) ;
 	free(old) ;
 	return str ;
 }

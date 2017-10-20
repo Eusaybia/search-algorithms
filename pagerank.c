@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
 		char *buf ;
 		pageRankWeights(strtod(argv[1], &buf), strtod(argv[2], &buf), atoi(argv[3]), urlGraph) ;
 	}
-	disposeQueue(collectionUrls1);
-	disposeGraph(urlGraph);
+	disposeQueue(collectionUrls1) ;
+	disposeGraph(urlGraph) ;
 	return EXIT_SUCCESS ;
 }
 
