@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     if(!argsOk(argc, argv)) return EXIT_FAILURE;
 
     for (int i = 0; i < (argc - 1); i++) {
-        readRankFile(argv[i + 1], rankArrays[i], &maxRows);
+        if (!readRankFile(argv[i + 1], rankArrays[i], &maxRows)) return EXIT_FAILURE;
         // printf("Ranking list %d\n", i);
         // for (int j = 0; j < maxRows; j++) {
         //     printf("%s ", rankArrays[i][j]->url);
@@ -118,11 +118,11 @@ Url newUrl() {
 }
 
 // Reads the ranked lists of urls into an array
-void readRankFile(char *filename, Url *array, int *maxRows) {
+int readRankFile(char *filename, Url *array, int *maxRows) {
     FILE *fp = fopen(filename, "r");
     if (fp == NULL) {
-        printf("File opening failed\n");
-        exit(1);
+        perror("File opening failed\n");
+        return 0;
     }
     int numRows = 0;
     int i = 0;
@@ -137,6 +137,7 @@ void readRankFile(char *filename, Url *array, int *maxRows) {
     if (numRows > *maxRows) {
         *maxRows = numRows;
     }
+    return 1;
 }
 
 void insertSetArray(Url *array, int *nElems, int size, Url elem) {
