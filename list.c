@@ -261,7 +261,7 @@ void showTfIdfList(List l, FILE *fp, int nUrls) {
 	}
 
 	while (n != NULL && nUrls != 0){
-		fprintf(fp, "%s %.6f\n", n->str, n->val);
+		fprintf(fp, "%s  %.6f\n", n->str, n->val);
 		n = n->next;
 		nUrls -= 1;
 	}
