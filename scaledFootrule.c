@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 	// hungarian_print_costmatrix(p);
 
 	//solve
-	printf("Cost: %lf\n", hungarian_solve(p));
+	printf("%.6lf\n", hungarian_solve(p));
 
 	//print assignment
 	// printf("Assignment:\n");
