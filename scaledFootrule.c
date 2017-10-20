@@ -4,111 +4,73 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <math.h>
 #define N_ROWS 100
+#define MAX_LISTS 100
 #define MAX_CHAR 256
 
 int argsOk(int argc, char *argv[]);
 void readRankFile(char *filename, int *array, int *maxRows);
-int factorial(int n);
-void swap (int v[], int i, int j);
-void perm (int v[], int n, int i, int *permArrays, int *permNum);
+int findRankListSize(int rankArray[], int maxUrls) {
+    int i;
+    for (i = 0; i < maxUrls; i++) {
+        if (rankArray[i] == 0) break;
+    }
+    return i;
+}
+
+int findUrlPositionInRankList(int rankArray[], int url, int maxUrls) {
+    int i;
+    for (i = 0; i < maxUrls; i++) {
+        // This means there's no such url in this rankArray
+        if (rankArray[i] == 0) return 0;
+        if (url == rankArray[i]) break;
+    }
+    return i + 1;
+}
+
+double scaledFootruleDistance(int rankArrays[MAX_LISTS][N_ROWS], int n, int p, int tc, int ti) {
+    double sfd = 0.0;
+    if (tc == 0) return sfd;
+    if (ti == 0 || n == 0) printf("NAN\n");
+    sfd = fabs(((double)tc / (double)ti) - ((double)p / (double)n));
+    return sfd;
+}
 
 int main(int argc, char *argv[]) {
     // A 2d array to hold different ranking list rankings
-    int **rankArrays = NULL;
+    int rankArrays[MAX_LISTS][N_ROWS] = {0};
     int maxRows = 0; // Determined by the no. entries in a rank file
     assert(argsOk(argc, argv));
 
-    // Create columns
-    rankArrays = malloc(sizeof(int *) * (argc - 1));
-    // Determine the maximum number of rows based on max size
-    // But for now, just create a shit ton of rows
     for (int i = 0; i < (argc - 1); i++) {
-        rankArrays[i] = malloc(sizeof(int) * N_ROWS);
         readRankFile(argv[i + 1], rankArrays[i], &maxRows);
-        printf("maxrows = %d\n", maxRows);
+        // for (int j = 0; j < maxRows; j++) {
+        //     printf("%d ", rankArrays[i][j]);
+        // }
+        // printf("maxrows = %d\n", maxRows);
     }
     
-    int nPerms = factorial(maxRows);
-
-    // Create a perms array to hold all the combinations of url positions
-    // Create n! columns (each column representing a perm) with maxRows
-    // number of rows (each row representing a url's position for that perm)
-    // This is a 2d array represented as a 1d array
-    int *permArrays = malloc(sizeof(int[nPerms][maxRows]));
-    
-    // Create an array of sorted numbers to create perms from
-    int *permNums = malloc(sizeof(int) * maxRows);
-    for (int i = 1; i <= maxRows; i++) permNums[i - 1] = i;
-    
-    // Populate permArrays with all possible permutations
-    int permNum = 0;
-    perm(permNums, maxRows, 0, permArrays, &permNum);
-    
-    // Print the permArrays for testing
-    // for (int i = 0; i < nPerms; i++) {
-    //     printf("Perm %d:\n", i);
-    //     for (int j = 0; j < maxRows; j++) {
-    //         printf("%d ", permArrays[i * maxRows + j]);
-    //     }
-    //     printf("\n");
-    // }
-
+    double *costMatrix = calloc(sizeof(double), maxRows * maxRows);
+    // For each url
+    for (int y = 1; y <= maxRows; y++) {
+        // For each position of that url
+        for (int x = 1; x <= maxRows; x++) {
+            // For each list
+            for (int i = 0; i < (argc - 1); i++) {
+                int tc = findUrlPositionInRankList(rankArrays[i], y, maxRows);
+                int ti = findRankListSize(rankArrays[i], maxRows);
+                // printf("url %d is rank %d in ranklist %d which has size %d\n", y, tc, i, ti);
+                costMatrix[y * maxRows + x] += scaledFootruleDistance(rankArrays, maxRows, x, tc, ti);
+                // printf("%d: %.2lf|", i + 1, costMatrix[y * maxRows + x]);
+            }
+            printf("%.2lf ", costMatrix[y * maxRows + x]);
+        }
+        printf("\n");
+    }
     return EXIT_SUCCESS;
 }
 
-// Calculate factorial
-int factorial(int n) {
-    if (n == 1) return 1;
-    return n * factorial(n - 1);
-}
-
-//http://www.cs.utexas.edu/users/djimenez/utsa/cs3343/lecture25.html
-/* function to swap array elements */
-
-void swap (int v[], int i, int j) {
-	int	t;
-
-	t = v[i];
-	v[i] = v[j];
-	v[j] = t;
-}
-
-/* recursive function to generate permutations */
-void perm (int v[], int n, int i, int *permArrays, int *permNum) {
-
-	/* this function generates the permutations of the array
-	 * from element i to element n-1
-	 */
-	int	j;
-
-	/* if we are at the end of the array, we have one permutation
-	 * we can use (here we print it; you could as easily hand the
-	 * array off to some other function that uses it for something
-	 */
-	if (i == n) {
-        for (j=0; j<n; j++) {
-            printf ("%d ", v[j]);
-            permArrays[(*permNum) * n + j] = v[j];
-        }
-        (*permNum)++;
-        printf ("\n");
-	} else
-		/* recursively explore the permutations starting
-		 * at index i going through index n-1
-		 */
-		for (j=i; j<n; j++) {
-
-			/* try the array with i and j switched */
-
-			swap (v, i, j);
-			perm (v, n, i+1, permArrays, permNum);
-
-			/* swap them back the way they were */
-
-			swap (v, i, j);
-		}
-}
 
 // Reads the rank list into an array
 void readRankFile(char *filename, int *array, int *maxRows) {
@@ -120,8 +82,9 @@ void readRankFile(char *filename, int *array, int *maxRows) {
     int numRows = 0;
     int i = 0;
     while (1) {
-        numRows = i++;
+        numRows = i;
         if (fscanf(fp, "url%d\n", &array[i]) == EOF) break;
+        i++;
     }
     fclose(fp);
     if (numRows > *maxRows) {
