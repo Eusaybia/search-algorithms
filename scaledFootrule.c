@@ -95,11 +95,13 @@ int main(int argc, char *argv[]) {
     
     // Free urlSet
     for (int i = 0; i < MAX_LISTS * N_ROWS; i++) free(urlSet[i]);
+
     // Free costMatrix
 	for (int i = 0; i < nElems; i++) {
 		free(costMatrix[i]);
     }
     free(costMatrix);
+
     // Free rankArrays
     for (int i = 0; i < MAX_LISTS; i++) {
         for (int j = 0; j < N_ROWS; j++) {
