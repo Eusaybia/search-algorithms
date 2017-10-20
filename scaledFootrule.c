@@ -1,14 +1,7 @@
 // Scaled footrule main
 // Written by Kongwei Ying, September 2017
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <string.h>
-#include <math.h>
 #include "scaledFootrule.h"
-#include "headers.h"
-#include "hungarian.h"
 
 struct UrlRep {
 	char url[MAX_CHAR];
