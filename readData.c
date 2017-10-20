@@ -21,11 +21,11 @@ Queue getCollectionUrls() {
 Graph createUrlGraph(Queue collectionUrls) {
 	Graph urlGraph = newGraph(MAX_V) ;
 	char url_from_location[MAX_CHAR] = {0} ;
-	char url_from[MAX_CHAR] = {0} ;
+	char *url_from ;
 	char url_to[MAX_CHAR] = {0} ;
 	// open one page at a time and add the edges to all the urls in that file
 	while (!emptyQueue(collectionUrls)){
-		strcpy(url_from, leaveQueue(collectionUrls)) ;
+		url_from = leaveQueue(collectionUrls);
 		strcpy(url_from_location, url_from) ;
 		strcat(url_from_location, ".txt") ;
 		FILE *nextUrlFp = fopen(url_from_location, "r") ;
@@ -50,6 +50,7 @@ Graph createUrlGraph(Queue collectionUrls) {
 			if (strcmp(url_from, url_to) != 0)
 				addEdge(urlGraph, url_from, url_to) ;
 		}
+		free(url_from);
 		fclose(nextUrlFp) ;
 	}
 	return urlGraph ;
