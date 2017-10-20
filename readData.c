@@ -1,5 +1,6 @@
-//readData.c - Reads data from files and creates a graph of the URLs
-//Modified by Rahil Agrawal, September 2017
+// readData.c - Reads data from files and creates a graph of the URLs
+// Written by Kongwei Ying, September 2017
+// Modified by Rahil Agrawal, September 2017
 #include "readData.h"
 
 // Get URLs from collection.txt and put it into set
@@ -15,20 +16,25 @@ Queue getCollectionUrls() {
     return collectionUrls;
 }
 
+// Get the file directory of a url
+// e.g. "url31" -> "./url31.txt"
+void nameToDirectory(char *urlDirectory, char *url) {
+    // e.g. ./
+    strcpy(urlDirectory, "./");
+    // e.g. ./url31
+    strcat(urlDirectory, url);
+    // e.g. ./url31.txt
+    strcat(urlDirectory, ".txt");
+}
+
 // Generate graph from URLs
 Graph createUrlGraph(Queue collectionUrls) {
     Graph urlGraph = newGraph(MAX_V);
     char url_from[MAX_CHAR] = {0};
-    char subdir[MAX_CHAR] = "./";
     while(!emptyQueue(collectionUrls)) {
         strcpy(url_from, leaveQueue(collectionUrls));
         char url_from_location[MAX_CHAR] = {0};
-        // e.g. ./Sample1/
-        strcpy(url_from_location, subdir);
-        // e.g. ./Sample1/url31
-        strcat(url_from_location, url_from);
-        // e.g. ./Sample1/url31.txt
-        strcat(url_from_location, ".txt");
+        nameToDirectory(url_from_location, url_from);
         FILE *nextUrlFp = fopen(url_from_location, "r");
         if(!nextUrlFp) {
             fprintf(stderr, "Couldn't open %s\n", url_from_location);

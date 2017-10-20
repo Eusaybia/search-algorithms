@@ -13,16 +13,10 @@ Tree getInvertedIndex(Queue collectionUrls) {
     Tree t = newTree();
     // e.g. url31
     char url_from[MAX_CHAR] = {0};
-    char subdir[MAX_CHAR] = "./";
     while (!emptyQueue(collectionUrls)) {
         strcpy(url_from, leaveQueue(collectionUrls));
         char url_from_location[MAX_CHAR] = {0};
-        // e.g. ./Sample1/
-        strcpy(url_from_location, subdir);
-        // e.g. ./Sample1/url31
-        strcat(url_from_location, url_from);
-        // e.g. ./Sample1/url31.txt
-        strcat(url_from_location, ".txt");
+        nameToDirectory(url_from_location, url_from);
         FILE *nextUrlFp = fopen(url_from_location, "r");
         // We want to look for urls and ignore all other strings
         char curr_word[MAX_CHAR] = {0};
@@ -39,11 +33,6 @@ Tree getInvertedIndex(Queue collectionUrls) {
             else if (strncmp(curr_word, "url", 3) == 0) continue;
             else if (strcmp(curr_word, "#end") == 0) continue;
 
-            // Convert word to lower case and remove full stops
-            // for (int i = 0; curr_word[i] != '\0'; i++) {
-            //     curr_word[i] = tolower((unsigned char)curr_word[i]);
-            //     if (curr_word[i] == '.') curr_word[i] = '\0';
-            // }
             normalize(curr_word);
             // If not in the tree, adds vertex curr_word to the tree
             insertIntoTree(t, curr_word);
