@@ -82,6 +82,7 @@ int main(int argc, char *argv[]) {
 
 	fclose(invertedIndexFp) ;
 	showTfIdfList(urlList, stdout, 30) ;
+	dropList(urlList);
 	return EXIT_SUCCESS ;
 }
 

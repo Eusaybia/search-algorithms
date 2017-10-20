@@ -64,11 +64,12 @@ void enterQueue(Queue q, char *str) {
 // - return string at front of Queue
 char *leaveQueue(Queue q) {
 	assert(q->front != NULL) ;
-	char *str = q->front->val ;
+	char *str = strdup(q->front->val) ;
 	Link old = q->front ;
 	q->front = old->next ;
 	if (q->front == NULL)
 		q->back = NULL ;
+	free(old->val);
 	free(old) ;
 	return str ;
 }
