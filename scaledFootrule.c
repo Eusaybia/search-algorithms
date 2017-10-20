@@ -35,6 +35,7 @@ int main(int argc, char *argv[]) {
     qsort(urlSet, nElems, sizeof(int), cmpInt);
 
     // Print set
+    // printf("Set of urls:\n")
     // for (int i = 0; i < nElems; i++) {
     //     printf("%d ", urlSet[i]);
     // }
