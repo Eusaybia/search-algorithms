@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
         }
     }
     int maxRows = 0; // Determined by the no. entries in a rank file
-    argsOk(argc, argv);
+    if(!argsOk(argc, argv)) return EXIT_FAILURE;
 
     for (int i = 0; i < (argc - 1); i++) {
         readRankFile(argv[i + 1], rankArrays[i], &maxRows);
