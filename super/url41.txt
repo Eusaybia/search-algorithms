@@ -1,0 +1,16 @@
+#start Section-1
+
+    url45 url48 url43
+    url5 url55
+url94 url88 url20 url14 url60 url5 url56      url21 url89 url97 url49      url64      url73 url80 url89 url88   url54 url35 url7
+url10 url54 url74     url9 url33
+
+#end Section-1
+
+#start Section-2
+
+    An airplane or aeroplane (informally plane) is a powered, fixed-wing aircraft that is propelled forward by thrust from a jet engine or propeller. Airplanes come in a variety of sizes, shapes, and wing configurations. The broad spectrum of uses for airplanes includes recreation, transportation of goods and people, military, and research. Commercial aviation is a massive industry involving the flying of tens of thousands of passengers daily on airliners. Most airplanes are flown by a pilot on board the aircraft, but some are designed to be remotely or computer-controlled.
+
+    The Wright brothers invented and flew the first airplane in 1903, recognized as "the first sustained and controlled heavier-than-air powered flight".[1] They built on the works of George Cayley dating from 1799, when he set forth the concept of the modern airplane (and later built and flew models and successful passenger-carrying gliders).[2] Between 1867 and 1896, the German pioneer of human aviation Otto Lilienthal also studied heavier-than-air flight. Following its limited use in World War I, aircraft technology continued to develop. Airplanes had a presence in all the major battles of World War II. The first jet aircraft was the German Heinkel He 178 in 1939. The first jet airliner, the de Havilland Comet, was introduced in 1952. The Boeing 707, the first widely successful commercial jet, was in commercial service for more than 50 years, from 1958 to at least 2013.
+
+#end Section-2

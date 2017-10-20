@@ -1,0 +1,36 @@
+#start Section-1
+
+url60 url71
+url28
+url53
+url4 url63   url56 url8
+
+#end Section-1
+
+#start Section-2
+
+Dr. Ashesh Mahidadia 
+
+Research Interests
+    Artificial Intelligence. 
+    Machine Learning. 
+    Data Mining and Analytics
+    Knowledge Discovery in Databases 
+    Knowledge Based Systems. 
+    Model Based Reasoning. 
+    Inductive Logic Programming. 
+    Human Computer Interaction. 
+    Decision Support Systems. 
+
+Justaid: Helping Researchers To Construct Scientific Models 
+
+It is very difficult, if not impossible, for researchers to manually evaluate and revise their
+scientific models using a vast amount of relevant information now available to them. JustAid, a new
+tool for scientific discovery, successfully integrates techniques from Knowledge Acquisition and
+Machine Learning in a way that complements their strengths to overcome their weaknesses, and
+provides an interactive environment to help researchers in a process of scientific discovery.
+JustAid can use information stored in medical databases and assist experimental scientists in
+forming, testing and revising scientific models, without a need of a knowledge engineer. JustAid has
+been applied to a real world problem in the area of neuroendocrinilogy, a branch of physiology.
+
+#end Section-2

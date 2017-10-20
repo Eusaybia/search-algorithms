@@ -1,0 +1,31 @@
+#start Section-1
+
+url2  url34  url1 url26
+url52 url21 url99 url102 url1
+url74  url6 url82 url77
+
+#end Section-1
+
+#start Section-2
+
+Explain the causes of Australia’s current account deficit and analyse the impact of a persistent current account deficit on the Australian economy.
+
+The current account deficit (CAD) is a measure of an economy’s external stability. If the CAD is too high, the economy is said to be unstable and cannot finance its import expenditure, impacting economic growth, inflation and unemployment. Some economists believe that an economy is externally stable if it maintains its international investor confidence. Australia has seen a persistent CAD over the last three decades, averaging 4.3% of GDP.
+
+Australia’s CAD has two components, the structural component and the cyclical component. Australia’s CAD was previously thought to be due to the trade deficit, but this is only a cyclical factor. As Australia lacks competitiveness in the manufacturing industry, domestic firms cannot compete with the large-scale, low-cost manufacturing economies such as China. In industries such as footwear, automobiles, textiles and ‘whitegoods’. This fall in international competitiveness contributed to a trade deficit of 2% of GDP in 1999, contributing to a CAD of 5%, as indicated by the graph.
+
+During the past decade, the global commodities boom, underpinned by the industrialisation of China, which led to a 15US cents appreciation between 2005 and 2008, as indicated in the table. This brought arise to ‘Dutch Disease’, where the demand for commodities led to an appreciation, decreasing the international competitiveness of another industry, in this case the manufacturing industry. Although Australia’s international competitiveness can be seen as both ‘cost’ issues (being able to sell goods at a lower price) and ‘non-cost’ issues (the quality of production).
+
+The structural cause of the CAD is due to the structural deficit in the net primary income component. The graph shows how over the last 25 years it has consistently moved between 3% and 4% of GDP. The deficit is due to Australia’s low level of savings, 1.6% in 2005-06, and high level of domestic investment, creating a ‘savings-investment’ gap. As domestic firms look to expand, they must draw on foreign funds, in forms of either debt or equity. This is recorded on the financial account and is consistently in surplus. As firms repay their debt, it is recorded in the net primary income account, therefore creating a CAD.
+
+The impact of the persistent CAD on the Australia economy depends on whether it unsustainable or not. The CAD has allowed Australian firms to fund investment and expand, but a high CAD can lead to a ‘debt trap scenario’. Where the CAD, requires more foreign funds to service it, which leads to increased interest repayments, which can lead to decreased international investor confidence, decreasing access to funds and increasing interest rates. A debt trap would significantly impact the Australian economy, as investor confidence is lost aggregate demand falls decreasing the growth, leading to higher unemployment.
+
+The Pitchford Thesis or ‘Consenting Adults’ thesis states that if an economy’s foreign debt is mostly private debt, there is no concern about external stability. Pitchford noted that almost all of Australia’s foreign debt is due to the private sector, therefore there is no need for concern. Although, some economists debate the integrity of his thesis – whether large financial institutions can accurately calculate risk – using the 2008 collapse of the subprime mortgage market leading to the GFC as an example.
+
+The ‘debt servicing ratio’ is one of the most reliable economic measures of a country’s capacity to service its foreign debt. It is the proportion of export revenue that must be spent on interest payments on foreign debt. The debt servicing ratio also provides evidence to suggest that Australia’s CAD is of no concern. Australia’s debt servicing ratio has fallen from over 20% in 1990 to 7.2% in 2014-15. Although, the reliability of this comparison is tested by the global economic climate shifting to a new era of low interest rates, and the domestic economy with much stronger growth than that of the 1990.
+
+On the other hand, if the size of foreign debt rises faster than GDP, as it has done in most years, the interest repayments will progressively take up a greater proportion of our GDP. Reducing both Australia’s overall standard of living and its economic growth potential. Australia’s foreign debt has risen from 6.3% of GDP in 1980-81 to 60.6% of GDP in 2014-15.
+
+Ultimately, the CAD is due to the cyclical component of the trade balance, and the structural component due to the ‘savings-investment gap’. The impact of a persistent CAD depends on whether it is unstable, impacting Australia’s external stability. The Pitchford thesis provides evidence that suggests that it is stable. Although, the rate of the increase of foreign debt provides evidence that perhaps Australia’s CAD is unstable and could lead to low economic growth and higher unemployment.
+
+#end Section-2

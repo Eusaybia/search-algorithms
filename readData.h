@@ -12,11 +12,7 @@
 
 // Get URLs from collection.txt and put it into set
 Queue getCollectionUrls();
-
 // Generate graph from URLs
 Graph createUrlGraph(Queue collectionUrls);
-
-// Generate empty inverted index BST
-// TODO: Create BST list structure
 
 #endif

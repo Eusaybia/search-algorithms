@@ -24,8 +24,7 @@ static void disposeNode(Link);
 
 // newQueue()
 // - create an initially empty Queue
-VertexQueue newVertexQueue()
-{
+VertexQueue newVertexQueue() {
 	VertexQueue new = malloc(sizeof(QueueRep));
 	assert(new != NULL);
 	new->front = NULL;
@@ -35,8 +34,7 @@ VertexQueue newVertexQueue()
 
 // disposeQueue(Queue)
 // - clean up memory associated with Queue
-void disposeVertexQueue(VertexQueue q)
-{
+void disposeVertexQueue(VertexQueue q) {
 	if (q == NULL)
 		return;
 	Link next, curr = q->front;
@@ -50,8 +48,7 @@ void disposeVertexQueue(VertexQueue q)
 
 // enterQueue(Queue,Str)
 // - add Str to back of Queue
-void enterVertexQueue(VertexQueue q, Vertex *str)
-{
+void enterVertexQueue(VertexQueue q, Vertex *str) {
 	Link new = newNode(str);
 	if (q->front == NULL)
 		q->front = q->back = new;
@@ -65,8 +62,7 @@ void enterVertexQueue(VertexQueue q, Vertex *str)
 
 // leaveQueue(Queue)
 // - return string at front of Queue
-Vertex *leaveVertexQueue(VertexQueue q)
-{
+Vertex *leaveVertexQueue(VertexQueue q) {
 	assert(q->front != NULL);
 	Vertex *str = q->front->val;
 	Link old = q->front;
@@ -79,15 +75,13 @@ Vertex *leaveVertexQueue(VertexQueue q)
 
 // emptyQueue(Queue)
 // - check whether Queue is empty
-int emptyVertexQueue(VertexQueue q)
-{
+int emptyVertexQueue(VertexQueue q) {
 	return (q->front == NULL);
 }
 
 // showQueue(Queue)
 // - display Queue (for debugging)
-void showVertexQueue(VertexQueue q)
-{
+void showVertexQueue(VertexQueue q) {
 	Link curr;
 	if (q->front == NULL)
 		printf("Queue is empty\n");
@@ -107,8 +101,7 @@ void showVertexQueue(VertexQueue q)
 
 // Helper functions
 
-static Link newNode(Vertex *str)
-{
+static Link newNode(Vertex *str) {
 	Link new = malloc(sizeof(Node));
 	assert(new != NULL);
 	new->val = str;
@@ -116,8 +109,7 @@ static Link newNode(Vertex *str)
 	return new;
 }
 
-static void disposeNode(Link curr)
-{
+static void disposeNode(Link curr) {
 	assert(curr != NULL);
 	free(curr->val);
 	free(curr);

@@ -1,31 +1,39 @@
 # Makefile for COMP2521 Assignment
 # Written by Kongwei Ying, September 2017
+# Modified by Rahil Agrawal, October 2017
 # Based off this:
 # https://stackoverflow.com/questions/12142865/debugging-using-gdb-properly-using-the-g-flag-with-several-files
 
 # Binary files
-BINARIES = searchPagerank searchTfIdf #testList testTree testGraph
+BINARIES = searchPagerank searchTfIdf pagerank inverted scaledFootrule #testList testTree testGraph
 
 # All c files (add files here if more are added to the project)
-SRC_FILES_1 = invertedIndex.c searchPagerank.c pagerank.c readData.c
-SRC_FILES_2 = invertedIndex.c readData.c searchTfIdf.c
+SRC_FILES_1 = searchPagerank.c readData.c
+SRC_FILES_2 = readData.c searchTfIdf.c
+SRC_FILES_3 = pagerank.c readData.c
+SRC_FILES_4 = inverted.c readData.c
+SRC_FILES_5 = scaledFootrule.c hungarian.c
 LIB_FILES = graph.c list.c queue.c tree.c vertexQueue.c searchFunctions.c
 #TEST_FILES = testGraph.c testList.c testTree.c
 
 # Automatically generated object file targets
 SRC_OBJ_FILES_1 = $(SRC_FILES_1: .c = .o) # Uses what's called a "substitution reference"
-SRC_OBJ_FILES_2 = $(SRC_FILES_2: .c = .o) # Uses what's called a "substitution reference"
+SRC_OBJ_FILES_2 = $(SRC_FILES_2: .c = .o)
+SRC_OBJ_FILES_3 = $(SRC_FILES_3: .c = .o)
+SRC_OBJ_FILES_4 = $(SRC_FILES_4: .c = .o)
+SRC_OBJ_FILES_5 = $(SRC_FILES_5: .c = .o)
+
 LIB_OBJ_FILES = $(LIB_FILES: .c = .o)
 #TEST_OBJ_FILES = $(TEST_FILES: .c = .o)
 
 # Flags, options
 CC = gcc
-CFLAGS = -ggdb -Wall -Werror
-CFLAGS_LINK = -ggdb -Wall -Werror
-OUTPUT = searchPagerank searchTfIdf
+CFLAGS = -ggdb -Wall -Werror -std=c11
+CFLAGS_LINK = -ggdb -Wall -Werror -std=c11
+OUTPUT = searchPagerank searchTfIdf pagerank inverted scaledFootrule
 
 # Default make target
-all: searchPagerank searchTfIdf #tests
+all: searchPagerank searchTfIdf pagerank inverted scaledFootrule #tests
 
 # Main yaggle program
 searchPagerank: $(SRC_OBJ_FILES_1) $(LIB_OBJ_FILES)
@@ -35,6 +43,14 @@ searchPagerank: $(SRC_OBJ_FILES_1) $(LIB_OBJ_FILES)
 searchTfIdf: $(SRC_OBJ_FILES_2) $(LIB_OBJ_FILES)
 	$(CC) $(CFLAGS_LINK) -o searchTfIdf $(SRC_OBJ_FILES_2) $(LIB_OBJ_FILES) -lm
 
+pagerank: $(SRC_OBJ_FILES_3) $(LIB_OBJ_FILES)
+	$(CC) $(CFLAGS_LINK) -o pagerank $(SRC_OBJ_FILES_3) $(LIB_OBJ_FILES) -lm
+
+inverted: $(SRC_OBJ_FILES_4) $(LIB_OBJ_FILES)
+	$(CC) $(CFLAGS_LINK) -o inverted $(SRC_OBJ_FILES_4) $(LIB_OBJ_FILES) -lm
+
+scaledFootrule: $(SRC_OBJ_FILES_5) $(LIB_OBJ_FILES)
+	$(CC) $(CFLAGS_LINK) -o scaledFootrule $(SRC_OBJ_FILES_5) $(LIB_OBJ_FILES) -lm
 # ADT Tests
 # tests: testGraph testList testTree
 #

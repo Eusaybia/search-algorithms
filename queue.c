@@ -17,22 +17,12 @@ typedef struct QueueRep
 	Link back;
 } QueueRep;
 
-// Function signatures
-
-Queue newQueue();
-void disposeQueue(Queue);
-void enterQueue(Queue, char *);
-char *leaveQueue(Queue);
-int emptyQueue(Queue);
-void showQueue(Queue q);
-
 static Link newNode(char *);
 static void disposeNode(Link);
 
 // newQueue()
 // - create an initially empty Queue
-Queue newQueue()
-{
+Queue newQueue() {
 	Queue new = malloc(sizeof(QueueRep));
 	assert(new != NULL);
 	new->front = NULL;
@@ -42,10 +32,10 @@ Queue newQueue()
 
 // disposeQueue(Queue)
 // - clean up memory associated with Queue
-void disposeQueue(Queue q)
-{
-	if (q == NULL)
+void disposeQueue(Queue q) {
+	if (q == NULL){
 		return;
+	}
 	Link next, curr = q->front;
 	while (curr != NULL)
 	{
@@ -53,12 +43,12 @@ void disposeQueue(Queue q)
 		disposeNode(curr);
 		curr = next;
 	}
+	free(q);
 }
 
 // enterQueue(Queue,Str)
 // - add Str to back of Queue
-void enterQueue(Queue q, char *str)
-{
+void enterQueue(Queue q, char *str) {
 	Link new = newNode(str);
 	if (q->front == NULL)
 		q->front = q->back = new;
@@ -72,29 +62,27 @@ void enterQueue(Queue q, char *str)
 
 // leaveQueue(Queue)
 // - return string at front of Queue
-char *leaveQueue(Queue q)
-{
+char *leaveQueue(Queue q) {
 	assert(q->front != NULL);
-	char *str = q->front->val;
+	char *str = strdup(q->front->val);
 	Link old = q->front;
 	q->front = old->next;
 	if (q->front == NULL)
 		q->back = NULL;
+	free(old->val);
 	free(old);
 	return str;
 }
 
 // emptyQueue(Queue)
 // - check whether Queue is empty
-int emptyQueue(Queue q)
-{
+int emptyQueue(Queue q) {
 	return (q->front == NULL);
 }
 
 // showQueue(Queue)
 // - display Queue (for debugging)
-void showQueue(Queue q)
-{
+void showQueue(Queue q) {
 	Link curr;
 	if (q->front == NULL)
 		printf("Queue is empty\n");
@@ -113,9 +101,7 @@ void showQueue(Queue q)
 }
 
 // Helper functions
-
-static Link newNode(char *str)
-{
+static Link newNode(char *str) {
 	Link new = malloc(sizeof(Node));
 	assert(new != NULL);
 	new->val = strdup(str);
@@ -123,8 +109,7 @@ static Link newNode(char *str)
 	return new;
 }
 
-static void disposeNode(Link curr)
-{
+static void disposeNode(Link curr) {
 	assert(curr != NULL);
 	free(curr->val);
 	free(curr);

@@ -1,0 +1,18 @@
+#start Section-1
+       url40 url41 url42 url49
+       url70    url84 url4 url37
+url45 url78 url51 url6    url92  url59 url12 url31 url6 url57 url89 url7 url70 url72 url34  url80 url49 url61 url57 url65 url14 url88
+url75 url36
+
+url36 url50 url85   url60 url57 url92  url86     url28
+#end Section-1
+
+#start Section-2
+
+    In the airline industry, a baggage handler is a person who loads and unloads baggage (suitcases or luggage), and other cargo (airfreight, mail, counter-to-counter packages) for transport via aircraft. With most airlines, the formal job title is "fleet service agent/clerk", though the position is commonly known amongst airline employees as a "ramp agent", due to the job's location on the airport ramp (tarmac).
+
+    Within the airline industry, a baggage handler is often referred to as a "rampie" or "ramper": one who handles cargo on the "ramp" (the Aircraft Operations Area or AOA; outside the airline industry, the ramp is frequently referred to as the "tarmac", a term popularized by the media). Offensive terms for rampie/ramper include "ramp rat," "bag smasher", "bag jockey", "luggage monkey", and "thrower."[1]
+
+    A baggage handler also works jobs which are out of view of the flying public, including the bag room, operations (or load control), and the air freight warehouse. Some of these jobs have union representation and due to this, baggage handlers can be very well compensated with an above average pay scale and good medical, retirement and benefits packages.
+
+#end Section-2

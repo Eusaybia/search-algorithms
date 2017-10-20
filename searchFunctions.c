@@ -3,17 +3,21 @@
 
 #include "searchFunctions.h"
 
-void normalize(char strings[MAX_CHAR]){
-    int j    = 0;
-    for (; strings[j] != '\0'; j++) {
-        strings[j] = tolower((unsigned char)strings[j]);
-    }
-    if (strings[j-1] == '.' || strings[j-1] == ',' || strings[j-1] == ';' || strings[j-1] == '?') strings[j-1] = '\0';
+// Mormalize - Remove trailing punctuations from a string
+void normalize(char strings[MAX_CHAR]) {
+	int i = 0;
+	for (i = 0; strings[i] != '\0'; i++){
+		strings[i] = tolower((unsigned char)strings[i]);
+	}
+
+	i--;
+	if (strings[i] == '.' || strings[i] == ',' || strings[i] == ';' || strings[i] == '?') strings[i] = '\0';
 }
 
-void getQueries(int argc, char* argv[], char queries[MAX_QUERIES][MAX_CHAR]){
-    for (int i = 1; i < argc; i++) {
-        normalize(argv[i]);
-        strcpy(queries[i-1], argv[i]);
-    }
+// Normalize the arguments and store them in a string array
+void getQueries(int argc, char *argv[], char queries[MAX_QUERIES][MAX_CHAR]) {
+	for (int i = 1; i < argc; i++){
+		normalize(argv[i]);
+		strcpy(queries[i - 1], argv[i]);
+	}
 }

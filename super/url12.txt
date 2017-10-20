@@ -1,0 +1,196 @@
+#start Section-1
+
+url99   url80   url19  url78  url25   url93     url20 url81
+
+
+url4 url14 url24 url74 url6 url96 url67 url52 url18 url89
+
+
+#end Section-1
+
+#start Section-2
+
+Full Article : http://doheth.co.uk/info/list-of-web-sites-with-high-page-rank.php
+
+Introduction
+
+The following is a list of websites with a high PageRank as assigned by the Google search engine. PageRank (PR) is the number of points out of ten that signifies the importance of a site to Google. The PageRank number appears to be logarithmic, with a single point representing an order of magnitude difference of importance. See Wikipedia's PageRank entry for more information.
+
+This list is a portion of all PageRank 9 and 10 pages derived from the Google Toolbar, which displays the PageRank of a web page currently displayed by a browser. The exact PageRank may vary slightly, due to changes in ranking by Google, or by local differences through use of different Google servers or through DNS behavior (e.g., google.com may redirect to its regional sites, which may have lower PageRank). Redirects from a high PageRank page may reduce the redirected page's PageRank.
+
+ 
+
+PageRank 10
+
+Currently 12 domains
+
+Google.com - Google, the most popular Internet search engine, and the one that assigns this PageRank we're rambling on about.
+W3.org - World Wide Web Consortium, the organization behind most web specifications like HTML, CSS and so on.
+http://jigsaw.w3.org/css-validator/ (CSS validator)
+USA.gov - The U.S. Government's official web portal.
+Adobe.com - The main domain is no longer PR10, but these two pages are:
+get.adobe.com/flashplayer/ (Adobe Flash Player)
+get.adobe.com/reader/ (Adobe PDF Reader)
+India.gov.in - Government of India
+HHS.gov - United States Department of Health and Human Services
+Recovery.gov - U.S Government recovery board
+TheEuropeanLibrary.org - The European Library - searches the content of European national libraries.
+Europeana.eu - Europeana - "The cultural collections of Europe".
+CNN.com - Cable News Network, American television news channel
+Miibeian.gov.cn - Ministry of Information Industry Records in China
+AddThis.com - AddThis bookmarking/sharing service - this page is linked to by every page using the system (as StatCounter.com used to be), hence the PR10.
+PageRank 9
+
+Currently 148 domains
+
+AAAS.org - American Association for the Advancement of Science
+ACM.org - Association for Computing Machinery
+AltaVista.com - AltaVista, search engine
+Amazon.com - Amazon.com, shopping site
+AOL.com - America Online, portal
+APS.org - American Physical Society
+Archive.org - Internet Archive
+Arizona.edu - University of Arizona
+ArXiv.org - ArXiv.org e-print archive
+ASU.edu - Arizona State University
+BarnesAndNoble.com - Barnes & Noble, bookseller
+BBC.co.uk - British Broadcasting Corporation
+Berkeley.edu - University of California, Berkeley
+Blogger.com - Blogger, a weblog publishing tool
+Bloglines.com - Bloglines, web-based news aggregator
+Brown.edu - Brown University
+BU.edu - Boston University
+Cam.ac.uk - Cambridge University
+CBC.ca - Canadian Broadcasting Corporation
+CERN.ch - CERN
+CMU.edu - Carnegie Mellon University
+CNET.com - Cnet, technology portal
+CNRS.fr - Centre National de la Recherche Scientifique
+Cisco.com - Cisco Systems
+Colorado.edu - University of Colorado at Boulder
+Columbia.edu - Columbia University
+Computer.org - IEEE Computer Society
+Copyright.gov - U.S. Copyright Office
+Cornell.edu - Cornell University
+CreativeCommons.org - Creative Commons
+Debian.org - Debian, open-source operating system
+DHHS.gov - Department of Health and Human Services
+DHS.gov/dhspublic/ - Department of Homeland Security
+DOI.gov - U.S. Department of the Interior
+Duke.edu - Duke University
+eBay.com - EBay, auction site
+Economist.com - news site
+Elsevier.com - Elsevier, publisher of scientific and medical literature
+EnergyStar.gov - Energy Star
+EPA.gov - Environmental Protection Agency
+ETHZ.ch - ETH Zurich, Swiss Federal Institute of Technology
+ErekAlert.org - science news site
+Excite.com - Excite, portal
+Expedia.com - Expedia, online travel agency
+Flickr.com - Flickr, remote image hosting site
+Freshmeat.net - Freshmeat, cross-platform software directory
+FWS.gov - U.S. Fish and Wildlife Service
+GameSpot.com - GameSpot
+GNU.org - GNU Project
+Google.co.uk - Google, UK version; several other versions are PR9 too, including French and Japanese versions
+Grants.gov - unified site for interaction between grant applicants and the U.S. federal agencies that manage grant funds
+Harvard.edu - Harvard University, Massachusetts, USA
+HUJI.ac.il - Hebrew University, Jerusalem, Israel
+House.gov - U.S. House of Representatives
+HP.com - Hewlett-Packard
+HTMLHelp.com - Information on web authoring
+IEEE.org - Institute of Electrical and Electronics Engineers
+IETF.org - Internet Engineering Task Force
+IIE.org - Institute of International Education
+IMDb.com - Internet Movie Database
+Indiana.edu - Indiana University system
+Inria.fr - INRIA, French national research institution
+Intel.com - Intel Corporation
+internet2.edu - Internet2
+IOM.edu - Institute of Medicine
+Jalbum.net - photo album software
+Java.com - Java programming language
+JHU.edu - Johns Hopkins University
+Linux.com - Linux Operating System
+LOC.gov - Library of Congress
+MamboServer - Mambo, open-source PHP content management system
+MapQuest.com - MapQuest
+Mozilla.org - Mozilla, open-source internet tools
+MSN.com - MSN.com, portal
+MSNBC.com - MSNBC.com, portal
+MSU.edu - Michigan State University
+MySQL.com - MySQL, open-source database engine
+NAP.edu - National Academies Press
+NAS.edu - National Academy of Sciences
+NationalAcademies.org - Science, Engineering and Medicine research
+Nature.com - Nature Publishing Group
+Netscape.com - Netscape, portal
+NYTimes.com - New York Times, news site
+NIH.gov - National Institutes of Health
+NIST.gov - National Institute of Standards and Technology
+NOAA.gov - National Oceanic & Atmospheric Administration
+NREL.gov - National Renewable Energy Laboratory
+Oanda.com - Currency conversion site
+OpenSource.org - open source
+Opera.com - Opera Software, web browser for desktop and mobile devices
+Oracle.com - Oracle Corporation, software company
+Oreilly.com - O'reilly, computer bookseller
+ORNL.gov - Oak Ridge National Laboratory
+OX.ac.uk - University of Oxford
+PBS.org - Public Broadcasting Station
+Perl.com - Perl, scripting language
+PHP.net - PHP, web scripting language
+phpBB.com - phpBB, open-source PHP bulletin board system
+Pitt.edu - University of Pittsburgh
+Plone.org - Plone, open source content management system
+Princeton.edu - Princeton University
+PrivacyMark.jp - PrivacyMark System, Japan
+PSU.edu - Pennsylvania State University
+Python.org - Python Programming Language
+Ranchero.com/netnewswire/ - RSS software for Mac
+RealNetworks.com - RealNetworks
+Realplayer.com - RealPlayer audio/video software
+RedHat.com - Red Hat
+Regulations.gov - portal for federal rulemaking
+Rutgers.edu - Rutgers University
+ScienceMag.com - Science Magazine
+Section508.gov - Section 508 Amendment to the Rehabilitation Act of 1973
+Senate.gov - U.S. Senate
+SI.edu - Smithsonian Institution
+Slashdot.org - Slashdot, technology news site
+SourceForge.Net - Sourceforge, a directory of open-source development projects
+Stanford.edu - Stanford University, California, USA
+State.gov - U.S. Department of State
+State.tx.us - Texas portal
+Sun.com - Sun Microsystems
+TRUSTe.org - web privacy organisation
+UCI.edu - University of California, Irvine
+UCL.ac.uk - University College London
+UIUC.edu - University of Illinois at Urbana-Champaign
+UMD.edu - University of Maryland, College Park
+UMich.edu - University of Michigan
+UMN.edu - University of Minnesota
+UN.org - United Nations
+Unesco.org - United Nations Educational, Scientific and Cultural Organization
+UPenn.edu - University of Pennsylvania
+USC.edu - University of Southern California
+USDA.gov - U.S. Department of Agriculture
+URGS.gov - U.S. Geological Survey
+UTexas.edu - University of Texas at Austin
+UToronto.ca - University of Toronto
+VeriSign.com - VeriSign
+Virginia.edu - University of Virginia
+Vlib.org - World Wide Web Virtual Library
+Washington.edu - University of Washington
+WebStandards.org - Web Standards Project
+WHO.int - World Health Organization
+en.wikipedia.org - Wikipedia, the free encyclopedia (English version)
+Windowsmediaplayer.com - (redirect) Microsoft's audio/video player
+WinZip.com - WinZip, commercial archive utility
+Wisc.edu - University of Wisconsin
+WordPress.org - WordPress, open-source PHP blog script
+Yahoo.com - Yahoo!, portal
+Yale.edu - Yale University
+
+#end Section-2
+

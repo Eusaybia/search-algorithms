@@ -1,0 +1,49 @@
+#start Section-1
+
+url4 url14 url24 url74 url6 url96 url67 url52 url18 url89
+
+#end Section-1
+
+#start Section-2
+
+
+Full site: http://remybordignon.com/
+
+
+
+Remy Bordignon
+I'm a |  Developer.Student.Co-op Scholar.
+
+Welcome!
+My name is Remy Bordignon and I am a first year Software Engineer at the University of New South Wales.
+
+My passions include Basketball, AFL, beaches, hiking and technology. I grew up in Coffs Harbour, and have just moved to Sydney with support from the UNSW Co-op Scholarship. I've always had a passion for understanding technology, but now I finally get to dive in trying to understand the complexity of the crazy tech around us as a full time student.
+
+I'm hoping to slowly add my own personal projects and upload my resume to website as my technical skills progress.
+
+About me
+
+computer
+Technical Skills
+C development experience from 3 Courses. Improving Python skills. Basic Front Edge Development skills.
+
+Academic Achievements
+Universitry Distinction Average, High School Dux, National Youth Science Forum.
+
+Leadership Roles
+Basketball captain in representative, local and state teams, High School SRC President, Business owner.
+
+Current Courses
+Data Structures and Algorithms, Software Engineering, Computer System, Discrete Maths.
+
+Work Experience
+Community startup: www.yourtechmate.com.au, Upcoming Internship: Commonwealth Bank.
+
+Future Aspirations
+CryptoCurrency Development, Exchange in 3rd year to Europe, Hobbyist Mobile Development.
+
+ 
+Email: remybordignon8@gmail.com
+Remy Bordignon - 2017
+
+#end Section-2

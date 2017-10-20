@@ -1,0 +1,92 @@
+#start Section-1
+
+url64   url38 url73  url52   url51 url39   url49  url87  url56          url55
+url43  url34   url19  url81  url22   url79 url29  url75 url54     url22 url15 url27 url34 url38 url43
+  url57 url62 url75 url88
+   url96      url46 url2 url13 url88  url68
+
+     url40 url47 url43
+     url3 url71 url97 url43    url32 url84  url55  url89 url37 url34 url4
+
+#end Section-1
+
+#start Section-2
+
+
+A common programming solution is to use threads. But then, two ‘llyou hav erpoblesm.
+
+Knock, knock.
+Race condition.
+Who’s there.
+
+I’ve got a really good UDP joke to tell you, but I don’t know if you’ll get it
+
+A guy walks into a bar and asks for 1.014 root beers.
+The bartender says, “I’ll have to charge you extra, that’s a root beer float”.
+So the guy says, “In that case, better make it a double.”
+
+An SEO expert walks into a bar, pub, public house, inn, restaurant, club.
+Why is it that women find C to be more attractive than Java?
+Because C doesn’t treat them like objects.
+
+There are 10 kinds of people in this world: Those who understand binary, those who don’t.
+
+If you like infinite loop jokes, check this one out.
+
+In order to understand recursion you must first understand recursion.
+
+Why do programmers confuse Halloween with Christmas?
+Because OCT 31 = DEC 25.
+
+In Canadian hexadecimal, why is 6 afraid of 7?
+Because 7 8 9 A?	
+
+Why aren’t octal jokes funny?
+Because 7 10 11.
+
+Your mama’s so FAT she can’t save files bigger than 4GB.
+
+Why do Java programmers wear glasses?
+Because they don’t C#!
+
+Why did the programmer quit his job?
+Because he didn’t get arrays.
+
+What do you call it when a programmer throws up at IHOP?
+A stack overflow.
+
+A programmer started to cuss
+Because getting to sleep was a fuss
+As he lay there in bed
+Looping ’round in his head
+was: while(!asleep()) sheep++;
+
+Knock, knock.
+Who’s there?
+vi.
+vi who?
+vi aren’t you using emacs!?
+
+What kind of modem did Jimi Hendrix have?
+A purple Hayes.
+
+An int, a char, and a string walk into a bar and order some drinks.
+A short while later, the int and char start hitting on the waitress who gets very uncomfortable and walks away.
+The string walks up to the waitress and says “You’ll have to forgive them, they’re primitive types.”
+
+Q: What do you call a collection that has no methods and doesn’t do anything?
+A: A listless list
+
+A group of DBAs walk into a diner.
+One waved over the waiter: “Can we join these tables?”.
+
+Frustrated, the professor slams down the phone.
+His colleague pops his head in to investigate, “What’s the matter?”
+“Oh, its these damn students. They keep asking for us teach low-level languages.”
+“So?”
+“So… if I told them once, I’ve told them a thousand times: There aren’t classes in C!”
+
+There’s no place like 127.0.0.1
+
+#end Section-2
+

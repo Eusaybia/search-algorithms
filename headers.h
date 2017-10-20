@@ -12,8 +12,10 @@
 #include <assert.h>
 
 
-#define MAX_CHAR 256
+#define MAX_CHAR 1024
 #define MAX_QUERIES 256
-#define MAX_V 256
+#define MAX_V 1024
+
+extern char *strdup(const char *s);
 
 #endif
