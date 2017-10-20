@@ -11,19 +11,26 @@
 int main(int argc, char *argv[]) {
     // A 2d array to hold different ranking list rankings
     int rankArrays[MAX_LISTS][N_ROWS] = {0};
+    for (int i = 0; i < MAX_LISTS; i++) {
+        for (int j = 0; j < N_ROWS; j++) {
+            rankArrays[i][j] = -1;
+        }
+    }
     int maxRows = 0; // Determined by the no. entries in a rank file
     assert(argsOk(argc, argv));
 
     for (int i = 0; i < (argc - 1); i++) {
         readRankFile(argv[i + 1], rankArrays[i], &maxRows);
+        // printf("Ranking list %d\n", i);
         // for (int j = 0; j < maxRows; j++) {
         //     printf("%d ", rankArrays[i][j]);
         // }
-        // printf("maxrows = %d\n", maxRows);
+        // printf("\n");
     }
     
     // Set of urls, a union of all the lists
     int urlSet[MAX_LISTS * N_ROWS] = {0};
+    for (int i = 0; i < MAX_LISTS * N_ROWS; i++) urlSet[i] = -1;
     int nElems = 0;
     for (int i = 0; i < (argc - 1); i++) {
         for (int j = 0; j < maxRows; j++) {
@@ -35,7 +42,7 @@ int main(int argc, char *argv[]) {
     qsort(urlSet, nElems, sizeof(int), cmpInt);
 
     // Print set
-    // printf("Set of urls:\n")
+    // printf("Set of urls:\n");
     // for (int i = 0; i < nElems; i++) {
     //     printf("%d ", urlSet[i]);
     // }
@@ -54,6 +61,7 @@ int main(int argc, char *argv[]) {
                 int tc = findUrlPositionInRankList(rankArrays[i], urlSet[y], nElems);
                 int ti = findRankListSize(rankArrays[i], nElems);
                 // printf("url %d is rank %d in ranklist %d which has size %d\n", y, tc, i, ti);
+                // printf("%d|", tc);
                 costMatrix[y][x] += scaledFootruleDistance(rankArrays, nElems, x + 1, tc, ti);
             }
             // printf("%.2lf ", costMatrix[y][x]);
@@ -130,7 +138,7 @@ int argsOk(int argc, char *argv[]) {
 int findRankListSize(int rankArray[], int maxUrls) {
     int i;
     for (i = 0; i < maxUrls; i++) {
-        if (rankArray[i] == 0) break;
+        if (rankArray[i] == -1) break;
     }
     return i;
 }
@@ -139,7 +147,7 @@ int findUrlPositionInRankList(int rankArray[], int url, int maxUrls) {
     int i;
     for (i = 0; i < maxUrls; i++) {
         // This means there's no such url in this rankArray
-        if (rankArray[i] == 0) return 0;
+        if (rankArray[i] == -1) return 0;
         if (url == rankArray[i]) break;
     }
     return i + 1;
