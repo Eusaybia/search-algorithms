@@ -97,4 +97,10 @@ void findPagerank(int nQueries, char matchedUrlList[MAX_V][MAX_CHAR]) {
 			// Print the top 30 pageranks to stdout
 			showList(queryTable[i], stdout, '\n', &nResults) ;
 	}
+
+	// Free queryTable
+	for (int i = 0 ; i < nQueries ; i++){
+		dropList(queryTable[i]);
+	}
+	free(queryTable);
 }
