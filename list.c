@@ -1,5 +1,6 @@
 // list.c - Implementation of a list of strings
 // Written by Kongwei Ying, September 2017
+// Modified by Rahil Agrawal, October 2017
 
 #include "list.h"
 
@@ -177,6 +178,14 @@ int cmpPagerank(const void *p1, const void *p2) {
     fclose(pagerankFp);
 }
 
+int cmpPagerankValues(const void *p1, const void *p2) {
+
+    if (((Node *)p1)->val < ((Node *)p2)->val) return 1;
+    else if (((Node *)p1)->val > ((Node *)p2)->val) return -1;
+    else return 0;
+
+}
+
 // Sort list using an arbitrary comparator function
 void sortList(List l, int (*compar)(const void *, const void *)) {
     quickSort(l->head, l->tail, compar);
@@ -233,7 +242,10 @@ void showList(List l, FILE *fp, char delimiter, int *nNodes) {
     }
 
     while (n != NULL && *nNodes != 0) {
-        fprintf(fp, "%s%c", n->str, ((n->next!=NULL && *nNodes!=1) ? delimiter : ' '));
+        if(n->next!=NULL && *nNodes!=1)
+            fprintf(fp, "%s%c", n->str, delimiter);
+        else
+            fprintf(fp, "%s", n->str);
         n = n->next;
         *nNodes = *nNodes - 1;
     }
@@ -264,7 +276,6 @@ static Node *newNode(char *str, double val, int terms) {
     n->next = NULL;
     n->prev = NULL;
 
-    // TODO: Need to change and use centralised MAX_CHAR across all files!
     n->str = malloc(sizeof(char) * MAX_CHAR);
     memset(n->str, 0, sizeof(char) * MAX_CHAR);
 

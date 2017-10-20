@@ -1,0 +1,7 @@
+#start Section-1
+url12
+#end Section-1
+
+#start Section-2
+This is the front page of the Simple English Wikipedia. Wikipedias are places where people work together to write encyclopedias in different languages.
+#end Section-2

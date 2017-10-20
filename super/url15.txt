@@ -1,0 +1,85 @@
+#start Section-1
+
+
+url1
+url2
+url3
+
+url5
+url6
+url7
+url8
+url9
+url10
+url11
+url12
+
+url14
+url15
+url16
+url17
+url18
+
+url20
+url21
+url22
+url23
+url24
+
+url26
+url27
+url28
+url29
+url30
+url31
+url32
+url33
+url34
+
+url36
+url37
+url38
+url39
+url40
+url41
+url42
+url43
+url44
+url45
+
+url47
+url48
+url49
+url50
+url51
+url52
+url53
+url54
+url55
+url56
+url57     url44 url41 url49
+    url71 url96 url66
+url31 url52 url58
+url43 url15 url85 url10 url35 url84
+url44    url55
+url75 url94 url1    url21    url53      url18 url77  url45     url98 url66 url36      url60
+url58
+url59 url2  url34  url1 url26
+url52 url21 url93 url27
+url74  url6 url82 url16
+
+#end Section-1
+
+#start Section-2
+
+Soz not soz!
+
+New Academic Calendar - UNSW3+
+UNSW is moving to a new academic calendar model from 2019.
+
+The new calendar consists of three normal terms each with ten weeks teaching, and an optional five-week summer term. The new academic calendar is called UNSW3+. We are working closely with students, staff and industry over the next two years to ensure every student is prepared for this exciting and progressive change.
+
+See below for what you need to know to prepare yourself for the 2019 transition.
+
+#end Section-2
+

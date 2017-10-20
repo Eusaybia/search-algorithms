@@ -28,7 +28,10 @@ Tree getInvertedIndex(Queue collectionUrls) {
             if (strcmp(curr_word, "#start") == 0) continue;
             else if (strncmp(curr_word, "Section", 7) == 0) continue;
             else if (strncmp(curr_word, "url", 3) == 0) continue;
-            else if (strcmp(curr_word, "#end") == 0) continue;
+            else if (strcmp(curr_word, "#end") == 0){
+                fscanf(nextUrlFp, "%s", curr_word);
+                continue;
+            }
 
             // Strip words of punctuation
             normalize(curr_word);
@@ -37,6 +40,7 @@ Tree getInvertedIndex(Queue collectionUrls) {
             // Adds the url_from into the list of urls for curr_word
             addUrl(t, curr_word, url_from);
         }
+        fclose(nextUrlFp);
     }
     FILE *invertedIndexFp = fopen("invertedIndex.txt", "w");
 	if (invertedIndexFp == NULL) {

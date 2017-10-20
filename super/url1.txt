@@ -1,0 +1,31 @@
+#start Section-1
+
+url88  url39   url1   url72   url3  url47
+url99 url16 url75  url81        url54   url19   url27   url32   url62
+
+url68 url5 url35        url36
+url20   url98  url63    url56   url33   url43   url26  url27   url87
+url46  url94
+
+#end Section-1
+
+#start Section-2
+
+Quisqualamine
+From Wikipedia, the free encyclopedia
+
+Quisqualamine is the α-decarboxylated analogue of quisqualic acid, as well as a relative of the
+neurotransmitters glutamate and γ-aminobutyric acid (GABA). α-Decarboxylation of excitatory
+amino acids can produce derivatives with inhibitory effects. Indeed, unlike quisqualic acid,
+quisqualamine has central depressant and neuroprotective properties and appears to act predominantly
+as an agonist of the GABAA receptor and also to a lesser extent as an agonist of the glycine
+receptor, due to the facts that its actions are inhibited in vitro by GABAA antagonists like
+bicuculline and picrotoxin and by the glycine antagonist strychnine, respectively. Mg2+ and
+DL-AP5, NMDA receptor blockers, CNQX, an antagonist of both the AMPA and kainate receptors, and
+2-hydroxysaclofen, a GABAB receptor antagonist, do not affect quisqualamine's actions in vitro,
+suggesting that it does not directly affect the ionotropic glutamate receptors or the GABAB receptor
+in any way. Whether it binds to and acts upon any of the metabotropic glutamate receptors like
+its analogue quisqualic acid however is unclear.
+
+#end Section-2
+

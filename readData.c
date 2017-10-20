@@ -52,6 +52,7 @@ Graph createUrlGraph(Queue collectionUrls) {
             if (strcmp(url_from, url_to) != 0)
                 addEdge(urlGraph, url_from, url_to);
         }
+        fclose(nextUrlFp);
     }
     //showGraph(urlGraph, DENSE);
     return urlGraph;

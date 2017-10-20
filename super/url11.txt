@@ -1,0 +1,35 @@
+#start Section-1
+
+url99   url80   url19  url78  url25   url93     url20 url81
+
+
+url56 url97 url96       url1 url68      url80  url84    url10   url28  url46  url67 url6   url48   url87    url85
+
+#end Section-1
+
+#start Section-2
+
+Preferred Name	Dr Aarthi Natarajan
+Office	K17 501-04
+Phone	+61 2 9385 4056 (Internal: x54056)
+Email	aarthin@cse.unsw.edu.au
+Mail	School of Computer Science and Engineering
+The University of New South Wales
+Sydney 2052, Australia
+Qualifications	
+Academic and Software Consultant
+
+Currently teaching:
+
+Lecturer-in-charge for COMP 1531 (Introduction to Software Engineering and Data Modelling)
+Lecturer-in-charge for COMP 1000 (Introduction to Web, Spreadsheets and Database)
+Co-lecturer for COMP 2911 (Object Oriented Design and Programming)
+My Current Research Interests:
+
+Service Oriented Architecture
+Semantic Technologies
+Knowledge Acquisition
+Data Analytics (Applying Software Engineering, Semantic Technologies and Statistical Learning Methods)
+
+#end Section-2
+

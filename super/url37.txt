@@ -1,0 +1,86 @@
+#start Section-1
+
+url22 url15 url27 url34 url38 url43
+  url57 url62 url75 url88
+   url96
+
+#end Section-1
+
+#start Section-2
+
+Full article: http://www.stuff.co.nz/business/82536460/Meet-the-Kiwi-teen-with-a-million-app-downloads
+
+
+
+
+
+Meet the Kiwi teen with a million app downloads
+
+Kerman Kohli in San Francisco for WWDC: "That's pretty exciting when you beat three fulltime guys."
+
+"The Homework App" has been downloaded over a million times, with many paying for a pro version, but most of the app's hundreds of thousands of users don't know the app was created by a 14-year-old. Kerman Kohli, now 18 and applying for top-tier US colleges, caught up with Henry Cooke in San Francisco during Apple's WWDC.
+
+Kerman Kohli is the most organised 18-year-old I have ever met.
+
+The Auckland-based teen sets up up our interview at 11.05, not 11, knowing exactly what time he would arrive. He's the one who sends a follow up email afterwards. He has a chartered accountant. 
+
+Kohli has to be organised, because over a hundred thousand people are relying on him to keep them organised, and a lot of them are paying for it. Most teens just have to keep their teacher's pleased.
+
+READ MORE: 
+* No plan to prepare NZ school kids for the digital age - Anna Curzon
+* Digital technology coming to the NZ Curriculum
+* Schools need to think like tech companies
+* Teaching tech to the teachers
+
+This drive for order among chaos is what sparked the idea for his app in the first place.
+
+"I started high school, and I wanted something to help remember my homework," Kohl said.
+
+
+"I went on the app store, and there were all these really mediocre apps that kind of did the job, but were really confusing to use but looked pretty bad. So I went 'hey let me give this a go."
+
+So in 2012 when Kohli was 14 The Homework App was born. But it wasn't his first app. 
+
+He got into coding two years earlier at age 12, when his dad agreed to buy him a computer if he promised to build an app. It soon took over his life.
+
+"It was the only thing I would really do. When you're 12, you don't have a car, you can't drive around and meet your friends, you're too young to party when you're 12 years old. Whenever I had free time I was coding."
+
+He made a app that enlarged text and a game where you won by tapping the screen as fast as possible. They garnered a few thousand downloads, and even a bit of money, but The Homework App blew them out of the water. 
+
+How so? The student organisation app has been downloaded over a million times, with more than a thousand new downloads every day. Over a 100,000 people use it every month. A substantial proportion - Kohli wisely won't tell me how many - pay $5 for a pro version, while the rest are served ads that also bring Kohli income. 
+
+But this isn't quite a lucky break. Kohli worked extremely hard to get the app popular, and continues to spend most of his spare time keeping it current.
+
+The first release took him about six months, working almost every night.
+
+"The learning curve was huge. It has a database in there, when you have a database you have really complex things that go on: relationships between different entities, delete/edit/add all of those functions, so the first six months were pretty hard. Now that same app would take me a week."
+
+Kohli had to learn both complex coding and interface design. He had a simple test to check if the app was easy enough to use.
+
+"Basically I asked my parents if they could use it. If they didn't know how to use it I'd go back and try again."
+
+But users - especially paid ones - are never happy if an app stays static, especially as new phones and technologies are released. Kohli said he had basically rebuilt the app from scratch seven or eight times, and new bugs could eat up his spare time.
+
+"It takes out weekends and stuff. You can't just be like 'I'm going to party every weekend and make apps on the side'."
+
+"It's a fulltime job at some points, and being a fulltime student at the same time - it gets crazy."
+
+"Socially I just make sure every interaction is worth the time spent. I'm never going to be like 'hey what's up man' and hang around for five hours doing nothing. If we're going to go out we're going to make sure there's a purpose and that it's fun."
+
+"You can never buy time. That's like a key strategy for my life: I walk fast, I always find the most efficient route, time is my number one priority at all times."
+
+This might sound somewhat depressing, but the work paid off.
+
+"I've basically dominated my competitor myHomework, who has three fulltime employees working on all these different platforms. On iOS which is my platform I've knocked them off the charts."
+
+"That's pretty exciting when you beat three fulltime guys."
+
+Kohl is now in discussions with a major ad buyer eager to reach his mostly teenage audience - always a goldmine for marketers. He talked to me while at Apple's annual WWDC software conference in San Francisco on a student scholarship. He was applying for "top ten" universities, hoping to return to the States soon, but was also looking to create an entirely new app, just as big as The Homework App.
+
+Yet through all the code, all the time optimisation, and all the opportunity, Kohli was completely grounded.
+
+"You still do need to have fun. If you become a full-coding person, you're not much fun."
+
+Henry Cooke travelled to San Francisco courtesy of Apple.
+
+#end Section-2

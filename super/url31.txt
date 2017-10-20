@@ -1,0 +1,43 @@
+#start Section-1
+
+url2  url34  url1 url26
+url52 url21 url93 url27
+url74  url6 url82 url16
+
+#end Section-1
+
+#start Section-2
+
+Bachelor of Science (Computer Science)
+
+Stream - COMPA1
+
+Single Award - Program 3778
+
+For earlier versions of this program, check the UNSW Handbook (previous versions) including: Programs 3978.
+
+Dual Award - For a list of all dual award programs options for this stream see the UNSW Handbook (Specialisations).
+
+Dual award programs do not complete 36 UOC Free Electives and 12 UOC General Education.
+
+Program structure
+
+UOC denotes Units of Credit, a measure of the amount of work required in a course;
+Review all courses in the handbook for information on assumed knowledge and requisites;
+Some courses are offered twice per year and may be taken in either semester;
+This program structure is a guide only.  Students may take courses in any order as long as requisites are observed.
+Notes on program revisions:
+
+In 2017:
+
+COMP1917, COMP1927, COMP2911, COMP2121, COMP2041, and 12 UOC free electives were replaced by COMP1511, COMP1521, COMP1531, COMP2511, COMP2521, COMP3121, COMP3900
+New majors were added:  Security, Programming Languages
+Majors were removed:  Game Design and Construction, Human Computer Interaction, Robotics
+COMP3441 was cancelled, and removed as a requirement in the networks major from 2017 onwards.  Previous completions of this course will still count.  COMP6441 will not be considered a replacement course for the major.
+The program code changed from 3978 to 3778
+Students who are transitioning from 3978 to 3778 with partial completion of previous core computing should make appropriate substitution for new core computing and seek advice from the CSE Student Office where options are not clear (see below for recommended study plan)
+
+Approved substitution: CompSci Students commencing 2016 or prior may replace COMP2121 (6UOC) with COMP1521 (6UOC)
+- Warning: Students wanting to take further hardware courses should enrol in COMP2121, particularly those specialising in Embedded Systems (COMPS1).
+
+#end Section-2

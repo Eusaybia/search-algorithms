@@ -20,15 +20,16 @@ int 	isConnected(Graph g, char *from, char *to);
 int 	isEdge(Graph g, int from, int to);
 int		numOutlinks(Graph g, int i);
 int		numInlinks(Graph g, int i);
-float	get_pagerank_before(Graph g, int i);
-float	get_pagerank_after(Graph g, int i);
-void 	set_pagerank_after(Graph g, int i, float value);
-void 	set_pagerank_before(Graph g, int i, float value);
+double	get_pagerank_before(Graph g, int i);
+double	get_pagerank_after(Graph g, int i);
+void 	set_pagerank_after(Graph g, int i, double value);
+void 	set_pagerank_before(Graph g, int i, double value);
 void 	showPageRanks(Graph g);
 void 	showGraph(Graph g, int print_mode);
-void	setVertexInfo(Graph g, int vertexId, int numInlinks, int numOutlinks, float pagerank);
+void	setVertexInfo(Graph g, int vertexId, int numInlinks, int numOutlinks, double pagerank);
 char    *getVertexUrl(Graph g, int vertexId);
 void	setVertexUrl(Graph g, char *string, int vertexId);
 void 	graphToList(Graph g, char sortedlist[][MAX_CHAR]);
+int findVertexIdFromString(Graph g, char *string);
 
 #endif

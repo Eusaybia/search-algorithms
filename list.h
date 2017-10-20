@@ -1,6 +1,6 @@
 // list.h - Interface to a list of strings
 // Written by Kongwei Ying, September 2017
-
+// Modified by Rahil Agrawal, October 2017
 #ifndef LIST_H
 #define LIST_H
 #define ALL_NODES -1
@@ -23,4 +23,6 @@ void addTfIdf(List l, char *str, double val, int terms);
 void showTfIdfList(List l, FILE *fp, int nUrls);
 void listToArray(List l, char sortedlist[][MAX_CHAR]);
 int cmptfidf(const void *p1, const void *p2);
+int cmpPagerankValues(const void *p1, const void *p2);
+
 #endif

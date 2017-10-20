@@ -1,0 +1,28 @@
+#start Section-1
+
+url64   url38 url73  url52   url51 url39   url49  url87  url56          url55
+url43  url34   url19  url81  url22   url79 url29  url75 url54           url46 url2 url13 url88  url68
+
+#end Section-1
+
+#start Section-2
+
+Sample Files for 1A
+You can download the following three sample files with expected pagerankList.txt files. For your
+reference, I have also included the file log.txt which includes values of Win, Wout, etc. Please
+note that you do NOT need to generate such a log file.
+
+Use format string "%.7f" to output pagerank values. Please note that your pagerank values might be
+slightly different to that provided in these samples. This might be due to the way you carry out
+calculations. However, make sure that your pagerank values match to say first 6 decimal points to
+the expected values. For example, say an expected value is 0.1843112, your value could be 0.184311x
+where x could be any digit.
+
+All the sample files were generated using the following command:
+
+% pagerank  0.85  0.00001  1000
+ex1
+ex2
+ex3
+
+#end Section-2

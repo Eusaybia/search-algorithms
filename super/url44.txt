@@ -1,0 +1,18 @@
+#start Section-1
+    url42 url40 url49
+    url97     url23 url48 url67
+url41 url82 url83     url36 url89 url65 url6 url98 url61 url25 url70 url47 url73
+url22 url87 url9 url13 url88  url86
+
+url4 url84 url70 url24 url98 url51    url60    url43    url86 url39
+#end Section-1
+
+#start Section-2
+
+    Baggage or luggage consists of bags, cases, and containers which hold a traveller's articles while the traveler is in transit.
+
+    The modern traveller can be expected to have packages containing clothing, toiletries, small possessions, trip necessities, and on the return-trip, souvenirs. For some people, luggage and the style thereof is representative of the owner's wealth.
+
+    Baggage (not luggage), or baggage train, can also refer to the train of people and goods, both military and of a personal nature, which commonly followed pre-modern armies on campaign.
+
+#end Section-2

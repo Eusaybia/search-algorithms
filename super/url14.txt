@@ -1,0 +1,153 @@
+#start Section-1
+
+
+url1
+url2
+url3
+
+url5
+url6
+url7
+url8
+url9
+url10
+url11
+url12
+
+url14
+url15
+url16
+url17
+url18
+
+url20
+url21
+url22
+url23
+url24
+
+url26
+url27
+url28
+url29
+url30
+url31
+url32
+url33
+url34
+
+url36
+url37
+url38
+url39
+url40
+url41
+url42
+url43
+url44
+url45
+
+url47
+url48
+url49
+url50
+url51
+url52
+url53
+url54
+url55
+url56
+url57     url44 url41 url49
+    url71 url96 url66
+url31 url52 url58
+url43 url15 url85 url10 url35 url84
+url44    url55
+url75 url94 url1    url21    url53      url18 url77  url45     url98 url66 url36      url60
+url58
+url59
+url60
+url61
+url62
+url63
+url64
+url65
+url66
+url67
+url68
+url69
+url70
+url71
+url72
+
+url74
+url75
+url76
+url77
+url78
+url79
+
+url81
+url82
+url83
+url84
+url85
+url86
+url87
+
+url89
+url90
+url91
+url92
+url93
+
+url95
+url96
+
+url98
+url99
+
+#end Section-1
+
+#start Section-2
+
+Programmer : A machine that turns coffee into code.
+
+Programmer : A person who fixed a problem that you don't know why you have, in a way you don't understand.
+
+Algorithm : Word used by Programmers when... they do not want to explain what they did.
+
+Hardware: the part of a computer that you can kick.
+
+What's the object oriented way to become healthy? 
+Inheritance.
+
+What do computers and air conditioners have in common? 
+They both become useless when you open windows!
+
+How do you tell HTML from HTML5?
+Try it out in IE. Did it work? No? It's HTML5.
+
+Chuck Norris writes code that optimizes itself.
+
+Chuck Norris can take a screenshot of his blue screen.
+
+Unix is user friendly. It;s just very particular about who its friends are.
+
+Optimist: Glass is half full.
+Pessimist: Glass is half empty.
+Programmer: Glass is twice as large as necessary.
+
+I don't see women as objects. I consider each to be in a class of her own.
+
+I'D LIKE TO MAKE THE WORLD A BETTER PLACE...... BUT THEY WON'T GIVE ME THE SOURCE CODE...
+
+Hide and seek champion...
+;
+since 1958
+
+C++ : You have no class
+C : *cries*
+
+
+#end Section-2
+
