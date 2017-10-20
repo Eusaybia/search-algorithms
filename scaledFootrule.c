@@ -102,7 +102,6 @@ void readRankFile(char *filename, int *array, int *maxRows) {
     if (numRows > *maxRows) {
         *maxRows = numRows;
     }
-    printf("\n");
 }
 
 void insertSetArray(int *array, int *nElems, int size, int elem) {
