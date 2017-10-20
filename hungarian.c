@@ -5,8 +5,14 @@
 
 #define INF (0x7FFFFFFF) //define infinity (almost)
 
+typedef struct h_problem_rep{
+	int size;
+	double** cost;
+	int** assignment;
+} h_problem_rep;
+
 //returns total cost
-static double subtractColMins(h_problem* p) {
+static double subtractColMins(h_problem p) {
 
 	//row and col counters
 	int r, c;
@@ -36,7 +42,7 @@ static double subtractColMins(h_problem* p) {
 }
 
 //returns number of unchosen rows
-static int matchRowCol(h_problem* p, double * row_dec, int * col_match, int * row_match, int * unchosen_row) {
+static int match(h_problem p, double * row_dec, int * col_match, int * row_match, int * unchosen_row) {
 
 	int nUnchosenRows = 0;
 	int r, c; //row and col counters
@@ -87,7 +93,7 @@ static int matchRowCol(h_problem* p, double * row_dec, int * col_match, int * ro
 }
 
 
-void hungarian_print_assignment(h_problem* p) {
+void hungarian_print_assignment(h_problem p) {
 	int i,j;
 	fprintf(stderr , "\n");
 	for(i=0; i<p->size; i++) {
@@ -100,7 +106,7 @@ void hungarian_print_assignment(h_problem* p) {
 	fprintf(stderr, "\n");
 }
 
-void hungarian_print_costmatrix(h_problem* p) {
+void hungarian_print_costmatrix(h_problem p) {
 	int i,j;
 	fprintf(stderr , "\n");
 	for(i=0; i<p->size; i++) {
@@ -113,7 +119,7 @@ void hungarian_print_costmatrix(h_problem* p) {
 	fprintf(stderr, "\n");
 }
 
-void hungarian_print_status(h_problem* p) {
+void hungarian_print_status(h_problem p) {
 
 	fprintf(stderr,"cost:\n");
 	hungarian_print_costmatrix(p);
@@ -124,7 +130,10 @@ void hungarian_print_status(h_problem* p) {
 }
 
 
-void hungarian_init(h_problem* p, double** cost_matrix, int size) {
+h_problem hungarian_init(double** cost_matrix, int size) {
+
+	h_problem_rep *p = (h_problem_rep *)malloc(sizeof(h_problem_rep));
+	assert(p != NULL);
 
 	//set problem size to size of square cost matrix
 	p->size = size;
@@ -147,10 +156,12 @@ void hungarian_init(h_problem* p, double** cost_matrix, int size) {
 			p->cost[i][j] =  cost_matrix[i][j];
 		}
 	}
+
+	return p;
 }
 
 
-void hungarian_free(h_problem* p) {
+void hungarian_free(h_problem p) {
 
 	//free 2nd dimension cost and assigment matrix memory
 	for (int i = 0; i < p->size; i++) {
@@ -168,29 +179,28 @@ void hungarian_free(h_problem* p) {
 
 
 
-double hungarian_solve(h_problem* p)
+double hungarian_solve(h_problem p)
 {
-	int  j, m, n, unmatched, nUnchosenRows, nRowsExpl;
+	int  j, unmatched, nUnchosenRows, nRowsExpl;
 	int r, c; //row and col counters
 	double s;
 
-	m = n = p->size;
-	//int r, c, nUnchosenRows, nRowsExpl;
-
-	int* col_match; //matchings
-	int* row_match; //matchings
+	//matchings
+	int* col_match;
+	int* row_match;
 	//e.g. if col c is matched with row r then col_match[r] == c and row_match[c] == r
 
 	int* parent_row; //keep track of preceeding row
-	int* unchosen_row;
+	int* unchosen_row; //
 
 	double* row_dec; //row decrements
 	double* col_inc; //col increments
 	double* slack; //minimum of each column (ignores chosen rows)
-	int* slack_row;
+	int* slack_row; //track row where col min occurs for each col
 
-	double cost = 0.0;
+	double cost = 0.0; //cost of assignment
 
+	//allocate memory to our helper arrays
 	col_match = (int*)calloc(p->size,sizeof(int));
 	assert(col_match != NULL);
 	unchosen_row = (int*)calloc(p->size,sizeof(int));
@@ -214,7 +224,7 @@ double hungarian_solve(h_problem* p)
 		row_match[i] = -1;
 		parent_row[i] = -1;
 		col_inc[i] = 0.0;
-		slack[i] = INF; //max int???
+		slack[i] = INF;
 	}
 
 
@@ -223,7 +233,7 @@ double hungarian_solve(h_problem* p)
 	// END ------------------------
 
 	// MATCHING ROWS AND COLS
-	nUnchosenRows = matchRowCol(p, row_dec, col_match, row_match, unchosen_row);
+	nUnchosenRows = match(p, row_dec, col_match, row_match, unchosen_row);
 	//END
 
 
@@ -301,7 +311,7 @@ double hungarian_solve(h_problem* p)
 
 						//Decreasing uncovered elements produces zero at [r,c]
 						if (row_match[c] < 0) {
-							for (j = c+1; j < n; j++)
+							for (j = c+1; j < p->size; j++)
 								if (slack[j] == 0.0)
 									col_inc[j] += s;
 							goto breakthrough;

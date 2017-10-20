@@ -4,7 +4,6 @@
 
 int main() {
 
-	h_problem p;
 
 	// an example cost matrix
 
@@ -29,20 +28,20 @@ int main() {
 	}
 
 	//initialise hungarian
-	hungarian_init(&p, m , 10) ;
+	h_problem p = hungarian_init(m , 10) ;
 
 	printf("Cost Matrix:\n");
 	//print cost matrix
-	hungarian_print_costmatrix(&p);
+	hungarian_print_costmatrix(p);
 
 	//solve
-	printf("Cost: %lf\n", hungarian_solve(&p));
+	printf("Cost: %lf\n", hungarian_solve(p));
 
 	//print assignment
 	printf("Assignemnt:\n");
-	hungarian_print_assignment(&p);
+	hungarian_print_assignment(p);
 
-	hungarian_free(&p);
+	hungarian_free(p);
 
 	return 0;
 }
