@@ -7,6 +7,7 @@
 #include <string.h>
 #include <math.h>
 #include "scaledFootrule.h"
+#include "headers.h"
 #include "hungarian.h"
 
 struct UrlRep {
@@ -15,9 +16,9 @@ struct UrlRep {
 
 int main(int argc, char *argv[]) {
 	// A 2d array to hold different ranking list rankings
-	Url rankArrays[MAX_LISTS][N_ROWS];
+	Url rankArrays[MAX_LISTS][MAX_V];
 	for (int i = 0; i < MAX_LISTS; i++){
-		for (int j = 0; j < N_ROWS; j++){
+		for (int j = 0; j < MAX_V; j++){
 			rankArrays[i][j] = newUrl();
 		}
 	}
@@ -29,12 +30,12 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Set of urls, a union of all the lists
-	Url urlSet[MAX_LISTS * N_ROWS];
-	for (int i = 0; i < MAX_LISTS * N_ROWS; i++) urlSet[i] = newUrl();
+	Url urlSet[MAX_LISTS * MAX_V];
+	for (int i = 0; i < MAX_LISTS * MAX_V; i++) urlSet[i] = newUrl();
 	int nElems = 0;
 	for (int i = 0; i < (argc - 1); i++){
 		for (int j = 0; j < maxRows; j++){
-			insertSetArray(urlSet, &nElems, MAX_LISTS * N_ROWS, rankArrays[i][j]);
+			insertSetArray(urlSet, &nElems, MAX_LISTS * MAX_V, rankArrays[i][j]);
 		}
 	}
 
@@ -78,7 +79,7 @@ int main(int argc, char *argv[]) {
 	disposeHungarian(p);
 
 	// Free urlSet
-	for (int i = 0; i < MAX_LISTS * N_ROWS; i++) free(urlSet[i]);
+	for (int i = 0; i < MAX_LISTS * MAX_V; i++) free(urlSet[i]);
 
 	// Free costMatrix
 	for (int i = 0; i < nElems; i++){
@@ -88,7 +89,7 @@ int main(int argc, char *argv[]) {
 
 	// Free rankArrays
 	for (int i = 0; i < MAX_LISTS; i++){
-		for (int j = 0; j < N_ROWS; j++){
+		for (int j = 0; j < MAX_V; j++){
 			free(rankArrays[i][j]);
 		}
 	}
