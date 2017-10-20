@@ -120,7 +120,7 @@ static Vertex *findVertex(Vertex *v, char *str) {
         return findVertex(v->right, str);
 }
 
-void showInOrder(Tree t, FILE *fp) {
+void printInOrder(Tree t, FILE *fp) {
     inOrderTraversal(t->root, fp);
 }
 

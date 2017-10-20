@@ -24,7 +24,7 @@ int main (int argc, char *argv[]) {
     addUrl(t, "car", "url141");
     addUrl(t, "cake", "url141");
     addUrl(t, "aadvark", "url141");
-    showInOrder(t, stdout);
+    printInOrder(t, stdout);
     dropTree(t);
     return EXIT_SUCCESS;
 }

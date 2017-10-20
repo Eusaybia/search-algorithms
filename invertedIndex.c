@@ -4,50 +4,50 @@
 #include "invertedIndex.h"
 
 int main(int argc, char* argv[]){
-    Queue collectionUrls2 = getCollectionUrls();
-    getInvertedIndex(collectionUrls2);
+    Queue collectionUrls = getCollectionUrls();
+    getInvertedIndex(collectionUrls);
     return EXIT_SUCCESS;
 }
-// Very similar logic to createUrlGraph() in readData.c
+
+// Generate InvertedIndex BST from URLs
 Tree getInvertedIndex(Queue collectionUrls) {
     Tree t = newTree();
-    // e.g. url31
     char url_from[MAX_CHAR] = {0};
+    char url_from_location[MAX_CHAR] = {0};
+    char curr_word[MAX_CHAR] = {0};
     while (!emptyQueue(collectionUrls)) {
         strcpy(url_from, leaveQueue(collectionUrls));
-        char url_from_location[MAX_CHAR] = {0};
         nameToDirectory(url_from_location, url_from);
         FILE *nextUrlFp = fopen(url_from_location, "r");
-        // We want to look for urls and ignore all other strings
-        char curr_word[MAX_CHAR] = {0};
-        while (1) {
-            // If we reach the end of the file
-            if (fscanf(nextUrlFp, "%s", curr_word) == EOF) {
-                break;
-            }
-
+        if (nextUrlFp == NULL) {
+            fprintf(stderr, "Couldn't open %s\n", url_from_location);
+            continue;
+        }
+        while (fscanf(nextUrlFp, "%s", curr_word) != EOF) {
+            // Only look for words in Section-2
             if (strcmp(curr_word, "#start") == 0) continue;
-            // Skip words with first 7 letters "Section"
             else if (strncmp(curr_word, "Section", 7) == 0) continue;
-            // Skip words with first 3 letters "url"
             else if (strncmp(curr_word, "url", 3) == 0) continue;
             else if (strcmp(curr_word, "#end") == 0) continue;
 
+            // Strip words of punctuation
             normalize(curr_word);
-            // If not in the tree, adds vertex curr_word to the tree
+            // Adds curr_word to the tree
             insertIntoTree(t, curr_word);
-            // Adds or updates the list urls within the vertex curr_word
+            // Adds the url_from into the list of urls for curr_word
             addUrl(t, curr_word, url_from);
         }
     }
     FILE *invertedIndexFp = fopen("invertedIndex.txt", "w");
 	if (invertedIndexFp == NULL) {
-        perror("Error, could not open file");
+        printf("Error, could not open file");
 	}
     else {
-        showInOrder(t, invertedIndexFp);
+        // Print the inverted index tree into invertedIndex.txt
+        printInOrder(t, invertedIndexFp);
         fclose(invertedIndexFp);
     }
-    //showInOrder(t, stdout);
+    // // Print index to stdout
+    //printInOrder(t, stdout);
     return t;
 }

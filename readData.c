@@ -31,27 +31,25 @@ void nameToDirectory(char *urlDirectory, char *url) {
 Graph createUrlGraph(Queue collectionUrls) {
     Graph urlGraph = newGraph(MAX_V);
     char url_from[MAX_CHAR] = {0};
-    while(!emptyQueue(collectionUrls)) {
+    char url_to[MAX_CHAR] = {0};
+    char url_from_location[MAX_CHAR] = {0};
+    while (!emptyQueue(collectionUrls)) {
         strcpy(url_from, leaveQueue(collectionUrls));
-        char url_from_location[MAX_CHAR] = {0};
         nameToDirectory(url_from_location, url_from);
         FILE *nextUrlFp = fopen(url_from_location, "r");
-        if(!nextUrlFp) {
+        if (nextUrlFp == NULL) {
             fprintf(stderr, "Couldn't open %s\n", url_from_location);
-            exit(0);
+            continue;
         }
-        // We want to look for urls and ignore all other strings
-        char url_to[MAX_CHAR] = {0};
-        while(1) {
-            // If we reach the end of the file
-            if (fscanf(nextUrlFp, "%s", url_to) == EOF) {
-                break;
-            }
+        // Scan urls in url_from Section-1 into string url_to
+        while (fscanf(nextUrlFp, "%s", url_to) != EOF) {
+            // Look for urls in Section-1
             if (strcmp(url_to, "#start") == 0) continue;
             else if (strcmp(url_to, "Section-1") == 0) continue;
             else if (strcmp(url_to, "#end") == 0) break;
 
-            if(strcmp(url_from,url_to))
+            // Only add edges if url_from and url_to are distinct
+            if (strcmp(url_from, url_to) != 0)
                 addEdge(urlGraph, url_from, url_to);
         }
     }
