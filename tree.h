@@ -9,11 +9,11 @@
 typedef struct TreeRep *Tree;
 
 typedef struct Vertex {
-    struct Vertex *left;
-    struct Vertex *right;
-    struct Vertex *parent;
-    char *word; // Acts as key
-    List urls; // List of urls that contain this word
+        struct Vertex *left;
+        struct Vertex *right;
+        struct Vertex *parent;
+        char *word; // Acts as key
+        List urls; // List of urls that contain this word
 } Vertex;
 
 Tree newTree();

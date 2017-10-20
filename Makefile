@@ -48,7 +48,7 @@ pagerank: $(SRC_OBJ_FILES_3) $(LIB_OBJ_FILES)
 
 inverted: $(SRC_OBJ_FILES_4) $(LIB_OBJ_FILES)
 	$(CC) $(CFLAGS_LINK) -o inverted $(SRC_OBJ_FILES_4) $(LIB_OBJ_FILES) -lm
-	
+
 scaledFootrule: $(SRC_OBJ_FILES_5) $(LIB_OBJ_FILES)
 	$(CC) $(CFLAGS_LINK) -o scaledFootrule $(SRC_OBJ_FILES_5) $(LIB_OBJ_FILES) -lm
 # ADT Tests
@@ -78,4 +78,4 @@ scaledFootrule: $(SRC_OBJ_FILES_5) $(LIB_OBJ_FILES)
 
 # Remove all object files and binaries
 clean:
-	rm $(BINARIES) *.o
+	rm $(BINARIES)

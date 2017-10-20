@@ -5,6 +5,7 @@ import cmd
 import subprocess
 import sys
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -18,7 +19,7 @@ class bcolors:
 
 class Search(cmd.Cmd):
 
-    prompt =    bcolors.OKBLUE + bcolors.BOLD + 'search: ' + bcolors.ENDC
+    prompt = bcolors.OKBLUE + bcolors.BOLD + 'search: ' + bcolors.ENDC
     search_type = "./searchPagerank "
 
     def default(self, line):
@@ -28,11 +29,11 @@ class Search(cmd.Cmd):
         subprocess.call(["less " + line + ".txt"], shell=True)
 
     def do_PAGERANK(self, line):
-        print (bcolors.WARNING + "Changing search type to pagerank" + bcolors.ENDC)
+        print(bcolors.WARNING + "Changing search type to pagerank" + bcolors.ENDC)
         self.search_type = "./searchPagerank "
 
     def do_TFIDF(self, line):
-        print (bcolors.WARNING + "Changing search type to pagerank" + bcolors.ENDC)
+        print(bcolors.WARNING + "Changing search type to tfidf" + bcolors.ENDC)
         self.search_type = "./searchTfIdf "
 
     def do_exit(self, line):
