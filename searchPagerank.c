@@ -47,7 +47,6 @@ int findMatchedUrls(char matchedUrlList[MAX_V][MAX_CHAR], char queries[MAX_QUERI
 		for (int i = 0 ; i < nQueries ; i++){
 			if (strcmp(invertedIndexStr, queries[i]) == 0){
 				// Read the rest of the line into buf
-				memset(buf, 0, MAX_CHAR) ;
 				fgets(buf, MAX_CHAR, invertedIndexFp) ;
 				// Then extract the strings and place them into matchedUrlList
 				char *url = NULL ;
