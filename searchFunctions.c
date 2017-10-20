@@ -9,8 +9,8 @@ void normalize(char strings[MAX_CHAR]){
         strings[i] = tolower((unsigned char)strings[i]);
     }
     
-    j--;
-    if (strings[j] == '.' || strings[j] == ',' || strings[j] == ';' || strings[j] == '?') strings[j] = '\0';
+    i--;
+    if (strings[i] == '.' || strings[i] == ',' || strings[i] == ';' || strings[i] == '?') strings[i] = '\0';
 }
 
 void getQueries(int argc, char* argv[], char queries[MAX_QUERIES][MAX_CHAR]){

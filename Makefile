@@ -12,7 +12,7 @@ SRC_FILES_1 = searchPagerank.c readData.c
 SRC_FILES_2 = readData.c searchTfIdf.c
 SRC_FILES_3 = pagerank.c readData.c
 SRC_FILES_4 = invertedIndex.c readData.c
-SRC_FILES_5 = scaledFootrule.c
+SRC_FILES_5 = scaledFootrule.c hungarian.c
 LIB_FILES = graph.c list.c queue.c tree.c vertexQueue.c searchFunctions.c
 #TEST_FILES = testGraph.c testList.c testTree.c
 

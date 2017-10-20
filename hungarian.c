@@ -92,6 +92,13 @@ static int match(h_problem p, double * row_dec, int * col_match, int * row_match
 
 }
 
+int hungarian_url_from_rank(h_problem p, int position, int nElems) {
+	for (int y = 0; y < nElems; y++) {
+		if (p->assignment[y][position]) return y;
+	}
+	fprintf(stderr, "No url found for this position, incorrect assignment!\n");
+	return -1;
+}
 
 void hungarian_print_assignment(h_problem p) {
 	int i,j;
@@ -112,7 +119,7 @@ void hungarian_print_costmatrix(h_problem p) {
 	for(i=0; i<p->size; i++) {
 		fprintf(stderr, " [");
 		for(j=0; j<p->size; j++) {
-			fprintf(stderr, "%5.1lf ",p->cost[i][j]);
+			fprintf(stderr, "%5.2lf ",p->cost[i][j]);
 		}
 		fprintf(stderr, "]\n");
 	}
