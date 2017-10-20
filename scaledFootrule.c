@@ -93,8 +93,19 @@ int main(int argc, char *argv[]) {
 
     hungarian_free(p);
     
-    // Need to free my costMatrix array too
-    
+    // Free urlSet
+    for (int i = 0; i < MAX_LISTS * N_ROWS; i++) free(urlSet[i]);
+    // Free costMatrix
+	for (int i = 0; i < nElems; i++) {
+		free(costMatrix[i]);
+    }
+    free(costMatrix);
+    // Free rankArrays
+    for (int i = 0; i < MAX_LISTS; i++) {
+        for (int j = 0; j < N_ROWS; j++) {
+            free(rankArrays[i][j]);
+        }
+    }
     return EXIT_SUCCESS;
 }
 
@@ -128,9 +139,6 @@ void readRankFile(char *filename, Url *array, int *maxRows) {
 
 void insertSetArray(Url *array, int *nElems, int size, Url elem) {
     for (int i = 0; i < size; i++) {
-        // printf("elem: %s\n", elem->url);
-        // printf("array: %s\n", array[i]->url);
-        // exit(1);
         if (strcmp(array[i]->url, elem->url) == 0) return;
     }
     strcpy(array[*nElems]->url, elem->url);
