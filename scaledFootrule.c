@@ -4,16 +4,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 #include <math.h>
 #include "scaledFootrule.h"
 #include "hungarian.h"
 
+struct UrlRep {
+    char url[MAX_CHAR];
+} UrlRep;
+
 int main(int argc, char *argv[]) {
     // A 2d array to hold different ranking list rankings
-    int rankArrays[MAX_LISTS][N_ROWS] = {0};
+    Url rankArrays[MAX_LISTS][N_ROWS];
     for (int i = 0; i < MAX_LISTS; i++) {
         for (int j = 0; j < N_ROWS; j++) {
-            rankArrays[i][j] = -1;
+            rankArrays[i][j] = newUrl();
         }
     }
     int maxRows = 0; // Determined by the no. entries in a rank file
@@ -23,31 +28,31 @@ int main(int argc, char *argv[]) {
         readRankFile(argv[i + 1], rankArrays[i], &maxRows);
         // printf("Ranking list %d\n", i);
         // for (int j = 0; j < maxRows; j++) {
-        //     printf("%d ", rankArrays[i][j]);
+        //     printf("%s ", rankArrays[i][j]->url);
         // }
         // printf("\n");
     }
     
     // Set of urls, a union of all the lists
-    int urlSet[MAX_LISTS * N_ROWS] = {0};
-    for (int i = 0; i < MAX_LISTS * N_ROWS; i++) urlSet[i] = -1;
+    Url urlSet[MAX_LISTS * N_ROWS];
+    for (int i = 0; i < MAX_LISTS * N_ROWS; i++) urlSet[i] = newUrl();
     int nElems = 0;
     for (int i = 0; i < (argc - 1); i++) {
         for (int j = 0; j < maxRows; j++) {
             insertSetArray(urlSet, &nElems, MAX_LISTS * N_ROWS, rankArrays[i][j]);
         }
     }
-    
-    // Sort set
-    qsort(urlSet, nElems, sizeof(int), cmpInt);
 
+    // Sort set
+    qsort(urlSet, nElems, sizeof(Url), cmpString);
+    
     // Print set
     // printf("Set of urls:\n");
     // for (int i = 0; i < nElems; i++) {
-    //     printf("%d ", urlSet[i]);
+    //     printf("%s ", urlSet[i]->url);
     // }
     // printf("\n");
-    
+
     double **costMatrix = (double **)calloc(nElems, sizeof(double *));
 	for (int i = 0; i < nElems; i++) {
 		costMatrix[i] = (double*)calloc(nElems, sizeof(double));
@@ -60,9 +65,9 @@ int main(int argc, char *argv[]) {
             for (int i = 0; i < (argc - 1); i++) {
                 int tc = findUrlPositionInRankList(rankArrays[i], urlSet[y], nElems);
                 int ti = findRankListSize(rankArrays[i], nElems);
-                // printf("url %d is rank %d in ranklist %d which has size %d\n", y, tc, i, ti);
-                // printf("%d|", tc);
-                costMatrix[y][x] += scaledFootruleDistance(rankArrays, nElems, x + 1, tc, ti);
+                // printf("%d|", ti);
+                costMatrix[y][x] += scaledFootruleDistance(nElems, x + 1, tc, ti);
+                // printf("%s is rank %d in ranklist %d which has size %d and position %d\n", urlSet[y]->url, tc, i, ti, x + 1);
             }
             // printf("%.2lf ", costMatrix[y][x]);
         }
@@ -83,7 +88,7 @@ int main(int argc, char *argv[]) {
     // hungarian_print_assignment(p);
     
     for (int i = 0; i < nElems; i++) {
-        printf("url%d\n", urlSet[hungarian_url_from_rank(p, i, nElems)]);
+        printf("%s\n", urlSet[hungarian_url_from_rank(p, i, nElems)]->url);
     }
 
     hungarian_free(p);
@@ -93,8 +98,14 @@ int main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 
-// Reads the rank list into an array
-void readRankFile(char *filename, int *array, int *maxRows) {
+Url newUrl() {
+    Url url = malloc(sizeof(struct UrlRep));
+    memset(url->url, 0, MAX_CHAR);
+    return url;
+}
+
+// Reads the ranked lists of urls into an array
+void readRankFile(char *filename, Url *array, int *maxRows) {
     FILE *fp = fopen(filename, "r");
     if (fp == NULL) {
         printf("File opening failed\n");
@@ -103,8 +114,10 @@ void readRankFile(char *filename, int *array, int *maxRows) {
     int numRows = 0;
     int i = 0;
     while (1) {
+        char buf[MAX_CHAR] = {0};
         numRows = i;
-        if (fscanf(fp, "url%d\n", &array[i]) == EOF) break;
+        if (fscanf(fp, "%s\n", buf) == EOF) break;
+        strcpy(array[i]->url, buf);
         i++;
     }
     fclose(fp);
@@ -113,16 +126,21 @@ void readRankFile(char *filename, int *array, int *maxRows) {
     }
 }
 
-void insertSetArray(int *array, int *nElems, int size, int elem) {
+void insertSetArray(Url *array, int *nElems, int size, Url elem) {
     for (int i = 0; i < size; i++) {
-        if (array[i] == elem) return;
+        // printf("elem: %s\n", elem->url);
+        // printf("array: %s\n", array[i]->url);
+        // exit(1);
+        if (strcmp(array[i]->url, elem->url) == 0) return;
     }
-    array[*nElems] = elem;
+    strcpy(array[*nElems]->url, elem->url);
     (*nElems)++;
 }
 
-int cmpInt(const void *a, const void *b) {
-    return ( *(int*)a - *(int*)b );
+int cmpString(const void *a, const void *b) {
+    Url pa = *(Url *)a;
+    Url pb = *(Url *)b;
+    return strcmp(pa->url, pb->url);
  }
 
 // Checks if correct number of commandline arguments are given
@@ -135,25 +153,25 @@ int argsOk(int argc, char *argv[]) {
         return 1;
 }
 
-int findRankListSize(int rankArray[], int maxUrls) {
+int findRankListSize(Url rankArray[], int maxUrls) {
     int i;
     for (i = 0; i < maxUrls; i++) {
-        if (rankArray[i] == -1) break;
+        if (rankArray[i]->url[0] == 0) break;
     }
     return i;
 }
 
-int findUrlPositionInRankList(int rankArray[], int url, int maxUrls) {
+int findUrlPositionInRankList(Url rankArray[], Url url, int maxUrls) {
     int i;
     for (i = 0; i < maxUrls; i++) {
         // This means there's no such url in this rankArray
-        if (rankArray[i] == -1) return 0;
-        if (url == rankArray[i]) break;
+        if (rankArray[i]->url[0] == 0) return 0;
+        if (strcmp(rankArray[i]->url, url->url) == 0) break;
     }
     return i + 1;
 }
 
-double scaledFootruleDistance(int rankArrays[MAX_LISTS][N_ROWS], int n, int p, int tc, int ti) {
+double scaledFootruleDistance(int n, int p, int tc, int ti) {
     double sfd = 0.0;
     if (tc == 0) return sfd;
     if (ti == 0 || n == 0) printf("NAN\n");
