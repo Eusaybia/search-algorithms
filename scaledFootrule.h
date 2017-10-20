@@ -1,6 +1,12 @@
-#define N_ROWS 100
+
+
+#ifndef SCALEDFOOTRULE_H
+#define SCALEDFOOTRULE_H
+
 #define MAX_LISTS 100
 
+#include "headers.h"
+#include "hungarian.h"
 typedef struct UrlRep *Url;
 
 Url newUrl();
@@ -11,3 +17,5 @@ int cmpString(const void *a, const void *b);
 int findRankListSize(Url rankArray[], int maxUrls);
 int findUrlPositionInRankList(Url rankArray[], Url url, int maxUrls);
 double scaledFootruleDistance(int n, int p, int tc, int ti);
+
+#endif
