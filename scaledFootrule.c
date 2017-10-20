@@ -22,17 +22,21 @@ int main(int argc, char *argv[]) {
         }
     }
     int maxRows = 0; // Determined by the no. entries in a rank file
-    if(!argsOk(argc, argv)) return EXIT_FAILURE;
+    if(!argsOk(argc, argv)){
+        for (int i = 0; i < MAX_LISTS; i++) {
+            for (int j = 0; j < N_ROWS; j++) {
+                free(rankArrays[i][j]);
+            }
+        }
+    }
+
 
     for (int i = 0; i < (argc - 1); i++) {
-        if (!readRankFile(argv[i + 1], rankArrays[i], &maxRows)) return EXIT_FAILURE;
-        // printf("Ranking list %d\n", i);
-        // for (int j = 0; j < maxRows; j++) {
-        //     printf("%s ", rankArrays[i][j]->url);
-        // }
-        // printf("\n");
+        if (!readRankFile(argv[i + 1], rankArrays[i], &maxRows)){
+            return EXIT_FAILURE;
+        }
     }
-    
+
     // Set of urls, a union of all the lists
     Url urlSet[MAX_LISTS * N_ROWS];
     for (int i = 0; i < MAX_LISTS * N_ROWS; i++) urlSet[i] = newUrl();
@@ -45,7 +49,7 @@ int main(int argc, char *argv[]) {
 
     // Sort set
     qsort(urlSet, nElems, sizeof(Url), cmpString);
-    
+
     // Print set
     // printf("Set of urls:\n");
     // for (int i = 0; i < nElems; i++) {
@@ -86,13 +90,13 @@ int main(int argc, char *argv[]) {
 	//print assignment
 	// printf("Assignment:\n");
     // hungarian_print_assignment(p);
-    
+
     for (int i = 0; i < nElems; i++) {
         printf("%s\n", urlSet[getUrlFromRank(p, i, nElems)]->url);
     }
 
     disposeHungarian(p);
-    
+
     // Free urlSet
     for (int i = 0; i < MAX_LISTS * N_ROWS; i++) free(urlSet[i]);
 
