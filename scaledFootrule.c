@@ -59,14 +59,8 @@ int main(int argc, char *argv[]) {
 	//initialise hungarian
 	hProblem p = newHungarian(costMatrix, nElems);
 
-	//print cost matrix
-	// hungarian_print_costmatrix(p);
-
 	//solve
 	printf("%.6lf\n", solveHungarian(p));
-
-	//print assignment
-	// hungarian_print_assignment(p);
 
 	for (int i = 0; i < nElems; i++){
 		printf("%s\n", urlSet[getUrlFromRank(p, i, nElems)]->url);

@@ -17,7 +17,6 @@ int main (int argc, char *argv[]) {
     insertIntoTree(t, "carrie");
     insertIntoTree(t, "carrie");
     insertIntoTree(t, "carrie");
-    showTree(t);
     addUrl(t, "banana", "url121");
     addUrl(t, "apple", "url121");
     addUrl(t, "carrot", "url131");

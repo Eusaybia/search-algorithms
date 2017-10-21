@@ -13,38 +13,41 @@ int main(int argc, char *argv[]) {
 // Generate InvertedIndex BST from URLs
 Tree getInvertedIndex(Queue collectionUrls) {
 	Tree t = newTree();
-	char *url_from;
-	char url_from_location[MAX_CHAR] = {0};
-	char curr_word[MAX_CHAR] = {0};
+	int readWords = 0;
+	char *urlFrom;
+	char urlFromLocation[MAX_CHAR] = {0};
+	char currWord[MAX_CHAR] = {0};
 	while (!emptyQueue(collectionUrls)){
-		url_from = leaveQueue(collectionUrls);
-		strcpy(url_from_location, url_from);
-		strcat(url_from_location, ".txt");
-		FILE *nextUrlFp = fopen(url_from_location, "r");
+		urlFrom = leaveQueue(collectionUrls);
+		strcpy(urlFromLocation, urlFrom);
+		strcat(urlFromLocation, ".txt");
+		FILE *nextUrlFp = fopen(urlFromLocation, "r");
 		if (nextUrlFp == NULL){
-			fprintf(stderr, "Couldn't open %s\n", url_from);
+			fprintf(stderr, "Couldn't open %s\n", urlFrom);
 			continue;
 		}
-		while (fscanf(nextUrlFp, "%s", curr_word) != EOF){
+		readWords = 0;
+		while (fscanf(nextUrlFp, "%s", currWord) != EOF){
 			// Only look for words in Section-2
-			if (strcmp(curr_word, "#start") == 0){
-				fscanf(nextUrlFp, "%s", curr_word);
+			if (strcmp(currWord, "#start") == 0){
+				fscanf(nextUrlFp, "%s", currWord);
 				continue;
 			}
-			else if (strncmp(curr_word, "url", 3) == 0) continue;
-			else if (strcmp(curr_word, "#end") == 0){
-				fscanf(nextUrlFp, "%s", curr_word);
+			else if (strcmp(currWord, "#end") == 0){
+				fscanf(nextUrlFp, "%s", currWord);
+				readWords = 1;
 				continue;
 			}
+			else if (readWords == 0) continue;
 
 			// Strip words of punctuation
-			normalize(curr_word);
-			// Adds curr_word to the tree
-			insertIntoTree(t, curr_word);
-			// Adds the url_from into the list of urls for curr_word
-			addUrl(t, curr_word, url_from);
+			normalize(currWord);
+			// Adds currWord to the tree
+			insertIntoTree(t, currWord);
+			// Adds the urlFrom into the list of urls for currWord
+			addUrl(t, currWord, urlFrom);
 		}
-		free(url_from);
+		free(urlFrom);
 		fclose(nextUrlFp);
 	}
 	FILE *invertedIndexFp = fopen("invertedIndex.txt", "w");

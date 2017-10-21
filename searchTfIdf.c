@@ -65,10 +65,10 @@ int main(int argc, char *argv[]) {
 
 				for (int j = 0; j < nMatchedUrls; j++){
 
-					char url_from_location[MAX_CHAR] = {0};
-					strcat(url_from_location, matchedUrlList[j]);
-					strcat(url_from_location, ".txt");
-					FILE *urlToOpen = fopen(url_from_location, "r");
+					char urlFromLocation[MAX_CHAR] = {0};
+					strcat(urlFromLocation, matchedUrlList[j]);
+					strcat(urlFromLocation, ".txt");
+					FILE *urlToOpen = fopen(urlFromLocation, "r");
 
 					double tfidf = getTfIdf(queries[i], urlToOpen, nMatchedUrls, totalDocs);
 					addTfIdf(urlList, matchedUrlList[j], tfidf, 1);
@@ -95,28 +95,28 @@ double getTfIdf(char term[MAX_CHAR], FILE *doc, int totalMatchedUrls, int totalD
 	double idf  = 0;
 	double tfidf = 0;
 
-	char curr_word[MAX_CHAR] = {0};
+	char currWord[MAX_CHAR] = {0};
 
 	while (1){
 		// If we reach the end of the file
-		if (fscanf(doc, "%s", curr_word) == EOF){
+		if (fscanf(doc, "%s", currWord) == EOF){
 			break;
 		}
 
-		if (strcmp(curr_word, "#start") == 0){
-			fscanf(doc, "%s", curr_word);
+		if (strcmp(currWord, "#start") == 0){
+			fscanf(doc, "%s", currWord);
 			continue;
 		}
 		// Skip words with first 3 letters "url"
-		else if (strncmp(curr_word, "url", 3) == 0) continue;
-		else if (strcmp(curr_word, "#end") == 0){
-			fscanf(doc, "%s", curr_word);
+		else if (strncmp(currWord, "url", 3) == 0) continue;
+		else if (strcmp(currWord, "#end") == 0){
+			fscanf(doc, "%s", currWord);
 			continue;
 		}
 
-		normalize(curr_word);
+		normalize(currWord);
 
-		if (strcmp(curr_word, term) == 0){
+		if (strcmp(currWord, term) == 0){
 			tc++;
 		}
 

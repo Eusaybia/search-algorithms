@@ -16,11 +16,11 @@ typedef struct GraphRep *Graph;
 Graph   newGraph(int maxV);
 // Empty the graph and free all memory associated with it
 void  disposeGraph(Graph g);
-// Add a directed edge from url_from to url_to
+// Add a directed edge from urlFrom to urlTo
 int  addEdge(Graph g, char *from, char *to);
 // Return the number of vertices in the graph
 int  nVertices(Graph g);
-// Return 1 if there is an edge from url_from to url_to, 0 otherwise
+// Return 1 if there is an edge from urlFrom to urlTo, 0 otherwise
 int  isConnected(Graph g, char *from, char *to);
 // Same as isConnected but used vertexId instead of url strings
 int  isEdge(Graph g, int from, int to);
@@ -39,7 +39,7 @@ void  setPagerankBefore(Graph g, int i, double value);
 // Write the pageranks to pagerankList.txt
 void  showPageRanks(Graph g);
 // Display graph to stdout in one of two modes. Mode can be supplied by user
-void  showGraph(Graph g, int print_mode);
+void  showGraph(Graph g, int printMode);
 // When creating a new vertex, set the corresponding values
 void setVertexInfo(Graph g, int vertexId, int numInlinks, int numOutlinks, double pagerank);
 // Returns the url of a page given its vertexId

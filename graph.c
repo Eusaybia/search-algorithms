@@ -11,8 +11,8 @@ typedef struct Vertex {
 	char url[MAX_CHAR];	// Link/URL of the page
 	int nInLinks;	// Number of incoming links to the page
 	int nOutLinks;	// Number of outgoing links from the page
-	double pagerank_before;	// pagerank of page at time t
-	double pagerank_after;	// pagerank of page at time t+1
+	double pagerankBefore;	// pagerank of page at time t
+	double pagerankAfter;	// pagerank of page at time t+1
 } Vertex;
 
 typedef struct GraphRep {
@@ -65,26 +65,26 @@ void disposeGraph(Graph g) {
 // Return: 1 if edge successfully added, 0 if unsuccessful
 int addEdge(Graph g, char *from, char *to) {
 	// Check if both vertices exist
-	int from_index = 0, to_index = 0;
-	from_index = findVertexIdFromString(g, from);
-	to_index = findVertexIdFromString(g, to);
+	int fromIndex = 0, toIndex = 0;
+	fromIndex = findVertexIdFromString(g, from);
+	toIndex = findVertexIdFromString(g, to);
 	// If from doesn't exist in the graph
-	if (from_index == -1){
-		from_index = addVertex(g, from);
+	if (fromIndex == -1){
+		fromIndex = addVertex(g, from);
 	}
 	// If to doesn't exist in the graph
-	if (to_index == -1){
-		to_index = addVertex(g, to);
+	if (toIndex == -1){
+		toIndex = addVertex(g, to);
 	}
-	if (from_index < 0 || to_index < 0){
+	if (fromIndex < 0 || toIndex < 0){
 		printf(RED "Index out of bounds\n" RESET);
 		return 0;
 	}
 	// Add an edge
-	if (!(g->edges[from_index][to_index])){
-		g->edges[from_index][to_index] += 1;
-		g->vertices[to_index]->nInLinks++;
-		g->vertices[from_index]->nOutLinks++;
+	if (!(g->edges[fromIndex][toIndex])){
+		g->edges[fromIndex][toIndex] += 1;
+		g->vertices[toIndex]->nInLinks++;
+		g->vertices[fromIndex]->nOutLinks++;
 	}
 
 	return 1;
@@ -96,22 +96,22 @@ int nVertices(Graph g) {
 }
 
 int isConnected(Graph g, char *from, char *to) {
-	int from_index = findVertexIdFromString(g, from);
-	int to_index = findVertexIdFromString(g, to);
-	if (from_index == -1 || to_index == -1) return 0;
-	return (g->edges[from_index][to_index] != 0) ? 1 : 0;
+	int fromIndex = findVertexIdFromString(g, from);
+	int toIndex = findVertexIdFromString(g, to);
+	if (fromIndex == -1 || toIndex == -1) return 0;
+	return (g->edges[fromIndex][toIndex] != 0) ? 1 : 0;
 }
 
 // Display the graph in one of two modes:
 // DENSE : Prints page name and explcitly states links
 // TERSE : Shows the links between pages in a 2D array of 1s and 0s
-void showGraph(Graph g, int print_mode) {
+void showGraph(Graph g, int printMode) {
 	assert(g != NULL);
 	if (g->nV == 0){
 		printf("Graph is empty\n");
 	}
 	else {
-		if (print_mode == DENSE){
+		if (printMode == DENSE){
 			for (int i = 0; i < g->nV; i++){
 				printf("Vertex %d: " RED "'%s'" RESET, i, getVertexUrl(g, i));
 				printf(" connects to:\n");
@@ -126,7 +126,7 @@ void showGraph(Graph g, int print_mode) {
 				if (!isConnected) printf("   Nothing\n");
 			}
 		}
-		else if (print_mode == TERSE){
+		else if (printMode == TERSE){
 			printf("   ");
 			for (int i = 0; i < g->maxV; i++) printf("%3d", i);
 			printf("\n");
@@ -195,22 +195,22 @@ int numInlinks(Graph g, int i) {
 
 // Return the pagerank of a page at time t given its vertexId
 double getPagerankBefore(Graph g, int i) {
-	return g->vertices[i]->pagerank_before;
+	return g->vertices[i]->pagerankBefore;
 }
 
 // Return the pagerank of a page at time t+1 given its vertexId
 double getPagerankAfter(Graph g, int i) {
-	return g->vertices[i]->pagerank_after;
+	return g->vertices[i]->pagerankAfter;
 }
 
 // Set the pagerank of a page at time t given the pagerank and page's VertexId
 void setPagerankBefore(Graph g, int i, double value) {
-	g->vertices[i]->pagerank_before = value;
+	g->vertices[i]->pagerankBefore = value;
 }
 
 // Set the pagerank of a page at time t+1 given the pagerank and page's VertexId
 void setPagerankAfter(Graph g, int i, double value) {
-	g->vertices[i]->pagerank_after = value;
+	g->vertices[i]->pagerankAfter = value;
 }
 
 // Display the pageranks of all pages and the sum of the pagerank
@@ -223,21 +223,21 @@ void showPageRanks(Graph g) {
 		perror("Error, could not open file");
 	}
 	// Write sorted pageranks in the following format:
-	// url_string, number of outlinks, pagerank to 7dp
+	// url string, number of outlinks, pagerank to 7dp
 	// Eg: url12, 7, 0.04567123
 	for (int i = 0; i < g->nV; i++){
 		int vertexId = findVertexIdFromString(g, sortedlist[i]);
 		fprintf(fp, "%s, %d, %.7lf\n",
 				g->vertices[vertexId]->url,
 				g->vertices[vertexId]->nOutLinks,
-				g->vertices[vertexId]->pagerank_before);
+				g->vertices[vertexId]->pagerankBefore);
 	}
 	fclose(fp);
 }
 
 // Set the values Page Info
 void setVertexInfo(Graph g, int vertexId, int nInLinks, int nOutLinks, double pagerank) {
-	g->vertices[vertexId]->pagerank_before = pagerank;
+	g->vertices[vertexId]->pagerankBefore = pagerank;
 	g->vertices[vertexId]->nInLinks = nInLinks;
 	g->vertices[vertexId]->nOutLinks = nOutLinks;
 }
@@ -250,7 +250,7 @@ void graphToList(Graph g, char sortedlist[][MAX_CHAR]) {
 	for (int i = 0; i < g->nV; i++){
 		// Create list with the url strings and pageranks values as the main
 		// components of the nodes
-		appendList(l, g->vertices[i]->url, g->vertices[i]->pagerank_before, 0);
+		appendList(l, g->vertices[i]->url, g->vertices[i]->pagerankBefore, 0);
 	}
 	// Sort the list in descending order of PageRankValues
 	sortList(l, cmpPagerankValues);
