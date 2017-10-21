@@ -18,9 +18,12 @@ int main(int argc, char *argv[]) {
 	int maxRows = 0;	// Determined by the no. entries in a rank file
 	if (!argsOk(argc, argv)) return EXIT_FAILURE;
 
+    int rankListSizes[MAX_LISTS] = {0};
+    // Read urls into rankArray
 	for (int i = 0; i < (argc - 1); i++){
-		if (!readRankFile(argv[i + 1], rankArrays[i], &maxRows)) return EXIT_FAILURE;
-	}
+        if (!readRankFile(argv[i + 1], rankArrays[i], &maxRows, rankListSizes, i))
+            return EXIT_FAILURE;
+    }
 
 	// Set of urls, a union of all the lists
 	Url urlSet[MAX_LISTS * MAX_V];
@@ -47,7 +50,7 @@ int main(int argc, char *argv[]) {
 			// For each list
 			for (int i = 0; i < (argc - 1); i++){
 				int tc = findUrlPositionInRankList(rankArrays[i], urlSet[y], nElems);
-				int ti = findRankListSize(rankArrays[i], nElems);
+                int ti = rankListSizes[i];
 				costMatrix[y][x] += scaledFootruleDistance(nElems, x + 1, tc, ti);
 			}
 		}
@@ -96,7 +99,7 @@ Url newUrl() {
 }
 
 // Reads the ranked lists of urls into an array
-int readRankFile(char *filename, Url *array, int *maxRows) {
+int readRankFile(char *filename, Url *array, int *maxRows, int rankListSizes[], int listNo) {
 	FILE *fp = fopen(filename, "r");
 	if (fp == NULL){
 		perror("File opening failed\n");
@@ -114,7 +117,8 @@ int readRankFile(char *filename, Url *array, int *maxRows) {
 	fclose(fp);
 	if (numRows > *maxRows){
 		*maxRows = numRows;
-	}
+    }
+    rankListSizes[listNo] = numRows;
 	return 1;
 }
 
@@ -140,14 +144,6 @@ int argsOk(int argc, char *argv[]) {
 	}
 	else
 		return 1;
-}
-
-int findRankListSize(Url rankArray[], int maxUrls) {
-	int i;
-	for (i = 0; i < maxUrls; i++){
-		if (rankArray[i]->url[0] == 0) break;
-	}
-	return i;
 }
 
 int findUrlPositionInRankList(Url rankArray[], Url url, int maxUrls) {
