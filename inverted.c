@@ -38,7 +38,7 @@ Tree getInvertedIndex(Queue collectionUrls) {
 			}
 
 			// Strip words of punctuation
-			normalize(curr_word);
+			normalise(curr_word);
 			// Adds curr_word to the tree
 			insertIntoTree(t, curr_word);
 			// Adds the url_from into the list of urls for curr_word

@@ -12,7 +12,7 @@
 
 
 int main(int argc, char *argv[]) {
-	// Normalize the search term queries which are passed as
+	// normalise the search term queries which are passed as
 	// Command-line arguments
 	char matchedUrlList[MAX_V][MAX_CHAR] = {{0}};
 	char queries[MAX_QUERIES][MAX_CHAR] = {{0}};

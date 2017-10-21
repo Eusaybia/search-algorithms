@@ -6,10 +6,10 @@
 
 #include "headers.h"
 
-// Normalize - Remove trailing punctuations from the end of the word
-void normalize(char strings[MAX_CHAR]);
+// normalise - Remove trailing punctuations from the end of the word
+void normalise(char strings[MAX_CHAR]);
 
-// Normalize the command line arguments and store them in a string array
-void getQueries(int argc, char* argv[], char queries[MAX_QUERIES][MAX_CHAR]);
+// normalise the command line arguments and store them in a string array
+int getQueries(int argc, char* argv[], char queries[MAX_QUERIES][MAX_CHAR]);
 
 #endif

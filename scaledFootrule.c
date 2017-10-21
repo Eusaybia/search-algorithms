@@ -139,7 +139,7 @@ int cmpString(const void *a, const void *b) {
 // Checks if correct number of commandline arguments are given
 int argsOk(int argc, char *argv[]) {
 	if (argc == 1 || argc == 2){
-		printf("Usage: ./scaledFootrule file1 file2\n");
+		printf("Usage: ./scaledFootrule file1 file2 ...\n");
 		return 0;
 	}
 	else
