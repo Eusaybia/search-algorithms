@@ -132,51 +132,6 @@ static void inOrderTraversal(Vertex *v, FILE *fp) {
 	}
 }
 
-#ifdef COMPACT
-	for (int i = 0; i < width; i++)
-		s[depth][offset + left + i] = b[i];
-
-	if (depth && isLeft){
-
-		for (int i = 0; i < width + right; i++)
-			s[depth - 1][offset + left + width / 2 + i] = '-';
-
-		s[depth - 1][offset + left + width / 2] = '.';
-
-	}
-	else if (depth && !isLeft){
-
-		for (int i = 0; i < left + width; i++)
-			s[depth - 1][offset - width / 2 + i] = '-';
-
-		s[depth - 1][offset + left + width / 2] = '.';
-	}
-#else
-	for (int i = 0; i < width; i++)
-		s[2 * depth][offset + left + i] = b[i];
-
-	if (depth && isLeft){
-
-		for (int i = 0; i < width + right; i++)
-			s[2 * depth - 1][offset + left + width / 2 + i] = '-';
-
-		s[2 * depth - 1][offset + left + width / 2] = '+';
-		s[2 * depth - 1][offset + left + width + right + width / 2] = '+';
-
-	}
-	else if (depth && !isLeft){
-
-		for (int i = 0; i < left + width; i++)
-			s[2 * depth - 1][offset - width / 2 + i] = '-';
-
-		s[2 * depth - 1][offset + left + width / 2] = '+';
-		s[2 * depth - 1][offset - width / 2 - 1] = '+';
-	}
-#endif
-
-	return left + width + right;
-}
-
 int getDepth(Tree t) {
 	// Zero indexed so subtract 1
 	return findDepth(t->root) - 1;
