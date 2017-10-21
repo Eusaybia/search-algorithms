@@ -1,5 +1,18 @@
-// Scaled footrule main
-// Written by Kongwei Ying, September 2017
+
+/*
+    Scaled footrule main
+
+    -------------------------------------------------------------
+    UNSW COMP2521 17s2 Assignment 2 - Yaggle
+    (http://www.cse.unsw.edu.au/~cs2521/17s2/ass/ass02/Ass2.html)
+    ass2grp (Yaggle) members:
+    - Rahil Agrawal (z5165505) rahil.agrawal@student.unsw.edu.au
+    - Dennis Gann (z5164328) d.gann@unsw.edu.au
+    - Kongwei Ying (z5014882) k.ying@student.unsw.edu.au
+    -------------------------------------------------------------
+
+ */
+
 
 #include "scaledFootrule.h"
 
@@ -18,12 +31,12 @@ int main(int argc, char *argv[]) {
 	int maxRows = 0;	// Determined by the no. entries in a rank file
 	if (!argsOk(argc, argv)) return EXIT_FAILURE;
 
-    int rankListSizes[MAX_LISTS] = {0};
-    // Read urls into rankArray
+	int rankListSizes[MAX_LISTS] = {0};
+	// Read urls into rankArray
 	for (int i = 0; i < (argc - 1); i++){
-        if (!readRankFile(argv[i + 1], rankArrays[i], &maxRows, rankListSizes, i))
-            return EXIT_FAILURE;
-    }
+		if (!readRankFile(argv[i + 1], rankArrays[i], &maxRows, rankListSizes, i))
+			return EXIT_FAILURE;
+	}
 
 	// Set of urls, a union of all the lists
 	Url urlSet[MAX_LISTS * MAX_V];
@@ -50,7 +63,7 @@ int main(int argc, char *argv[]) {
 			// For each list
 			for (int i = 0; i < (argc - 1); i++){
 				int tc = findUrlPositionInRankList(rankArrays[i], urlSet[y], nElems);
-                int ti = rankListSizes[i];
+				int ti = rankListSizes[i];
 				costMatrix[y][x] += scaledFootruleDistance(nElems, x + 1, tc, ti);
 			}
 		}
@@ -111,8 +124,8 @@ int readRankFile(char *filename, Url *array, int *maxRows, int rankListSizes[], 
 	fclose(fp);
 	if (numRows > *maxRows){
 		*maxRows = numRows;
-    }
-    rankListSizes[listNo] = numRows;
+	}
+	rankListSizes[listNo] = numRows;
 	return 1;
 }
 
