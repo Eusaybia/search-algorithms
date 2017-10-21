@@ -20,37 +20,37 @@ Queue getCollectionUrls() {
 // Generate graph from URLs
 Graph createUrlGraph(Queue collectionUrls) {
 	Graph urlGraph = newGraph(MAX_V);
-	char url_from_location[MAX_CHAR] = {0};
-	char *url_from;
-	char url_to[MAX_CHAR] = {0};
+	char urlFromLocation[MAX_CHAR] = {0};
+	char *urlFrom;
+	char urlTo[MAX_CHAR] = {0};
 	// open one page at a time and add the edges to all the urls in that file
 	while (!emptyQueue(collectionUrls)){
-		url_from = leaveQueue(collectionUrls);
-		strcpy(url_from_location, url_from);
-		strcat(url_from_location, ".txt");
-		FILE *nextUrlFp = fopen(url_from_location, "r");
+		urlFrom = leaveQueue(collectionUrls);
+		strcpy(urlFromLocation, urlFrom);
+		strcat(urlFromLocation, ".txt");
+		FILE *nextUrlFp = fopen(urlFromLocation, "r");
 		if (nextUrlFp == NULL){
-			fprintf(stderr, "Couldn't open %s\n", url_from_location);
+			fprintf(stderr, "Couldn't open %s\n", urlFromLocation);
 			continue;
 		}
-		// Scan urls in url_from Section-1 into string url_to
-		while (fscanf(nextUrlFp, "%s", url_to) != EOF){
+		// Scan urls in urlFrom Section-1 into string urlTo
+		while (fscanf(nextUrlFp, "%s", urlTo) != EOF){
 			// Look for urls in Section-1
-			if (strcmp(url_to, "#start") == 0) continue;
-			else if (strcmp(url_to, "Section-1") == 0) continue;
-			else if (strcmp(url_to, "#end") == 0) break;
+			if (strcmp(urlTo, "#start") == 0) continue;
+			else if (strcmp(urlTo, "Section-1") == 0) continue;
+			else if (strcmp(urlTo, "#end") == 0) break;
 			// Only add an edge if the destination page exists
-			char url_to_location[MAX_CHAR] = {0};
-			strcpy(url_to_location, url_to);
-			strcat(url_to_location, ".txt");
-			FILE *urlTo = fopen(url_to_location, "r");
-			if (urlTo == NULL) continue;
-			else fclose(urlTo);
-			// Only add edges if url_from and url_to are distinct
-			if (strcmp(url_from, url_to) != 0)
-				addEdge(urlGraph, url_from, url_to);
+			char urlToLocation[MAX_CHAR] = {0};
+			strcpy(urlToLocation, urlTo);
+			strcat(urlToLocation, ".txt");
+			FILE *urlToFile = fopen(urlToLocation, "r");
+			if (urlToFile == NULL) continue;
+			else fclose(urlToFile);
+			// Only add edges if urlFrom and urlTo are distinct
+			if (strcmp(urlFrom, urlTo) != 0)
+				addEdge(urlGraph, urlFrom, urlTo);
 		}
-		free(url_from);
+		free(urlFrom);
 		fclose(nextUrlFp);
 	}
 	return urlGraph;

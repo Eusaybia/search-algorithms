@@ -224,13 +224,13 @@ static void swap(Node *n1, Node *n2) {
 	strcpy(n1->str, n2->str);
 	strcpy(n2->str, temp);
 
-	double temp_value = n1->val;
+	double tempValue = n1->val;
 	n1->val = n2->val;
-	n2->val = temp_value;
+	n2->val = tempValue;
 
-	int temp_terms = n1->terms;
+	int tempTerms = n1->terms;
 	n1->terms = n2->terms;
-	n2->terms = temp_terms;
+	n2->terms = tempTerms;
 }
 
 // delimiter controls what elements are printed with

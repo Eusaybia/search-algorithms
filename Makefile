@@ -28,8 +28,8 @@ LIB_OBJ_FILES = $(LIB_FILES: .c = .o)
 
 # Flags, options
 CC = gcc
-CFLAGS = -pg -Wall -Werror -std=c11
-CFLAGS_LINK = -pg -Wall -Werror -std=c11
+CFLAGS = -Wall -Werror -std=c11
+CFLAGS_LINK = -Wall -Werror -std=c11
 OUTPUT = searchPagerank searchTfIdf pagerank inverted scaledFootrule
 
 # Default make target
